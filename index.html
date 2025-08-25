@@ -47,18 +47,6 @@
         #delivery-address-field {
             display: none;
         }
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body class="bg-[#121212] text-white">
@@ -171,10 +159,7 @@
                 </div>
 
                 <div id="menu-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    <div class="col-span-full text-center py-10">
-                        <div class="loading-spinner mx-auto mb-3"></div>
-                        <p class="text-gray-400">Loading menu items...</p>
-                    </div>
+                    <!-- Menu items will be loaded dynamically from JSON -->
                 </div>
             </section>
 
@@ -323,6 +308,142 @@
     </div>
 
     <script>
+        // Sample JSON data (would be loaded from external files in a real implementation)
+        const menuData = {
+            "burgers.json": {
+                "items": [
+                    {
+                        "name": "Double Up Beef Burger",
+                        "description": "Double beef patties with cheese, lettuce, tomato, and signature sauce",
+                        "image": "https://storage.googleapis.com/a1aa/image/f0d28fa7-3892-4b84-e75d-f000408572de.jpg",
+                        "price": 8.99,
+                        "tags": ["burger", "beef"],
+                        "mealPriceModifier": 3.00
+                    },
+                    {
+                        "name": "Crispy Chicken Burger",
+                        "description": "Crispy fried chicken breast with fresh salad and spicy mayo",
+                        "image": "https://storage.googleapis.com/a1aa/image/6fe21feb-3ed4-43cf-8048-db3deafa9c65.jpg",
+                        "price": 7.99,
+                        "tags": ["burger", "chicken"],
+                        "mealPriceModifier": 2.50
+                    },
+                    {
+                        "name": "Nashville-Fire Burger",
+                        "description": "Spicy Nashville-style chicken burger with fiery sauce and pickles",
+                        "image": "https://storage.googleapis.com/a1aa/image/3be4e48c-d4a2-467f-608d-b767d430c7b1.jpg",
+                        "price": 8.49,
+                        "tags": ["burger", "chicken", "spicy"],
+                        "mealPriceModifier": 2.50
+                    }
+                ]
+            },
+            "wraps.json": {
+                "items": [
+                    {
+                        "name": "Chicken Shawarma Wrap",
+                        "description": "Tender chicken shawarma with fresh vegetables and garlic sauce",
+                        "image": "https://storage.googleapis.com/a1aa/image/ab0b2e82-110d-4e42-26b5-41268509ea12.jpg",
+                        "price": 6.99,
+                        "tags": ["wrap", "chicken"],
+                        "mealPriceModifier": 2.00
+                    },
+                    {
+                        "name": "Crispy Chicken Wrap",
+                        "description": "Crispy fried chicken with fresh salad and special sauce",
+                        "image": "https://storage.googleapis.com/a1aa/image/fe19314b-9ee3-415c-e6b0-cbe1dfebe2e5.jpg",
+                        "price": 6.99,
+                        "tags": ["wrap", "chicken"],
+                        "mealPriceModifier": 2.00
+                    },
+                    {
+                        "name": "Falafel Wrap",
+                        "description": "Crispy falafel with hummus, salad, and tahini sauce",
+                        "image": "https://storage.googleapis.com/a1aa/image/d29dd29d-220c-43e8-435d-bd499be79073.jpg",
+                        "price": 5.99,
+                        "tags": ["wrap", "vegetarian"],
+                        "mealPriceModifier": 2.00
+                    }
+                ]
+            },
+            "doners.json": {
+                "items": [
+                    {
+                        "name": "Lamb Doner",
+                        "description": "Slow-roasted lamb doner with fresh salad and choice of sauce",
+                        "image": "https://storage.googleapis.com/a1aa/image/17b4d271-231c-4583-3a40-e1591aaf739d.jpg",
+                        "price": 7.49,
+                        "tags": ["doner", "lamb"],
+                        "mealPriceModifier": 2.50
+                    },
+                    {
+                        "name": "Chicken Doner",
+                        "description": "Marinated chicken doner with fresh vegetables and garlic sauce",
+                        "image": "https://storage.googleapis.com/a1aa/image/0303e037-ca16-41cf-b345-096e58b589ce.jpg",
+                        "price": 6.99,
+                        "tags": ["doner", "chicken"],
+                        "mealPriceModifier": 2.50
+                    },
+                    {
+                        "name": "Mixed Doner",
+                        "description": "Combination of lamb and chicken doners with fresh salad",
+                        "image": "https://storage.googleapis.com/a1aa/image/d19a540a-edf2-47e1-1166-031dc1cf2df2.jpg",
+                        "price": 7.99,
+                        "tags": ["doner", "lamb", "chicken"],
+                        "mealPriceModifier": 2.50
+                    }
+                ]
+            },
+            "sides.json": {
+                "items": [
+                    {
+                        "name": "Wings-Tastic",
+                        "description": "Crispy chicken wings with your choice of sauce",
+                        "image": "https://storage.googleapis.com/a1aa/image/61fe43fa-f246-44e8-5fc4-7c10ebe9d85f.jpg",
+                        "price": 5.99,
+                        "tags": ["sides", "chicken"],
+                        "mealPriceModifier": 1.50
+                    },
+                    {
+                        "name": "Loaded Fries",
+                        "description": "Crispy fries loaded with cheese, sauce, and toppings",
+                        "image": "https://storage.googleapis.com/a1aa/image/c4f24f61-9572-4692-e357-12942417335e.jpg",
+                        "price": 4.99,
+                        "tags": ["sides", "vegetarian"],
+                        "mealPriceModifier": 1.50
+                    },
+                    {
+                        "name": "Regular Fries",
+                        "description": "Golden crispy fries seasoned to perfection",
+                        "image": "https://storage.googleapis.com/a1aa/image/a2ad199f-c046-430e-eeb0-7db2d2b73712.jpg",
+                        "price": 3.49,
+                        "tags": ["sides", "vegetarian"],
+                        "mealPriceModifier": 1.50
+                    }
+                ]
+            },
+            "drinks.json": {
+                "items": [
+                    {
+                        "name": "Pepsi",
+                        "description": "Refreshing cold Pepsi drink",
+                        "image": "https://storage.googleapis.com/a1aa/image/12c78164-1413-4fdb-54b8-94252aa9036c.jpg",
+                        "price": 1.99,
+                        "tags": ["drinks"],
+                        "mealPriceModifier": 0.00
+                    },
+                    {
+                        "name": "KA Drinks",
+                        "description": "Variety of KA flavored drinks",
+                        "image": "https://storage.googleapis.com/a1aa/image/8c4b1dd5-d16b-45d9-f3ef-5654d132343d.jpg",
+                        "price": 1.99,
+                        "tags": ["drinks"],
+                        "mealPriceModifier": 0.00
+                    }
+                ]
+            }
+        };
+
         // Cart functionality
         let cart = [];
         const cartButton = document.getElementById('cart-button');
@@ -350,33 +471,18 @@
         const orderConfirmation = document.getElementById('order-confirmation');
         const confirmOkButton = document.getElementById('confirm-ok');
 
-        // Load menu items from external JSON files
-        async function loadMenuItems() {
-            try {
-                const fileNames = ['burgers.json', 'wraps.json', 'doners.json', 'sides.json', 'drinks.json'];
-                const fetchPromises = fileNames.map(fileName => 
-                    fetch(`/${fileName}`).then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Failed to fetch ${fileName}`);
-                        }
-                        return response.json();
-                    })
-                );
-                
-                const results = await Promise.all(fetchPromises);
-                let allItems = [];
-                
-                results.forEach(data => {
-                    if (data && data.items) {
-                        allItems = allItems.concat(data.items);
-                    }
-                });
-                
-                renderMenuItems(allItems);
-            } catch (error) {
-                console.error('Error loading menu items:', error);
-                menuContainer.innerHTML = '<p class="text-center text-gray-400 col-span-full py-8 text-lg">Error loading menu. Please try again later.</p>';
+        // Load menu items from JSON data
+        function loadMenuItems() {
+            let allItems = [];
+            
+            // Simulate loading from multiple JSON files
+            for (const fileName in menuData) {
+                if (menuData.hasOwnProperty(fileName)) {
+                    allItems = allItems.concat(menuData[fileName].items);
+                }
             }
+            
+            renderMenuItems(allItems);
         }
 
         // Render menu items to the page
@@ -392,12 +498,9 @@
                 const article = document.createElement('article');
                 article.className = 'bg-[#1a1a1a] rounded-lg overflow-hidden shadow-md text-base menu-item-card';
                 
-                // Use relative paths for images
-                const imagePath = `/images/${item.image}`;
-                
                 article.innerHTML = `
                     <div class="relative">
-                        <img alt="${item.name}" class="w-full h-48 object-cover" src="${imagePath}" onerror="this.src='https://via.placeholder.com/300x200/1a1a1a/ff6a00?text=Image+Not+Found'">
+                        <img alt="${item.name}" class="w-full h-48 object-cover" src="${item.image}">
                         <span class="absolute top-3 left-3 bg-[#ff6a00] text-xs font-semibold uppercase rounded px-2 py-1">
                             ${item.tags[0]}
                         </span>
@@ -445,44 +548,27 @@
         }
 
         // Filter menu items based on search and tags
-        async function filterMenuItems() {
-            try {
-                const searchTerm = searchInput.value.toLowerCase();
-                const activeTag = document.querySelector('.tag-filter.active')?.getAttribute('data-tag') || 'all';
-                
-                const fileNames = ['burgers.json', 'wraps.json', 'doners.json', 'sides.json', 'drinks.json'];
-                const fetchPromises = fileNames.map(fileName => 
-                    fetch(`/${fileName}`).then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Failed to fetch ${fileName}`);
-                        }
-                        return response.json();
-                    })
-                );
-                
-                const results = await Promise.all(fetchPromises);
-                let allItems = [];
-                
-                results.forEach(data => {
-                    if (data && data.items) {
-                        allItems = allItems.concat(data.items);
-                    }
-                });
-                
-                let filteredItems = allItems.filter(item => {
-                    const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
-                                        item.description.toLowerCase().includes(searchTerm);
-                    
-                    const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
-                    
-                    return matchesSearch && matchesTag;
-                });
-                
-                renderMenuItems(filteredItems);
-            } catch (error) {
-                console.error('Error filtering menu items:', error);
-                menuContainer.innerHTML = '<p class="text-center text-gray-400 col-span-full py-8 text-lg">Error filtering menu items. Please try again.</p>';
+        function filterMenuItems() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeTag = document.querySelector('.tag-filter.active')?.getAttribute('data-tag') || 'all';
+            
+            let allItems = [];
+            for (const fileName in menuData) {
+                if (menuData.hasOwnProperty(fileName)) {
+                    allItems = allItems.concat(menuData[fileName].items);
+                }
             }
+            
+            let filteredItems = allItems.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
+                                    item.description.toLowerCase().includes(searchTerm);
+                
+                const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
+                
+                return matchesSearch && matchesTag;
+            });
+            
+            renderMenuItems(filteredItems);
         }
 
         // Add item to cart
@@ -715,5 +801,3 @@
     </script>
 </body>
 </html>
-
-
