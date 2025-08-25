@@ -3,10 +3,11 @@
         {
             "name": "Double Up Beef Burger",
             "description": "Double beef patties with cheese, lettuce, tomato, and signature sauce",
-            "image": "https://storage.googleapis.com/a1aa/image/f0d28fa7-3892-4b84-e75d-f000408572de.jpg",
+            "image": "Double Up Beef Burger.jpg",
             "price": 8.99,
             "tags": ["burger", "beef"],
             "mealPriceModifier": 3.00
         }
     ]
 }
+
