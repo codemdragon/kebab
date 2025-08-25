@@ -47,27 +47,25 @@
         #delivery-address-field {
             display: none;
         }
-        #home {
-            min-height: 100vh;
+        /* Updated home section styling */
+        #home-container {
             position: relative;
-            display: flex;
-            align-items: center;
+            width: 100%;
             overflow: hidden;
         }
-        #home::before {
-            content: '';
+        #home-backdrop {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('Backdrop.jpg');
             background-size: cover;
             background-position: center;
             filter: blur(8px);
             z-index: -1;
         }
-        #home::after {
+        #home-backdrop::after {
             content: '';
             position: absolute;
             top: 0;
@@ -75,10 +73,26 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.7);
-            z-index: -1;
         }
-        #home > div {
+        #home-content {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             z-index: 1;
+            max-width: 7xl;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        @media (min-width: 640px) {
+            #home-content {
+                padding: 0 1.5rem;
+            }
+        }
+        @media (min-width: 768px) {
+            #home-content {
+                padding: 0 2.5rem;
+            }
         }
     </style>
 </head>
@@ -129,44 +143,48 @@
         </header>
 
         <main>
-            <!-- Home Section -->
-            <section id="home" class="flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-12 md:py-24 gap-10 md:gap-0">
-                <div class="md:w-1/2 max-w-md md:max-w-none">
-                    <h2 class="text-white text-3xl sm:text-4xl font-extrabold leading-tight mb-4">
-                        Where Flavor
-                        <br>
-                        <span class="text-[#ff6a00]">Meets Time</span>
-                    </h2>
-                    <p class="text-sm sm:text-base text-gray-300 mb-6 leading-relaxed">
-                        Experience authentic kebabs, burgers, and shawarma crafted with passion. Fresh ingredients, bold flavors, and unbeatable taste - available 12PM till 2AM daily.
-                    </p>
-                    <div class="flex space-x-4 mb-6">
-                        <button id="order-now-btn" class="bg-[#ff6a00] text-base sm:text-lg font-semibold rounded px-6 py-2 hover:bg-[#e05a00]">
-                            Order Now
-                        </button>
-                        <button id="view-menu-btn" class="bg-[#1a1a1a] border border-[#ff6a00] text-base sm:text-lg font-semibold rounded px-6 py-2 hover:bg-[#ff6a00] hover:text-black">
-                            View Menu
-                        </button>
+    <!-- Home Section - Updated Structure -->
+    <div id="home-container">
+        <div id="home-backdrop"></div>
+        <section id="home-content" class="flex flex-col md:flex-row items-center justify-center py-12 md:py-24 gap-10 md:gap-0">
+            <div class="md:w-1/2 max-w-md md:max-w-none">
+                <h2 class="text-white text-3xl sm:text-4xl font-extrabold leading-tight mb-4">
+                    Where Flavor
+                    <br>
+                    <span class="text-[#ff6a00]">Meets Time</span>
+                </h2>
+                <p class="text-sm sm:text-base text-gray-300 mb-6 leading-relaxed">
+                    Experience authentic kebabs, burgers, and shawarma crafted with passion. Fresh ingredients, bold flavors, and unbeatable taste - available 12PM till 2AM daily.
+                </p>
+                <div class="flex space-x-4 mb-6">
+                    <button id="order-now-btn" class="bg-[#ff6a00] text-base sm:text-lg font-semibold rounded px-6 py-2 hover:bg-[#e05a00]">
+                        Order Now
+                    </button>
+                    <button id="view-menu-btn" class="bg-[#1a1a1a] border border-[#ff6a00] text-base sm:text-lg font-semibold rounded px-6 py-2 hover:bg-[#ff6a00] hover:text-black">
+                        View Menu
+                    </button>
+                </div>
+                <div class="flex items-center space-x-4 text-sm sm:text-base text-gray-400 font-semibold">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-star text-[#ff6a00]"></i>
+                        <span>4.8 Rating</span>
                     </div>
-                    <div class="flex items-center space-x-4 text-sm sm:text-base text-gray-400 font-semibold">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-star text-[#ff6a00]"></i>
-                            <span>4.8 Rating</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-clock text-[#ff6a00]"></i>
-                            <span>12PM</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-moon text-[#ff6a00]"></i>
-                            <span>2AM Daily</span>
-                        </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-clock text-[#ff6a00]"></i>
+                        <span>12PM</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-moon text-[#ff6a00]"></i>
+                        <span>2AM Daily</span>
                     </div>
                 </div>
-                <div class="md:w-1/2 max-w-[350px] sm:max-w-[400px] md:max-w-[450px] rounded-xl overflow-hidden shadow-lg">
-                    <img alt="Photo of Kebab O'Clock shop front with signage showing Kebab O' Clock, Shawarma, Burgers, Shakes" class="w-full h-auto object-cover" height="600" loading="lazy" src="https://storage.googleapis.com/a1aa/image/fff3f09a-a428-4d7d-6d7a-1ed0e4c07011.jpg" width="450">
-                </div>
-            </section>
+            </div>
+            <div class="md:w-1/2 max-w-[350px] sm:max-w-[400px] md:max-w-[450px] rounded-xl overflow-hidden shadow-lg">
+                <img alt="Photo of Kebab O'Clock shop front with signage showing Kebab O' Clock, Shawarma, Burgers, Shakes" class="w-full h-auto object-cover" height="600" loading="lazy" src="https://storage.googleapis.com/a1aa/image/fff3f09a-a428-4d7d-6d7a-1ed0e4c07011.jpg" width="450">
+            </div>
+        </section>
+    </div>
+
 
             <!-- Menu Section -->
             <section id="menu" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-12 md:py-20">
@@ -848,4 +866,5 @@
     </script>
 </body>
 </html>
+
 
