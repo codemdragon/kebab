@@ -307,497 +307,138 @@
         </div>
     </div>
 
-    <script>
-        // Sample JSON data (would be loaded from external files in a real implementation)
-        const menuData = {
-            "burgers.json": {
-                "items": [
-                    {
-                        "name": "Double Up Beef Burger",
-                        "description": "Double beef patties with cheese, lettuce, tomato, and signature sauce",
-                        "image": "https://storage.googleapis.com/a1aa/image/f0d28fa7-3892-4b84-e75d-f000408572de.jpg",
-                        "price": 8.99,
-                        "tags": ["burger", "beef"],
-                        "mealPriceModifier": 3.00
-                    },
-                    {
-                        "name": "Crispy Chicken Burger",
-                        "description": "Crispy fried chicken breast with fresh salad and spicy mayo",
-                        "image": "https://storage.googleapis.com/a1aa/image/6fe21feb-3ed4-43cf-8048-db3deafa9c65.jpg",
-                        "price": 7.99,
-                        "tags": ["burger", "chicken"],
-                        "mealPriceModifier": 2.50
-                    },
-                    {
-                        "name": "Nashville-Fire Burger",
-                        "description": "Spicy Nashville-style chicken burger with fiery sauce and pickles",
-                        "image": "https://storage.googleapis.com/a1aa/image/3be4e48c-d4a2-467f-608d-b767d430c7b1.jpg",
-                        "price": 8.49,
-                        "tags": ["burger", "chicken", "spicy"],
-                        "mealPriceModifier": 2.50
+        <script>
+            // Fetch menu items from JSON file
+            async function fetchMenuItems() {
+                try {
+                    const response = await fetch('https://kebab-alpha.vercel.app/menu.json'); // Use your actual URL
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                ]
-            },
-            "wraps.json": {
-                "items": [
-                    {
-                        "name": "Chicken Shawarma Wrap",
-                        "description": "Tender chicken shawarma with fresh vegetables and garlic sauce",
-                        "image": "https://storage.googleapis.com/a1aa/image/ab0b2e82-110d-4e42-26b5-41268509ea12.jpg",
-                        "price": 6.99,
-                        "tags": ["wrap", "chicken"],
-                        "mealPriceModifier": 2.00
-                    },
-                    {
-                        "name": "Crispy Chicken Wrap",
-                        "description": "Crispy fried chicken with fresh salad and special sauce",
-                        "image": "https://storage.googleapis.com/a1aa/image/fe19314b-9ee3-415c-e6b0-cbe1dfebe2e5.jpg",
-                        "price": 6.99,
-                        "tags": ["wrap", "chicken"],
-                        "mealPriceModifier": 2.00
-                    },
-                    {
-                        "name": "Falafel Wrap",
-                        "description": "Crispy falafel with hummus, salad, and tahini sauce",
-                        "image": "https://storage.googleapis.com/a1aa/image/d29dd29d-220c-43e8-435d-bd499be79073.jpg",
-                        "price": 5.99,
-                        "tags": ["wrap", "vegetarian"],
-                        "mealPriceModifier": 2.00
-                    }
-                ]
-            },
-            "doners.json": {
-                "items": [
-                    {
-                        "name": "Lamb Doner",
-                        "description": "Slow-roasted lamb doner with fresh salad and choice of sauce",
-                        "image": "https://storage.googleapis.com/a1aa/image/17b4d271-231c-4583-3a40-e1591aaf739d.jpg",
-                        "price": 7.49,
-                        "tags": ["doner", "lamb"],
-                        "mealPriceModifier": 2.50
-                    },
-                    {
-                        "name": "Chicken Doner",
-                        "description": "Marinated chicken doner with fresh vegetables and garlic sauce",
-                        "image": "https://storage.googleapis.com/a1aa/image/0303e037-ca16-41cf-b345-096e58b589ce.jpg",
-                        "price": 6.99,
-                        "tags": ["doner", "chicken"],
-                        "mealPriceModifier": 2.50
-                    },
-                    {
-                        "name": "Mixed Doner",
-                        "description": "Combination of lamb and chicken doners with fresh salad",
-                        "image": "https://storage.googleapis.com/a1aa/image/d19a540a-edf2-47e1-1166-031dc1cf2df2.jpg",
-                        "price": 7.99,
-                        "tags": ["doner", "lamb", "chicken"],
-                        "mealPriceModifier": 2.50
-                    }
-                ]
-            },
-            "sides.json": {
-                "items": [
-                    {
-                        "name": "Wings-Tastic",
-                        "description": "Crispy chicken wings with your choice of sauce",
-                        "image": "https://storage.googleapis.com/a1aa/image/61fe43fa-f246-44e8-5fc4-7c10ebe9d85f.jpg",
-                        "price": 5.99,
-                        "tags": ["sides", "chicken"],
-                        "mealPriceModifier": 1.50
-                    },
-                    {
-                        "name": "Loaded Fries",
-                        "description": "Crispy fries loaded with cheese, sauce, and toppings",
-                        "image": "https://storage.googleapis.com/a1aa/image/c4f24f61-9572-4692-e357-12942417335e.jpg",
-                        "price": 4.99,
-                        "tags": ["sides", "vegetarian"],
-                        "mealPriceModifier": 1.50
-                    },
-                    {
-                        "name": "Regular Fries",
-                        "description": "Golden crispy fries seasoned to perfection",
-                        "image": "https://storage.googleapis.com/a1aa/image/a2ad199f-c046-430e-eeb0-7db2d2b73712.jpg",
-                        "price": 3.49,
-                        "tags": ["sides", "vegetarian"],
-                        "mealPriceModifier": 1.50
-                    }
-                ]
-            },
-            "drinks.json": {
-                "items": [
-                    {
-                        "name": "Pepsi",
-                        "description": "Refreshing cold Pepsi drink",
-                        "image": "https://storage.googleapis.com/a1aa/image/12c78164-1413-4fdb-54b8-94252aa9036c.jpg",
-                        "price": 1.99,
-                        "tags": ["drinks"],
-                        "mealPriceModifier": 0.00
-                    },
-                    {
-                        "name": "KA Drinks",
-                        "description": "Variety of KA flavored drinks",
-                        "image": "https://storage.googleapis.com/a1aa/image/8c4b1dd5-d16b-45d9-f3ef-5654d132343d.jpg",
-                        "price": 1.99,
-                        "tags": ["drinks"],
-                        "mealPriceModifier": 0.00
-                    }
-                ]
-            }
-        };
-
-        // Cart functionality
-        let cart = [];
-        const cartButton = document.getElementById('cart-button');
-        const closeCart = document.getElementById('close-cart');
-        const cartDrawer = document.querySelector('.cart-drawer');
-        const overlay = document.querySelector('.overlay');
-        const cartItems = document.getElementById('cart-items');
-        const cartSubtotal = document.getElementById('cart-subtotal');
-        const cartCount = document.getElementById('cart-count');
-        const menuContainer = document.getElementById('menu-container');
-        const searchInput = document.getElementById('search-input');
-        const tagFilters = document.querySelectorAll('.tag-filter');
-        const checkoutButton = document.getElementById('checkout-button');
-        const orderNowButton = document.getElementById('order-now-btn');
-        const mainContent = document.getElementById('main-content');
-        const checkoutPage = document.getElementById('checkout-page');
-        const backToMenuButton = document.getElementById('back-to-menu');
-        const checkoutItems = document.getElementById('checkout-items');
-        const checkoutTotal = document.getElementById('checkout-total');
-        const placeOrderButton = document.getElementById('place-order-btn');
-        const checkoutForm = document.getElementById('checkout-form');
-        const orderTypeSelect = document.getElementById('order-type');
-        const deliveryAddressField = document.getElementById('delivery-address-field');
-        const deliveryAddress = document.getElementById('delivery-address');
-        const orderConfirmation = document.getElementById('order-confirmation');
-        const confirmOkButton = document.getElementById('confirm-ok');
-
-        // Load menu items from JSON data
-        function loadMenuItems() {
-            let allItems = [];
-            
-            // Simulate loading from multiple JSON files
-            for (const fileName in menuData) {
-                if (menuData.hasOwnProperty(fileName)) {
-                    allItems = allItems.concat(menuData[fileName].items);
+                    const data = await response.json();
+                    return data.items; // Assuming your JSON structure has an "items" array
+                } catch (error) {
+                    console.error('Error fetching menu items:', error);
+                    return [];
                 }
             }
-            
-            renderMenuItems(allItems);
-        }
-
-        // Render menu items to the page
-        function renderMenuItems(items) {
-            menuContainer.innerHTML = '';
-            
-            if (items.length === 0) {
-                menuContainer.innerHTML = '<p class="text-center text-gray-400 col-span-full py-8 text-lg">No menu items found matching your criteria.</p>';
-                return;
+        
+            // Load menu items from JSON data
+            async function loadMenuItems() {
+                const allItems = await fetchMenuItems();
+                renderMenuItems(allItems);
             }
-            
-            items.forEach(item => {
-                const article = document.createElement('article');
-                article.className = 'bg-[#1a1a1a] rounded-lg overflow-hidden shadow-md text-base menu-item-card';
+        
+            // Render menu items to the page
+            function renderMenuItems(items) {
+                menuContainer.innerHTML = '';
                 
-                article.innerHTML = `
-                    <div class="relative">
-                        <img alt="${item.name}" class="w-full h-48 object-cover" src="${item.image}">
-                        <span class="absolute top-3 left-3 bg-[#ff6a00] text-xs font-semibold uppercase rounded px-2 py-1">
-                            ${item.tags[0]}
-                        </span>
-                    </div>
-                    <div class="p-4">
-                        <h4 class="font-semibold text-white mb-2 text-lg">${item.name}</h4>
-                        <p class="text-gray-400 mb-3 text-sm">${item.description}</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-[#ff6a00] font-semibold text-lg">£${item.price.toFixed(2)}</span>
-                        </div>
-                        <div class="flex flex-col gap-3">
-                            <button class="add-to-cart-base w-full bg-[#ff6a00] text-white font-semibold rounded-lg py-2 hover:bg-[#e05a00] flex items-center justify-center space-x-2" 
-                                data-name="${item.name}" data-price="${item.price}">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span>Add to Cart (£${item.price.toFixed(2)})</span>
-                            </button>
-                            <button class="add-to-cart-meal w-full bg-[#1a1a1a] border border-[#ff6a00] text-[#ff6a00] font-semibold rounded-lg py-2 hover:bg-[#ff6a00] hover:text-black flex items-center justify-center space-x-2" 
-                                data-name="${item.name}" data-price="${item.price + item.mealPriceModifier}">
-                                <i class="fas fa-utensils"></i>
-                                <span>Make it a Meal (£${(item.price + item.mealPriceModifier).toFixed(2)})</span>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                menuContainer.appendChild(article);
-            });
-            
-            // Add event listeners to the new buttons
-            document.querySelectorAll('.add-to-cart-base').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const name = e.currentTarget.getAttribute('data-name');
-                    const price = parseFloat(e.currentTarget.getAttribute('data-price'));
-                    addToCart(name, price, false);
-                });
-            });
-            
-            document.querySelectorAll('.add-to-cart-meal').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const name = e.currentTarget.getAttribute('data-name');
-                    const price = parseFloat(e.currentTarget.getAttribute('data-price'));
-                    addToCart(name, price, true);
-                });
-            });
-        }
-
-        // Filter menu items based on search and tags
-        function filterMenuItems() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const activeTag = document.querySelector('.tag-filter.active')?.getAttribute('data-tag') || 'all';
-            
-            let allItems = [];
-            for (const fileName in menuData) {
-                if (menuData.hasOwnProperty(fileName)) {
-                    allItems = allItems.concat(menuData[fileName].items);
-                }
-            }
-            
-            let filteredItems = allItems.filter(item => {
-                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
-                                    item.description.toLowerCase().includes(searchTerm);
-                
-                const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
-                
-                return matchesSearch && matchesTag;
-            });
-            
-            renderMenuItems(filteredItems);
-        }
-
-        // Add item to cart
-        function addToCart(name, price, isMeal) {
-            const displayName = isMeal ? `${name} (Meal)` : name;
-            
-            // Check if item already exists in cart
-            const existingItem = cart.find(item => item.name === displayName);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    name: displayName,
-                    price,
-                    quantity: 1,
-                    isMeal
-                });
-            }
-            
-            updateCart();
-            openCartDrawer();
-        }
-
-        // Open cart drawer
-        function openCartDrawer() {
-            cartDrawer.classList.add('open');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close cart drawer
-        function closeCartDrawer() {
-            cartDrawer.classList.remove('open');
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Update cart display
-        function updateCart() {
-            // Clear current items
-            cartItems.innerHTML = '';
-            
-            let total = 0;
-            let count = 0;
-            
-            // Add items to cart display
-            cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                count += item.quantity;
-                
-                const li = document.createElement('li');
-                li.className = 'flex justify-between items-center text-white text-sm border-b border-[#222222] pb-3';
-                li.innerHTML = `
-                    <div>
-                        <div class="font-semibold">${item.name}</div>
-                        <div class="text-[#ff6a00]">£${item.price.toFixed(2)} x ${item.quantity}</div>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="font-semibold mr-3">£${itemTotal.toFixed(2)}</span>
-                        <button class="remove-item text-red-500 hover:text-red-700" data-name="${item.name}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-                
-                cartItems.appendChild(li);
-            });
-            
-            // Update subtotal and count
-            cartSubtotal.textContent = `£${total.toFixed(2)}`;
-            cartCount.textContent = `Cart (${count})`;
-            
-            // Update checkout button text
-            placeOrderButton.textContent = `Place Order – £${total.toFixed(2)}`;
-            
-            // Add event listeners to remove buttons
-            document.querySelectorAll('.remove-item').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const name = e.currentTarget.getAttribute('data-name');
-                    removeFromCart(name);
-                });
-            });
-        }
-
-        // Remove item from cart
-        function removeFromCart(name) {
-            const itemIndex = cart.findIndex(item => item.name === name);
-            
-            if (itemIndex !== -1) {
-                if (cart[itemIndex].quantity > 1) {
-                    cart[itemIndex].quantity -= 1;
-                } else {
-                    cart.splice(itemIndex, 1);
+                if (items.length === 0) {
+                    menuContainer.innerHTML = '<p class="text-center text-gray-400 col-span-full py-8 text-lg">No menu items found matching your criteria.</p>';
+                    return;
                 }
                 
-                updateCart();
-            }
-        }
-
-        // Show checkout page
-        function showCheckoutPage() {
-            if (cart.length === 0) {
-                alert("Your cart is empty. Please add some items before checkout.");
-                return;
-            }
-            
-            mainContent.style.display = 'none';
-            checkoutPage.style.display = 'block';
-            
-            // Populate checkout items
-            checkoutItems.innerHTML = '';
-            let total = 0;
-            
-            cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                
-                const div = document.createElement('div');
-                div.className = 'flex justify-between items-center';
-                div.innerHTML = `
-                    <div class="flex-1">
-                        <div class="font-semibold">${item.name}</div>
-                        <div class="text-sm text-gray-400">£${item.price.toFixed(2)} x ${item.quantity}</div>
-                    </div>
-                    <div class="font-semibold">£${itemTotal.toFixed(2)}</div>
-                `;
-                
-                checkoutItems.appendChild(div);
-            });
-            
-            checkoutTotal.textContent = `£${total.toFixed(2)}`;
-            placeOrderButton.textContent = `Place Order – £${total.toFixed(2)}`;
-        }
-
-        // Show main content
-        function showMainContent() {
-            checkoutPage.style.display = 'none';
-            mainContent.style.display = 'block';
-        }
-
-        // Handle order type change
-        function handleOrderTypeChange() {
-            if (orderTypeSelect.value === 'delivery') {
-                deliveryAddressField.style.display = 'block';
-                deliveryAddress.setAttribute('required', 'required');
-            } else {
-                deliveryAddressField.style.display = 'none';
-                deliveryAddress.removeAttribute('required');
-            }
-        }
-
-        // Handle form submission
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            
-            // In a real application, you would send the order to a server here
-            // For this example, we'll just show a confirmation message
-            
-            orderConfirmation.classList.remove('hidden');
-        }
-
-        // Smooth scrolling for navigation
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                items.forEach(item => {
+                    const article = document.createElement('article');
+                    article.className = 'bg-[#1a1a1a] rounded-lg overflow-hidden shadow-md text-base menu-item-card';
                     
-                    // Update active navigation link
-                    document.querySelectorAll('.nav-link').forEach(navLink => {
-                        navLink.classList.remove('active-section');
-                    });
-                    link.classList.add('active-section');
-                }
-            });
-        });
-
-        // Initialize the page
-        function init() {
-            // Load menu items
-            loadMenuItems();
-            
-            // Event listeners
-            cartButton.addEventListener('click', openCartDrawer);
-            closeCart.addEventListener('click', closeCartDrawer);
-            overlay.addEventListener('click', closeCartDrawer);
-            
-            // Search and filter events
-            searchInput.addEventListener('input', filterMenuItems);
-            
-            tagFilters.forEach(filter => {
-                filter.addEventListener('click', () => {
-                    tagFilters.forEach(f => f.classList.remove('active'));
-                    filter.classList.add('active');
-                    filterMenuItems();
+                    article.innerHTML = `
+                        <div class="relative">
+                            <img alt="${item.name}" class="w-full h-48 object-cover" src="${item.image}">
+                            <span class="absolute top-3 left-3 bg-[#ff6a00] text-xs font-semibold uppercase rounded px-2 py-1">
+                                ${item.tags[0]}
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-semibold text-white mb-2 text-lg">${item.name}</h4>
+                            <p class="text-gray-400 mb-3 text-sm">${item.description}</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-[#ff6a00] font-semibold text-lg">£${item.price.toFixed(2)}</span>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <button class="add-to-cart-base w-full bg-[#ff6a00] text-white font-semibold rounded-lg py-2 hover:bg-[#e05a00] flex items-center justify-center space-x-2" 
+                                    data-name="${item.name}" data-price="${item.price}">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span>Add to Cart (£${item.price.toFixed(2)})</span>
+                                </button>
+                                <button class="add-to-cart-meal w-full bg-[#1a1a1a] border border-[#ff6a00] text-[#ff6a00] font-semibold rounded-lg py-2 hover:bg-[#ff6a00] hover:text-black flex items-center justify-center space-x-2" 
+                                    data-name="${item.name}" data-price="${item.price + item.mealPriceModifier}">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>Make it a Meal (£${(item.price + item.mealPriceModifier).toFixed(2)})</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    menuContainer.appendChild(article);
                 });
-            });
-            
-            // Checkout events
-            checkoutButton.addEventListener('click', showCheckoutPage);
-            orderNowButton.addEventListener('click', showCheckoutPage);
-            backToMenuButton.addEventListener('click', showMainContent);
-            
-            // Order type event
-            orderTypeSelect.addEventListener('change', handleOrderTypeChange);
-            
-            // Form submission
-            checkoutForm.addEventListener('submit', handleFormSubmit);
-            
-            // Confirmation button
-            confirmOkButton.addEventListener('click', () => {
-                orderConfirmation.classList.add('hidden');
-                showMainContent();
-                cart = [];
-                updateCart();
-                checkoutForm.reset();
-            });
-            
-            // Set initial active filter
-            document.querySelector('[data-tag="all"]').classList.add('active');
-        }
-
-        // Run initialization when DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+                
+                // Add event listeners to the new buttons
+                document.querySelectorAll('.add-to-cart-base').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const name = e.currentTarget.getAttribute('data-name');
+                        const price = parseFloat(e.currentTarget.getAttribute('data-price'));
+                        addToCart(name, price, false);
+                    });
+                });
+                
+                document.querySelectorAll('.add-to-cart-meal').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const name = e.currentTarget.getAttribute('data-name');
+                        const price = parseFloat(e.currentTarget.getAttribute('data-price'));
+                        addToCart(name, price, true);
+                    });
+                });
+            }
+        
+            // Initialize the page
+            async function init() {
+                // Load menu items
+                await loadMenuItems();
+                
+                // Event listeners
+                cartButton.addEventListener('click', openCartDrawer);
+                closeCart.addEventListener('click', closeCartDrawer);
+                overlay.addEventListener('click', closeCartDrawer);
+                
+                // Search and filter events
+                searchInput.addEventListener('input', filterMenuItems);
+                
+                tagFilters.forEach(filter => {
+                    filter.addEventListener('click', () => {
+                        tagFilters.forEach(f => f.classList.remove('active'));
+                        filter.classList.add('active');
+                        filterMenuItems();
+                    });
+                });
+                
+                // Checkout events
+                checkoutButton.addEventListener('click', showCheckoutPage);
+                orderNowButton.addEventListener('click', showCheckoutPage);
+                backToMenuButton.addEventListener('click', showMainContent);
+                
+                // Order type event
+                orderTypeSelect.addEventListener('change', handleOrderTypeChange);
+                
+                // Form submission
+                checkoutForm.addEventListener('submit', handleFormSubmit);
+                
+                // Confirmation button
+                confirmOkButton.addEventListener('click', () => {
+                    orderConfirmation.classList.add('hidden');
+                    showMainContent();
+                    cart = [];
+                    updateCart();
+                    checkoutForm.reset();
+                });
+                
+                // Set initial active filter
+                document.querySelector('[data-tag="all"]').classList.add('active');
+            }
+        
+            // Run initialization when DOM is loaded
+            document.addEventListener('DOMContentLoaded', init);
+        </script>
 </body>
 </html>
+
