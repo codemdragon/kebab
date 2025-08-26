@@ -91,7 +91,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://storage.googleapis.com/a1aa/image/fff3f09a-a428-4d7d-6d7a-1ed0e4c07011.jpg');
+            background-image: url('Backdrop.jpg');
             background-size: cover;
             background-position: center;
             filter: blur(8px);
@@ -613,7 +613,7 @@
     </div>
 
     <script>
-        // Sauce options by category
+        // MODIFIED: Sauce options by category with updated labels
         const sauceOptions = {
             "Beefy-Tastic": ["Garlic Mayo", "Burger Blast", "Hot Chilli", "Mild Chilli", "BBQ", "Ketchup", "Mayonnaise", "Peri Peri", "Sweet Chilli"],
             "Chicken menu": ["Garlic Mayo", "Burger Blast", "Hot Chilli", "Mild Chilli", "BBQ", "Ketchup", "Mayonnaise", "Peri Peri", "Sweet Chilli"],
@@ -960,8 +960,17 @@
                 if (sauceCategory && sauceOptions[sauceCategory]) {
                     const sauceDiv = document.createElement('div');
                     sauceDiv.className = 'modal-option';
+                    
+                    // MODIFIED: Determine the label text based on category
+                    let labelText = "Sauce";
+                    if (["Beefy-Tastic", "Chicken menu", "Veggie-Tastic"].includes(sauceCategory)) {
+                        labelText = "Dip";
+                    } else if (["Grilled-Tastic", "Wrap-Tastic", "Wings/tenders"].includes(sauceCategory)) {
+                        labelText = "Flavour";
+                    }
+                    
                     sauceDiv.innerHTML = `
-                        <label for="modal-sauce-select">Sauce:</label>
+                        <label for="modal-sauce-select">${labelText}:</label>
                         <select id="modal-sauce-select" class="option-selector">
                             ${sauceOptions[sauceCategory].map(sauce => `
                                 <option value="${sauce}">${sauce}</option>
