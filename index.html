@@ -640,7 +640,7 @@
         // Drink options
         const drinkOptions = ["Sprite", "Pepsi", "Tango Orange", "Tango Mango", "Vimto", "KA sparkling fruit punch"];
 
-        // Updated JSON data with showSlider and dips options
+        // Updated JSON data with all items and proper structure
         const menuData = {
             "Beefy-Tastic.json": {
                 "items": [
@@ -663,6 +663,26 @@
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
                         "dips": true
+                    },
+                    {
+                        "name": "Double Smash Beef Burger",
+                        "description": "double smash patties with nachos cheese, glazed onions, burger blast sauce and 1 dip",
+                        "image": "Single Up Beef Burger.jpg",
+                        "price": 8.50,
+                        "tags": ["Beefy-Tastic", "burger", "beef"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true
+                    },
+                    {
+                        "name": "Single Smash Beef Burger",
+                        "description": "Single smash patty with nachos cheese, glazed onions, burger blast sauce and 1 dip",
+                        "image": "Single Smash Beef Burger.jpg",
+                        "price": 8.50,
+                        "tags": ["Beefy-Tastic", "burger", "beef"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true
                     }
                 ]
             },
@@ -673,6 +693,46 @@
                         "description": "Spicy Nashville-style chicken burger with nachos cheese, pickles, burger blast sauce and 1 dip",
                         "image": "Nash Hot Bird Burger.jpg",
                         "price": 6.00,
+                        "tags": ["Chicken menu", "burger", "chicken", "spicy"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true
+                    },
+                    {
+                        "name": "Nash Crunch Burger",
+                        "description": "Spicy Nashville-style chicken burger with coleslaw, pickles, burger blast sauce and 1 dip",
+                        "image": "Nash Crunch Burger.jpg",
+                        "price": 7.00,
+                        "tags": ["Chicken menu", "burger", "chicken", "spicy"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true
+                    },
+                    {
+                        "name": "Hot Honey Siracha Burger",
+                        "description": "Juicy chicken fillet with glazed onions, pickles, hot honey siracha sauce and 1 dip",
+                        "image": "Hot Honey Siracha Burger.jpg",
+                        "price": 7.00,
+                        "tags": ["Chicken menu", "burger", "chicken", "spicy"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true
+                    },
+                    {
+                        "name": "Korean BBQ Burger",
+                        "description": "Juicy chicken fillet with coleslaw, pickles, lettuce, Korean BBQ sauce and 1 dip",
+                        "image": "Korean BBQ Burger.jpg",
+                        "price": 7.00,
+                        "tags": ["Chicken menu", "burger", "chicken", "spicy"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true
+                    },
+                    {
+                        "name": "Buffalo Kick Burger",
+                        "description": "Juicy chicken fillet with onions, pickles, Buffalo kick sauce and 1 dip",
+                        "image": "Buffalo Kick Burger.jpg",
+                        "price": 7.00,
                         "tags": ["Chicken menu", "burger", "chicken", "spicy"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
@@ -692,6 +752,50 @@
                         "showSlider": false,
                         "dips": true,
                         "salad": true
+                    },
+                    {
+                        "name": "Grilled Chicken Wrap",
+                        "description": "Tender grilled chicken with your choice of salad, your choice of sauce and 1 dip",
+                        "image": "Grilled Chicken Wrap.jpg",
+                        "price": 7.00,
+                        "tags": ["Wrap-Tastic", "wrap", "chicken"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true,
+                        "salad": true
+                    },
+                    {
+                        "name": "Veg Paneer Wrap",
+                        "description": "Delicious paneer cubes with your choice of salad, your choice of sauce and 1 dip",
+                        "image": "Veg Paneer Wrap.jpg",
+                        "price": 7.00,
+                        "tags": ["Wrap-Tastic", "wrap", "vegetarian"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true,
+                        "salad": true
+                    },
+                    {
+                        "name": "Pulled Beef Wrap",
+                        "description": "succulent pulled beef with nachos cheese along with your choice of salad, your choice of sauce and 1 dip",
+                        "image": "Pulled Beef Wrap.jpg",
+                        "price": 7.00,
+                        "tags": ["Wrap-Tastic", "wrap", "beef"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true,
+                        "salad": true
+                    },
+                    {
+                        "name": "Fresh Falafel Wrap",
+                        "description": "Fresh falafel with your choice of salad, your choice of sauce and 1 dip",
+                        "image": "Fresh Falafel Wrap.jpg",
+                        "price": 7.00,
+                        "tags": ["Wrap-Tastic", "wrap", "vegetarian"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true,
+                        "salad": true
                     }
                 ]
             },
@@ -704,6 +808,56 @@
                         "price": 8.00,
                         "tags": ["Don-Shawarma", "doner", "lamb"],
                         "mealPriceModifier": 1.50,
+                        "showSlider": false,
+                        "dips": false
+                    },
+                    {
+                        "name": "Chicken Shawarma and Chips",
+                        "description": "Marinated chicken shawarma with crispy fries, onion, cucumber,pickles, tomato, garlic mayo and garlic chilli sauce",
+                        "image": "Chicken Shawarma & Chips.jpg",
+                        "price": 8.00,
+                        "tags": ["Don-Shawarma", "doner", "chicken"],
+                        "mealPriceModifier": 1.50,
+                        "showSlider": false,
+                        "dips": false
+                    },
+                    {
+                        "name": "Lamb Doner Sandwich",
+                        "description": "Succulent lamb doner with onions, cucumber, pickles, tomato, garlic mayo and garlic chilli sauce",
+                        "image": "Lamb Doner Sandwich.jpg",
+                        "price": 7.00,
+                        "tags": ["Don-Shawarma", "doner", "lamb"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": false
+                    },
+                    {
+                        "name": "Chicken Shawarma Sandwich",
+                        "description": "Juicy Chicken Shawarma with onions, cucumber, pickles, tomato, garlic mayo and garlic chilli sauce",
+                        "image": "Chicken Shawarma Sandwich.jpg",
+                        "price": 7.00,
+                        "tags": ["Don-Shawarma", "doner", "chicken"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": false
+                    },
+                    {
+                        "name": "Lamb Doner Wrap",
+                        "description": "Juicy Lamb Doner with onions, lettuce, tomato, garlic mayo and garlic chilli sauce",
+                        "image": "Lamb Doner Wrap.jpg",
+                        "price": 6.00,
+                        "tags": ["Don-Shawarma", "doner", "lamb"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": false
+                    },
+                    {
+                        "name": "Chicken Shawarma Wrap",
+                        "description": "Juicy Chicken Shawarma with onions, lettuce, tomato, garlic mayo and garlic chilli sauce",
+                        "image": "Chicken Shawarma Wrap.jpg",
+                        "price": 6.00,
+                        "tags": ["Don-Shawarma", "doner", "chicken"],
+                        "mealPriceModifier": 2.50,
                         "showSlider": false,
                         "dips": false
                     }
@@ -720,6 +874,41 @@
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
                         "dips": true
+                    },
+                    {
+                        "name": "Double Grilled Chicken Burger",
+                        "description": " Double Grilled Chicken patty with nachos cheese, lettuce and our signiture KOC sauce",
+                        "image": "Double Grilled Chicken Burger.jpg",
+                        "price": 8.00,
+                        "tags": ["Grilled-Tastic", "burger", "chicken"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": true
+                    },
+                    {
+                        "name": "Grilled Chicken Tenders",
+                        "description": "Grilled chicken tenders with your choice of sauce",
+                        "image": "Grilled Chicken Tenders.jpg",
+                        "tags": ["Grilled-Tastic", "chicken"],
+                        "mealPriceModifier": 2.50,
+                        "options": [
+                            {"name": "5 piece", "price": 5.00},
+                            {"name": "10 piece", "price": 9.00},
+                            {"name": "15 piece", "price": 14.00},
+                            {"name": "20 piece", "price": 18.00}
+                        ],
+                        "showSlider": false,
+                        "dips": true
+                    },
+                    {
+                        "name": "Grilled Chicken Tenders & Rice",
+                        "description": "4 pc Grilled Chicken Tenders with Rice and 1 drink",
+                        "image": "Grilled Chicken Tenders & Rice.jpg",
+                        "price": 8.00,
+                        "tags": ["Grilled-Tastic", "chicken"],
+                        "mealPriceModifier": 0.00,
+                        "showSlider": false,
+                        "dips": false
                     }
                 ]
             },
@@ -754,6 +943,37 @@
                         "showSlider": false,
                         "dips": false,
                         "salad": true
+                    },
+                    {
+                        "name": "Fresh Falafel Wrap",
+                        "description": "Fresh falafel with your choice of salad, your choice of sauce and 1 dip",
+                        "image": "Fresh Falafel Wrap.jpg",
+                        "price": 7.00,
+                        "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "dips": false,
+                        "salad": true
+                    },
+                    {
+                        "name": "Loaded Fries",
+                        "description": "Crispy fries loaded with cheese, sauce, and toppings",
+                        "image": "Loaded Fries.jpg",
+                        "price": 4.99,
+                        "tags": ["Veggie-Tastic", "sides", "vegetarian"],
+                        "mealPriceModifier": 1.50,
+                        "showSlider": false,
+                        "dips": false
+                    },
+                    {
+                        "name": "Regular Fries",
+                        "description": "Golden crispy fries seasoned to perfection",
+                        "image": "Regular Fries.jpg",
+                        "price": 3.49,
+                        "tags": ["Veggie-Tastic", "sides", "vegetarian"],
+                        "mealPriceModifier": 1.50,
+                        "showSlider": false,
+                        "dips": false
                     }
                 ]
             },
@@ -763,6 +983,16 @@
                         "name": "Pepsi",
                         "description": "Refreshing cold Pepsi drink",
                         "image": "Pepsi.jpg",
+                        "price": 1.99,
+                        "tags": ["drinks"],
+                        "mealPriceModifier": 0.00,
+                        "showSlider": false,
+                        "dips": false
+                    },
+                    {
+                        "name": "KA Drinks",
+                        "description": "Variety of KA flavored drinks",
+                        "image": "KA Drinks.jpg",
                         "price": 1.99,
                         "tags": ["drinks"],
                         "mealPriceModifier": 0.00,
@@ -1381,3 +1611,4 @@
     </script>
 </body>
 </html>
+
