@@ -259,6 +259,31 @@
             font-weight: 600;
             cursor: pointer;
         }
+        /* Vegetable selection styling */
+        .vegetable-selection {
+            background-color: #222;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .vegetable-selection h4 {
+            color: white;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .vegetable-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .vegetable-checkbox input {
+            margin-right: 0.5rem;
+        }
+        .vegetable-checkbox label {
+            color: white;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="bg-[#121212] text-white">
@@ -282,6 +307,31 @@
             
             <div id="modal-options">
                 <!-- Options will be inserted here -->
+            </div>
+            
+            <!-- Vegetable Selection Section -->
+            <div id="vegetable-selection" class="vegetable-selection" style="display: none;">
+                <h4>Select Vegetables:</h4>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-lettuce" name="vegetables" value="Lettuce">
+                    <label for="vegetable-lettuce">Lettuce</label>
+                </div>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-onions" name="vegetables" value="Onions">
+                    <label for="vegetable-onions">Onions</label>
+                </div>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-pickles" name="vegetables" value="Pickles">
+                    <label for="vegetable-pickles">Pickles</label>
+                </div>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-tomatoes" name="vegetables" value="Tomatoes">
+                    <label for="vegetable-tomatoes">Tomatoes</label>
+                </div>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-cucumber" name="vegetables" value="Cucumber">
+                    <label for="vegetable-cucumber">Cucumber</label>
+                </div>
             </div>
             
             <div class="modal-buttons">
@@ -577,6 +627,11 @@
             "Sprite", "Pepsi", "Tango Orange", "Tango Mango", "Vimto", "KA sparkling fruit punch"
         ];
 
+        // Vegetable options for Veggie-Tastic and Wrap-Tastic
+        const vegetableOptions = [
+            "Lettuce", "Onions", "Pickles", "Tomatoes", "Cucumber"
+        ];
+
         // Updated JSON data with showSlider and sauces options
         const menuData = {
             "Beefy-Tastic.json": {
@@ -589,7 +644,8 @@
                         "tags": ["Beefy-Tastic", "burger", "beef"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "sauces": true
+                        "sauces": true,
+                        "vegetables": false
                     },
                     {
                         "name": "Single Up Beef Burger",
@@ -599,7 +655,8 @@
                         "tags": ["Beefy-Tastic", "burger", "beef"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "sauces": true
+                        "sauces": true,
+                        "vegetables": false
                     }
                 ]
             },
@@ -613,7 +670,8 @@
                         "tags": ["Chicken menu", "burger", "chicken", "spicy"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "sauces": true
+                        "sauces": true,
+                        "vegetables": false
                     }
                 ]
             },
@@ -627,7 +685,8 @@
                         "tags": ["Wrap-Tastic", "wrap", "chicken"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "sauces": true
+                        "sauces": true,
+                        "vegetables": true
                     }
                 ]
             },
@@ -641,7 +700,8 @@
                         "tags": ["Don-Shawarma", "doner", "lamb"],
                         "mealPriceModifier": 1.50,
                         "showSlider": false,
-                        "sauces": false
+                        "sauces": false,
+                        "vegetables": false
                     }
                 ]
             },
@@ -655,7 +715,8 @@
                         "tags": ["Grilled-Tastic", "burger", "chicken"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "sauces": true
+                        "sauces": true,
+                        "vegetables": false
                     }
                 ]
             },
@@ -674,7 +735,8 @@
                             {"name": "20 piece", "price": 18.00}
                         ],
                         "showSlider": false,
-                        "sauces": true
+                        "sauces": true,
+                        "vegetables": false
                     }
                 ]
             },
@@ -688,7 +750,8 @@
                         "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "sauces": false
+                        "sauces": false,
+                        "vegetables": true
                     }
                 ]
             },
@@ -702,7 +765,8 @@
                         "tags": ["drinks"],
                         "mealPriceModifier": 0.00,
                         "showSlider": false,
-                        "sauces": false
+                        "sauces": false,
+                        "vegetables": false
                     }
                 ]
             }
@@ -751,6 +815,7 @@
         const drinkSelect = document.getElementById('drink-select');
         const modalAddChipsDrinkFinal = document.getElementById('modal-add-chips-drink-final');
         const closeModal = document.querySelector('.close-modal');
+        const vegetableSelection = document.getElementById('vegetable-selection');
         
         // Image positioning controls
         const imagePositionSlider = document.getElementById('image-position-slider');
@@ -837,6 +902,18 @@
             // Reset drink selection UI
             drinkSelection.style.display = 'none';
             modalAddChipsDrink.style.display = 'block';
+            
+            // Reset vegetable selection
+            document.querySelectorAll('input[name="vegetables"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Show or hide vegetable selection based on item
+            if (item.vegetables) {
+                vegetableSelection.style.display = 'block';
+            } else {
+                vegetableSelection.style.display = 'none';
+            }
             
             // Set modal content
             modalImage.src = item.image;
@@ -959,6 +1036,7 @@
             const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
             let selectedOption = null;
             let selectedSauce = null;
+            let selectedVegetables = [];
             let basePrice = currentModalItem.price;
             
             // Get selected option if exists
@@ -977,11 +1055,18 @@
                 }
             }
             
+            // Get selected vegetables if applicable
+            if (currentModalItem.vegetables) {
+                const vegetableCheckboxes = document.querySelectorAll('input[name="vegetables"]:checked');
+                selectedVegetables = Array.from(vegetableCheckboxes).map(cb => cb.value);
+            }
+            
             const price = isChipsDrink ? basePrice + currentModalItem.mealPriceModifier : basePrice;
             
             let displayName = currentModalItem.name;
             if (selectedOption) displayName += ` (${selectedOption})`;
             if (selectedSauce) displayName += ` with ${selectedSauce}`;
+            if (selectedVegetables.length > 0) displayName += ` with ${selectedVegetables.join(', ')}`;
             if (isChipsDrink) displayName += ` with Chips and ${selectedDrink}`;
             
             // Check if item already exists in cart
@@ -997,6 +1082,7 @@
                     isChipsDrink,
                     selectedOption,
                     selectedSauce,
+                    selectedVegetables,
                     selectedDrink: isChipsDrink ? selectedDrink : null
                 });
             }
