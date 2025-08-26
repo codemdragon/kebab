@@ -111,17 +111,19 @@
         }
         /* Updated image styling */
         .menu-item-image {
-            height: 260px;
+            height: 260px; /* Set a fixed height */
             width: 100%;
-            object-fit: cover;
-            object-position: top; /* This ensures cropping happens from the top */
+            object-fit: cover; /* Cover the entire area */
+            object-position: top; /* Crop from the top */
         }
-        }
-        /* Updated card height */
+        
         .menu-item-card {
             height: 100%;
             display: flex;
             flex-direction: column;
+            overflow: hidden; /* Ensure overflow is hidden */
+        }
+
         }
         .menu-item-card .card-content {
             flex-grow: 1;
@@ -1150,4 +1152,5 @@
     </script>
 </body>
 </html>
+
 
