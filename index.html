@@ -168,6 +168,62 @@
             padding: 0.5rem;
             margin-bottom: 0.75rem;
         }
+        /* Checkbox styling */
+        .checkbox-container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #222;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        .checkbox-container:hover input ~ .checkmark {
+            background-color: #333;
+        }
+        .checkbox-container input:checked ~ .checkmark {
+            background-color: #ff6a00;
+        }
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .checkbox-container input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .checkbox-container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
         /* Modal styling */
         .item-modal {
             display: none;
@@ -230,7 +286,7 @@
             color: white;
             border: none;
         }
-        .add-meal {
+        .add-chips-drinks {
             background-color: transparent;
             color: #ff6a00;
             border: 2px solid #ff6a00;
@@ -262,7 +318,31 @@
             
             <div class="modal-buttons">
                 <button id="modal-add-base" class="add-base">Add to Cart - £<span id="modal-base-price">0.00</span></button>
-                <button id="modal-add-meal" class="add-meal">Make it a Meal - £<span id="modal-meal-price">0.00</span></button>
+                <button id="modal-add-chips-drinks" class="add-chips-drinks">Add chips and drinks - £<span id="modal-meal-price">0.00</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Drink Selection Modal -->
+    <div id="drink-modal" class="item-modal">
+        <div class="modal-content">
+            <span class="close-drink-modal">&times;</span>
+            <h2 class="text-white text-2xl font-bold mb-4">Select a Drink</h2>
+            
+            <div class="modal-option">
+                <label for="drink-select">Choose your drink:</label>
+                <select id="drink-select" class="option-selector">
+                    <option value="Sprite">Sprite</option>
+                    <option value="Pepsi">Pepsi</option>
+                    <option value="Tango Orange">Tango Orange</option>
+                    <option value="Tango Mango">Tango Mango</option>
+                    <option value="Vimto">Vimto</option>
+                    <option value="KA sparkling fruit punch">KA sparkling fruit punch</option>
+                </select>
+            </div>
+            
+            <div class="modal-buttons">
+                <button id="confirm-drink" class="add-base">Confirm Selection</button>
             </div>
         </div>
     </div>
@@ -536,6 +616,9 @@
             "Wings/tenders": ["Mango & Lime", "Korean BBQ", "Peri Peri", "Mango Habanero", "Hot Honey Siracha", "Buffalo Kick"]
         };
 
+        // Salad options for wraps and veggie items
+        const saladOptions = ["Lettuce", "Onions", "Pickles", "Tomatoes", "Cucumber"];
+
         // Updated JSON data with showSlider and sauces options
         const menuData = {
             "Beefy-Tastic.json": {
@@ -586,7 +669,8 @@
                         "tags": ["Wrap-Tastic", "wrap", "chicken"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "sauces": true
+                        "sauces": true,
+                        "saladOptions": true
                     }
                 ]
             },
@@ -647,7 +731,8 @@
                         "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "sauces": false
+                        "sauces": false,
+                        "saladOptions": true
                     }
                 ]
             },
@@ -704,8 +789,14 @@
         const modalBasePrice = document.getElementById('modal-base-price');
         const modalMealPrice = document.getElementById('modal-meal-price');
         const modalAddBase = document.getElementById('modal-add-base');
-        const modalAddMeal = document.getElementById('modal-add-meal');
+        const modalAddChipsDrinks = document.getElementById('modal-add-chips-drinks');
         const closeModal = document.querySelector('.close-modal');
+        
+        // Drink modal elements
+        const drinkModal = document.getElementById('drink-modal');
+        const drinkSelect = document.getElementById('drink-select');
+        const closeDrinkModal = document.querySelector('.close-drink-modal');
+        const confirmDrinkButton = document.getElementById('confirm-drink');
         
         // Image positioning controls
         const imagePositionSlider = document.getElementById('image-position-slider');
@@ -715,6 +806,12 @@
 
         // Current item being viewed in modal
         let currentModalItem = null;
+        let currentSelectedOptions = {
+            optionIndex: 0,
+            sauce: null,
+            saladSelections: [],
+            drink: null
+        };
 
         // Load menu items from JSON data
         function loadMenuItems() {
@@ -788,6 +885,12 @@
         // Open modal for a menu item
         function openItemModal(item) {
             currentModalItem = item;
+            currentSelectedOptions = {
+                optionIndex: 0,
+                sauce: null,
+                saladSelections: [],
+                drink: null
+            };
             
             // Set modal content
             modalImage.src = item.image;
@@ -799,7 +902,6 @@
             
             // Add options if item has them
             const hasOptions = item.options && item.options.length > 0;
-            let selectedOptionIndex = 0;
             let basePrice = hasOptions ? item.options[0].price : item.price;
             
             if (hasOptions) {
@@ -820,8 +922,8 @@
                 // Add event listener to update prices when option changes
                 const optionSelect = document.getElementById('modal-option-select');
                 optionSelect.addEventListener('change', (e) => {
-                    selectedOptionIndex = parseInt(e.target.value);
-                    basePrice = item.options[selectedOptionIndex].price;
+                    currentSelectedOptions.optionIndex = parseInt(e.target.value);
+                    basePrice = item.options[currentSelectedOptions.optionIndex].price;
                     updateModalPrices(item, basePrice);
                 });
             }
@@ -843,7 +945,49 @@
                         </select>
                     `;
                     modalOptions.appendChild(sauceDiv);
+                    
+                    // Set the default sauce selection
+                    const sauceSelect = document.getElementById('modal-sauce-select');
+                    currentSelectedOptions.sauce = sauceSelect.value;
+                    
+                    // Add event listener to update sauce selection
+                    sauceSelect.addEventListener('change', (e) => {
+                        currentSelectedOptions.sauce = e.target.value;
+                    });
                 }
+            }
+            
+            // Add salad options for wraps and veggie items
+            if (item.saladOptions) {
+                const saladDiv = document.createElement('div');
+                saladDiv.className = 'modal-option';
+                saladDiv.innerHTML = `
+                    <label>Salad Options (select all that apply):</label>
+                    <div class="mt-2">
+                        ${saladOptions.map(salad => `
+                            <label class="checkbox-container">${salad}
+                                <input type="checkbox" value="${salad}" class="salad-checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+                modalOptions.appendChild(saladDiv);
+                
+                // Add event listeners to salad checkboxes
+                const saladCheckboxes = document.querySelectorAll('.salad-checkbox');
+                saladCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', (e) => {
+                        if (e.target.checked) {
+                            currentSelectedOptions.saladSelections.push(e.target.value);
+                        } else {
+                            const index = currentSelectedOptions.saladSelections.indexOf(e.target.value);
+                            if (index > -1) {
+                                currentSelectedOptions.saladSelections.splice(index, 1);
+                            }
+                        }
+                    });
+                });
             }
             
             // Update prices
@@ -865,6 +1009,16 @@
             itemModal.style.display = 'none';
             document.body.style.overflow = 'auto';
             currentModalItem = null;
+        }
+
+        // Open drink selection modal
+        function openDrinkModal() {
+            drinkModal.style.display = 'block';
+        }
+
+        // Close drink modal
+        function closeDrinkModal() {
+            drinkModal.style.display = 'none';
         }
 
         // Find menu item by name
@@ -908,23 +1062,16 @@
             
             const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
             let selectedOption = null;
-            let selectedSauce = null;
+            let selectedSauce = currentSelectedOptions.sauce;
+            let selectedSalad = currentSelectedOptions.saladSelections.length > 0 ? 
+                                currentSelectedOptions.saladSelections.join(', ') : null;
+            let selectedDrink = currentSelectedOptions.drink;
             let basePrice = currentModalItem.price;
             
             // Get selected option if exists
             if (hasOptions) {
-                const optionSelect = document.getElementById('modal-option-select');
-                const optionIndex = parseInt(optionSelect.value);
-                selectedOption = currentModalItem.options[optionIndex].name;
-                basePrice = currentModalItem.options[optionIndex].price;
-            }
-            
-            // Get selected sauce if exists
-            if (currentModalItem.sauces) {
-                const sauceSelect = document.getElementById('modal-sauce-select');
-                if (sauceSelect) {
-                    selectedSauce = sauceSelect.value;
-                }
+                selectedOption = currentModalItem.options[currentSelectedOptions.optionIndex].name;
+                basePrice = currentModalItem.options[currentSelectedOptions.optionIndex].price;
             }
             
             const price = isMeal ? basePrice + currentModalItem.mealPriceModifier : basePrice;
@@ -932,7 +1079,9 @@
             let displayName = currentModalItem.name;
             if (selectedOption) displayName += ` (${selectedOption})`;
             if (selectedSauce) displayName += ` with ${selectedSauce}`;
-            if (isMeal) displayName += ' - Meal';
+            if (selectedSalad) displayName += `, Salad: ${selectedSalad}`;
+            if (isMeal && selectedDrink) displayName += `, Drink: ${selectedDrink}`;
+            if (isMeal) displayName += ' + Chips';
             
             // Check if item already exists in cart
             const existingItem = cart.find(item => item.name === displayName);
@@ -946,7 +1095,9 @@
                     quantity: 1,
                     isMeal,
                     selectedOption,
-                    selectedSauce
+                    selectedSauce,
+                    selectedSalad,
+                    selectedDrink
                 });
             }
             
@@ -1174,12 +1325,23 @@
             // Modal events
             closeModal.addEventListener('click', closeItemModal);
             modalAddBase.addEventListener('click', () => addToCartFromModal(false));
-            modalAddMeal.addEventListener('click', () => addToCartFromModal(true));
+            modalAddChipsDrinks.addEventListener('click', openDrinkModal);
             
-            // Close modal when clicking outside
+            // Drink modal events
+            closeDrinkModal.addEventListener('click', closeDrinkModal);
+            confirmDrinkButton.addEventListener('click', () => {
+                currentSelectedOptions.drink = drinkSelect.value;
+                closeDrinkModal();
+                addToCartFromModal(true);
+            });
+            
+            // Close modals when clicking outside
             window.addEventListener('click', (e) => {
                 if (e.target === itemModal) {
                     closeItemModal();
+                }
+                if (e.target === drinkModal) {
+                    closeDrinkModal();
                 }
             });
             
