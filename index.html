@@ -230,68 +230,10 @@
             color: white;
             border: none;
         }
-        .add-chips-drinks {
+        .add-meal {
             background-color: transparent;
             color: #ff6a00;
             border: 2px solid #ff6a00;
-        }
-        /* Drink modal styling */
-        .drink-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1010;
-        }
-        .drink-modal-content {
-            background-color: #1a1a1a;
-            margin: 10% auto;
-            padding: 2rem;
-            border-radius: 1rem;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-        }
-        .drink-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        .drink-option {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem;
-            background-color: #222;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .drink-option:hover {
-            background-color: #333;
-        }
-        .drink-option.selected {
-            background-color: #ff6a00;
-            color: black;
-        }
-        .drink-option input {
-            margin-right: 0.5rem;
-        }
-        /* Checkbox styling for salad options */
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.5rem;
-        }
-        .checkbox-option {
-            display: flex;
-            align-items: center;
-        }
-        .checkbox-option input {
-            margin-right: 0.5rem;
         }
     </style>
 </head>
@@ -320,47 +262,7 @@
             
             <div class="modal-buttons">
                 <button id="modal-add-base" class="add-base">Add to Cart - £<span id="modal-base-price">0.00</span></button>
-                <button id="modal-add-chips-drinks" class="add-chips-drinks">Add chips and drinks - £<span id="modal-meal-price">0.00</span></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Drink Selection Modal -->
-    <div id="drink-modal" class="drink-modal">
-        <div class="drink-modal-content">
-            <span class="close-drink-modal">&times;</span>
-            <h2 class="text-white text-2xl font-bold mb-4">Select a Drink</h2>
-            
-            <div class="drink-options">
-                <label class="drink-option">
-                    <input type="radio" name="drink" value="Sprite">
-                    <span>Sprite</span>
-                </label>
-                <label class="drink-option">
-                    <input type="radio" name="drink" value="Pepsi">
-                    <span>Pepsi</span>
-                </label>
-                <label class="drink-option">
-                    <input type="radio" name="drink" value="Tango Orange">
-                    <span>Tango Orange</span>
-                </label>
-                <label class="drink-option">
-                    <input type="radio" name="drink" value="Tango Mango">
-                    <span>Tango Mango</span>
-                </label>
-                <label class="drink-option">
-                    <input type="radio" name="drink" value="Vimto">
-                    <span>Vimto</span>
-                </label>
-                <label class="drink-option">
-                    <input type="radio" name="drink" value="KA sparkling fruit punch">
-                    <span>KA Sparkling Fruit Punch</span>
-                </label>
-            </div>
-            
-            <div class="flex gap-4 mt-6">
-                <button id="confirm-drink" class="flex-1 bg-[#ff6a00] text-white font-semibold py-2 rounded">OK</button>
-                <button id="cancel-drink" class="flex-1 bg-gray-600 text-white font-semibold py-2 rounded">Cancel</button>
+                <button id="modal-add-meal" class="add-meal">Make it a Meal - £<span id="modal-meal-price">0.00</span></button>
             </div>
         </div>
     </div>
@@ -411,7 +313,7 @@
         </header>
 
         <main>
-            <!-- Home Section -->
+            <!-- Home Section - Updated Structure with correct ID -->
             <section id="home">
                 <div id="home-backdrop"></div>
                 <div id="home-content" class="py-12 md:py-24">
@@ -625,299 +527,103 @@
     </div>
 
     <script>
-        // Dip options by category
-        const dipOptions = {
-            "Beefy-Tastic": ["Burger Blast", "Butter Ranch", "Garlic Gurb", "Habanero Mayo", "Mango Habanero", "Siracha Heat", "Smookey BBQ", "Tomato Splash", "Buffalo Kick"],
-            "Chicken menu": ["Burger Blast", "Butter Ranch", "Garlic Gurb", "Habanero Mayo", "Mango Habanero", "Siracha Heat", "Smookey BBQ", "Tomato Splash", "Buffalo Kick"],
+        // Sauce options by category
+        const sauceOptions = {
+            "Beefy-Tastic": ["Garlic Mayo", "Burger Blast", "Hot Chilli", "Mild Chilli", "BBQ", "Ketchup", "Mayonnaise", "Peri Peri", "Sweet Chilli"],
+            "Chicken menu": ["Garlic Mayo", "Burger Blast", "Hot Chilli", "Mild Chilli", "BBQ", "Ketchup", "Mayonnaise", "Peri Peri", "Sweet Chilli"],
             "Grilled-Tastic": ["Mango & Lime", "Medium Peri Peri", "Hot Peri Peri"],
             "Wrap-Tastic": ["Garlic Herb Mayo", "Sticky BBQ", "Buffalo Kick"],
             "Wings/tenders": ["Mango & Lime", "Korean BBQ", "Peri Peri", "Mango Habanero", "Hot Honey Siracha", "Buffalo Kick"]
         };
 
-        // Salad options for wraps and veggie items
-        const saladOptions = ["Lettuce", "Onions", "Pickles", "Tomato's", "Cucumber"];
-
-        // Drink options
-        const drinkOptions = ["Sprite", "Pepsi", "Tango Orange", "Tango Mango", "Vimto", "KA sparkling fruit punch"];
-
-        // Updated JSON data with all items and proper structure
+        // Updated JSON data with showSlider and sauces options
         const menuData = {
-            "Beefy-Tastic": {
+            "Beefy-Tastic.json": {
                 "items": [
                     {
                         "name": "Double Up Beef Burger",
                         "description": "Double beef patties with double nachos cheese, glazed onions, burger blast sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Double+Up+Beef+Burger",
+                        "image": "Double Up Beef Burger.jpg",
                         "price": 8.50,
                         "tags": ["Beefy-Tastic", "burger", "beef"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "dips": true
+                        "sauces": true
                     },
                     {
                         "name": "Single Up Beef Burger",
                         "description": "single beef patty with nachos cheese, glazed onions, burger blast sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Single+Up+Beef+Burger",
+                        "image": "Single Up Beef Burger.jpg",
                         "price": 6.50,
                         "tags": ["Beefy-Tastic", "burger", "beef"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "dips": true
-                    },
-                    {
-                        "name": "Double Smash Beef Burger",
-                        "description": "double smash patties with nachos cheese, glazed onions, burger blast sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Double+Smash+Beef+Burger",
-                        "price": 8.50,
-                        "tags": ["Beefy-Tastic", "burger", "beef"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true
-                    },
-                    {
-                        "name": "Single Smash Beef Burger",
-                        "description": "Single smash patty with nachos cheese, glazed onions, burger blast sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Single+Smash+Beef+Burger",
-                        "price": 8.50,
-                        "tags": ["Beefy-Tastic", "burger", "beef"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true
+                        "sauces": true
                     }
                 ]
             },
-            "Chicken menu": {
+            "Chicken menu.json": {
                 "items": [
                     {
                         "name": "Nash hot bird Burger",
                         "description": "Spicy Nashville-style chicken burger with nachos cheese, pickles, burger blast sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Nash+Hot+Bird+Burger",
+                        "image": "Nash Hot Bird Burger.jpg",
                         "price": 6.00,
                         "tags": ["Chicken menu", "burger", "chicken", "spicy"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "dips": true
-                    },
-                    {
-                        "name": "Nash Crunch Burger",
-                        "description": "Spicy Nashville-style chicken burger with coleslaw, pickles, burger blast sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Nash+Crunch+Burger",
-                        "price": 7.00,
-                        "tags": ["Chicken menu", "burger", "chicken", "spicy"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true
-                    },
-                    {
-                        "name": "Hot Honey Siracha Burger",
-                        "description": "Juicy chicken fillet with glazed onions, pickles, hot honey siracha sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Hot+Honey+Siracha+Burger",
-                        "price": 7.00,
-                        "tags": ["Chicken menu", "burger", "chicken", "spicy"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true
-                    },
-                    {
-                        "name": "Korean BBQ Burger",
-                        "description": "Juicy chicken fillet with coleslaw, pickles, lettuce, Korean BBQ sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Korean+BBQ+Burger",
-                        "price": 7.00,
-                        "tags": ["Chicken menu", "burger", "chicken", "spicy"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true
-                    },
-                    {
-                        "name": "Buffalo Kick Burger",
-                        "description": "Juicy chicken fillet with onions, pickles, Buffalo kick sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Buffalo+Kick+Burger",
-                        "price": 7.00,
-                        "tags": ["Chicken menu", "burger", "chicken", "spicy"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true
+                        "sauces": true
                     }
                 ]
             },
-            "Wrap-Tastic": {
+            "Wrap-Tastic.json": {
                 "items": [
                     {
                         "name": "Crispy Chicken Wrap",
                         "description": "crispy chicken with your choice of salad, your choice of sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Crispy+Chicken+Wrap",
+                        "image": "Crispy Chicken Wrap.jpg",
                         "price": 7.00,
                         "tags": ["Wrap-Tastic", "wrap", "chicken"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "dips": true,
-                        "salad": true
-                    },
-                    {
-                        "name": "Grilled Chicken Wrap",
-                        "description": "Tender grilled chicken with your choice of salad, your choice of sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Grilled+Chicken+Wrap",
-                        "price": 7.00,
-                        "tags": ["Wrap-Tastic", "wrap", "chicken"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true,
-                        "salad": true
-                    },
-                    {
-                        "name": "Veg Paneer Wrap",
-                        "description": "Delicious paneer cubes with your choice of salad, your choice of sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Veg+Paneer+Wrap",
-                        "price": 7.00,
-                        "tags": ["Wrap-Tastic", "wrap", "vegetarian"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true,
-                        "salad": true
-                    },
-                    {
-                        "name": "Pulled Beef Wrap",
-                        "description": "succulent pulled beef with nachos cheese along with your choice of salad, your choice of sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Pulled+Beef+Wrap",
-                        "price": 7.00,
-                        "tags": ["Wrap-Tastic", "wrap", "beef"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true,
-                        "salad": true
-                    },
-                    {
-                        "name": "Fresh Falafel Wrap",
-                        "description": "Fresh falafel with your choice of salad, your choice of sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Fresh+Falafel+Wrap",
-                        "price": 7.00,
-                        "tags": ["Wrap-Tastic", "wrap", "vegetarian"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true,
-                        "salad": true
+                        "sauces": true
                     }
                 ]
             },
-            "Don-Shawarma": {
+            "Don-Shawarma.json": {
                 "items": [
                     {
                         "name": "Lamb Doner and Chips",
                         "description": "Succulent lamb doner with crispy fries, onion, cucumber,pickles, tomato, garlic mayo and garlic chilli sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Lamb+Doner+%26+Chips",
+                        "image": "Lamb Doner & Chips.jpg",
                         "price": 8.00,
                         "tags": ["Don-Shawarma", "doner", "lamb"],
                         "mealPriceModifier": 1.50,
                         "showSlider": false,
-                        "dips": false
-                    },
-                    {
-                        "name": "Chicken Shawarma and Chips",
-                        "description": "Marinated chicken shawarma with crispy fries, onion, cucumber,pickles, tomato, garlic mayo and garlic chilli sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Chicken+Shawarma+%26+Chips",
-                        "price": 8.00,
-                        "tags": ["Don-Shawarma", "doner", "chicken"],
-                        "mealPriceModifier": 1.50,
-                        "showSlider": false,
-                        "dips": false
-                    },
-                    {
-                        "name": "Lamb Doner Sandwich",
-                        "description": "Succulent lamb doner with onions, cucumber, pickles, tomato, garlic mayo and garlic chilli sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Lamb+Doner+Sandwich",
-                        "price": 7.00,
-                        "tags": ["Don-Shawarma", "doner", "lamb"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": false
-                    },
-                    {
-                        "name": "Chicken Shawarma Sandwich",
-                        "description": "Juicy Chicken Shawarma with onions, cucumber, pickles, tomato, garlic mayo and garlic chilli sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Chicken+Shawarma+Sandwich",
-                        "price": 7.00,
-                        "tags": ["Don-Shawarma", "doner", "chicken"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": false
-                    },
-                    {
-                        "name": "Lamb Doner Wrap",
-                        "description": "Juicy Lamb Doner with onions, lettuce, tomato, garlic mayo and garlic chilli sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Lamb+Doner+Wrap",
-                        "price": 6.00,
-                        "tags": ["Don-Shawarma", "doner", "lamb"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": false
-                    },
-                    {
-                        "name": "Chicken Shawarma Wrap",
-                        "description": "Juicy Chicken Shawarma with onions, lettuce, tomato, garlic mayo and garlic chilli sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Chicken+Shawarma+Wrap",
-                        "price": 6.00,
-                        "tags": ["Don-Shawarma", "doner", "chicken"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": false
+                        "sauces": false
                     }
                 ]
             },
-            "Grilled-Tastic": {
+            "Grilled-Tastic.json": {
                 "items": [
                    {
                         "name": "Single Grilled Chicken Burger",
                         "description": " Single grilled chicken patty with nachos cheese, lettuce and our signiture KOC sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Single+Grilled+Chicken+Burger",
+                        "image": "Single Grilled Chicken Burger.jpg",
                         "price": 5.50,
                         "tags": ["Grilled-Tastic", "burger", "chicken"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "dips": true
-                    },
-                    {
-                        "name": "Double Grilled Chicken Burger",
-                        "description": " Double Grilled Chicken patty with nachos cheese, lettuce and our signiture KOC sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Double+Grilled+Chicken+Burger",
-                        "price": 8.00,
-                        "tags": ["Grilled-Tastic", "burger", "chicken"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": true
-                    },
-                    {
-                        "name": "Grilled Chicken Tenders",
-                        "description": "Grilled chicken tenders with your choice of sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Grilled+Chicken+Tenders",
-                        "tags": ["Grilled-Tastic", "chicken"],
-                        "mealPriceModifier": 2.50,
-                        "options": [
-                            {"name": "5 piece", "price": 5.00},
-                            {"name": "10 piece", "price": 9.00},
-                            {"name": "15 piece", "price": 14.00},
-                            {"name": "20 piece", "price": 18.00}
-                        ],
-                        "showSlider": false,
-                        "dips": true
-                    },
-                    {
-                        "name": "Grilled Chicken Tenders & Rice",
-                        "description": "4 pc Grilled Chicken Tenders with Rice and 1 drink",
-                        "image": "https://via.placeholder.com/300x200.png?text=Grilled+Chicken+Tenders+%26+Rice",
-                        "price": 8.00,
-                        "tags": ["Grilled-Tastic", "chicken"],
-                        "mealPriceModifier": 0.00,
-                        "showSlider": false,
-                        "dips": false
+                        "sauces": true
                     }
                 ]
             },
-            "Wings/tenders": {
+            "Wings/tenders.json": {
                 "items": [
                     {
                         "name": "Chicken Tenders or Wings",
                         "description": "Chicken wings or tenders with any 1 sauce",
-                        "image": "https://via.placeholder.com/300x200.png?text=Tenders+%26+Wings",
+                        "image": "Tenders & Wings.jpg",
                         "tags": ["Wings/tenders", "chicken"],
                         "mealPriceModifier": 2.50,
                         "options": [
@@ -927,77 +633,35 @@
                             {"name": "20 piece", "price": 18.00}
                         ],
                         "showSlider": false,
-                        "dips": true
+                        "sauces": true
                     }
                 ]
             },
-            "Veggie-Tastic": {
+            "Veggie-Tastic.json": {
                 "items": [
                     {
                         "name": "Veg Paneer Wrap",
                         "description": "Delicious paneer cubes with your choice of salad, your choice of sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Veg+Paneer+Wrap",
+                        "image": "Veg Paneer Wrap.jpg",
                         "price": 7.00,
                         "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
                         "mealPriceModifier": 2.50,
                         "showSlider": false,
-                        "dips": false,
-                        "salad": true
-                    },
-                    {
-                        "name": "Fresh Falafel Wrap",
-                        "description": "Fresh falafel with your choice of salad, your choice of sauce and 1 dip",
-                        "image": "https://via.placeholder.com/300x200.png?text=Fresh+Falafel+Wrap",
-                        "price": 7.00,
-                        "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
-                        "mealPriceModifier": 2.50,
-                        "showSlider": false,
-                        "dips": false,
-                        "salad": true
-                    },
-                    {
-                        "name": "Loaded Fries",
-                        "description": "Crispy fries loaded with cheese, sauce, and toppings",
-                        "image": "https://via.placeholder.com/300x200.png?text=Loaded+Fries",
-                        "price": 4.99,
-                        "tags": ["Veggie-Tastic", "sides", "vegetarian"],
-                        "mealPriceModifier": 1.50,
-                        "showSlider": false,
-                        "dips": false
-                    },
-                    {
-                        "name": "Regular Fries",
-                        "description": "Golden crispy fries seasoned to perfection",
-                        "image": "https://via.placeholder.com/300x200.png?text=Regular+Fries",
-                        "price": 3.49,
-                        "tags": ["Veggie-Tastic", "sides", "vegetarian"],
-                        "mealPriceModifier": 1.50,
-                        "showSlider": false,
-                        "dips": false
+                        "sauces": false
                     }
                 ]
             },
-            "drinks": {
+            "drinks.json": {
                 "items": [
                     {
                         "name": "Pepsi",
                         "description": "Refreshing cold Pepsi drink",
-                        "image": "https://via.placeholder.com/300x200.png?text=Pepsi",
+                        "image": "Pepsi.jpg",
                         "price": 1.99,
                         "tags": ["drinks"],
                         "mealPriceModifier": 0.00,
                         "showSlider": false,
-                        "dips": false
-                    },
-                    {
-                        "name": "KA Drinks",
-                        "description": "Variety of KA flavored drinks",
-                        "image": "https://via.placeholder.com/300x200.png?text=KA+Drinks",
-                        "price": 1.99,
-                        "tags": ["drinks"],
-                        "mealPriceModifier": 0.00,
-                        "showSlider": false,
-                        "dips": false
+                        "sauces": false
                     }
                 ]
             }
@@ -1040,14 +704,8 @@
         const modalBasePrice = document.getElementById('modal-base-price');
         const modalMealPrice = document.getElementById('modal-meal-price');
         const modalAddBase = document.getElementById('modal-add-base');
-        const modalAddChipsDrinks = document.getElementById('modal-add-chips-drinks');
+        const modalAddMeal = document.getElementById('modal-add-meal');
         const closeModal = document.querySelector('.close-modal');
-        
-        // Drink modal elements
-        const drinkModal = document.getElementById('drink-modal');
-        const closeDrinkModal = document.querySelector('.close-drink-modal');
-        const confirmDrink = document.getElementById('confirm-drink');
-        const cancelDrink = document.getElementById('cancel-drink');
         
         // Image positioning controls
         const imagePositionSlider = document.getElementById('image-position-slider');
@@ -1055,27 +713,22 @@
         const resetPositionButton = document.getElementById('reset-position');
         const imageControlPanel = document.querySelector('.image-control-panel');
 
-        // Current item being viewed in modal and drink selection state
+        // Current item being viewed in modal
         let currentModalItem = null;
-        let currentMealConfiguration = null;
-        let selectedDrink = null;
 
         // Load menu items from JSON data
         function loadMenuItems() {
             let allItems = [];
             let showSliderPanel = false;
             
-            // Iterate through each category in menuData
-            for (const category in menuData) {
-                if (menuData.hasOwnProperty(category)) {
-                    const categoryItems = menuData[category].items;
-                    if (Array.isArray(categoryItems)) {
-                        allItems = allItems.concat(categoryItems);
-                        
-                        // Check if any item in this category has showSlider set to true
-                        if (categoryItems.some(item => item.showSlider)) {
-                            showSliderPanel = true;
-                        }
+            // Simulate loading from multiple JSON files
+            for (const fileName in menuData) {
+                if (menuData.hasOwnProperty(fileName)) {
+                    allItems = allItems.concat(menuData[fileName].items);
+                    
+                    // Check if any item has showSlider set to true
+                    if (menuData[fileName].items.some(item => item.showSlider)) {
+                        showSliderPanel = true;
                     }
                 }
             }
@@ -1132,32 +785,6 @@
             });
         }
 
-        // Filter menu items based on search and tags
-        function filterMenuItems() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const activeTag = document.querySelector('.tag-filter.active').getAttribute('data-tag');
-            
-            let allItems = [];
-            
-            // Get all items from menuData
-            for (const category in menuData) {
-                if (menuData.hasOwnProperty(category)) {
-                    allItems = allItems.concat(menuData[category].items);
-                }
-            }
-            
-            // Filter by search term and tag
-            const filteredItems = allItems.filter(item => {
-                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
-                                     item.description.toLowerCase().includes(searchTerm);
-                const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
-                
-                return matchesSearch && matchesTag;
-            });
-            
-            renderMenuItems(filteredItems);
-        }
-
         // Open modal for a menu item
         function openItemModal(item) {
             currentModalItem = item;
@@ -1199,42 +826,24 @@
                 });
             }
             
-            // Add dip options if item has dips
-            if (item.dips) {
-                // Find the category for dip options
-                let dipCategory = item.tags.find(tag => dipOptions.hasOwnProperty(tag));
+            // Add sauce options if item has sauces
+            if (item.sauces) {
+                // Find the category for sauce options
+                let sauceCategory = item.tags.find(tag => sauceOptions.hasOwnProperty(tag));
                 
-                if (dipCategory && dipOptions[dipCategory]) {
-                    const dipDiv = document.createElement('div');
-                    dipDiv.className = 'modal-option';
-                    dipDiv.innerHTML = `
-                        <label for="modal-dip-select">Dip:</label>
-                        <select id="modal-dip-select" class="option-selector">
-                            ${dipOptions[dipCategory].map(dip => `
-                                <option value="${dip}">${dip}</option>
+                if (sauceCategory && sauceOptions[sauceCategory]) {
+                    const sauceDiv = document.createElement('div');
+                    sauceDiv.className = 'modal-option';
+                    sauceDiv.innerHTML = `
+                        <label for="modal-sauce-select">Sauce:</label>
+                        <select id="modal-sauce-select" class="option-selector">
+                            ${sauceOptions[sauceCategory].map(sauce => `
+                                <option value="${sauce}">${sauce}</option>
                             `).join('')}
                         </select>
                     `;
-                    modalOptions.appendChild(dipDiv);
+                    modalOptions.appendChild(sauceDiv);
                 }
-            }
-            
-            // Add salad options if item has salad
-            if (item.salad) {
-                const saladDiv = document.createElement('div');
-                saladDiv.className = 'modal-option';
-                saladDiv.innerHTML = `
-                    <label>Salad Options (Select multiple):</label>
-                    <div class="checkbox-group">
-                        ${saladOptions.map(salad => `
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="salad" value="${salad}" checked>
-                                <span>${salad}</span>
-                            </label>
-                        `).join('')}
-                    </div>
-                `;
-                modalOptions.appendChild(saladDiv);
             }
             
             // Update prices
@@ -1258,68 +867,48 @@
             currentModalItem = null;
         }
 
-        // Open drink modal
-        function openDrinkModal() {
-            // Store current configuration for meal
-            const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
-            let selectedOption = null;
-            let selectedDip = null;
-            let selectedSalads = [];
-            let basePrice = currentModalItem.price;
-            
-            // Get selected option if exists
-            if (hasOptions) {
-                const optionSelect = document.getElementById('modal-option-select');
-                const optionIndex = parseInt(optionSelect.value);
-                selectedOption = currentModalItem.options[optionIndex].name;
-                basePrice = currentModalItem.options[optionIndex].price;
+        // Find menu item by name
+        function findMenuItemByName(name) {
+            for (const fileName in menuData) {
+                if (menuData.hasOwnProperty(fileName)) {
+                    const item = menuData[fileName].items.find(item => item.name === name);
+                    if (item) return item;
+                }
             }
+            return null;
+        }
+
+        // Filter menu items based on search and tags
+        function filterMenuItems() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeTag = document.querySelector('.tag-filter.active')?.getAttribute('data-tag') || 'all';
             
-            // Get selected dip if exists
-            if (currentModalItem.dips) {
-                const dipSelect = document.getElementById('modal-dip-select');
-                if (dipSelect) {
-                    selectedDip = dipSelect.value;
+            let allItems = [];
+            for (const fileName in menuData) {
+                if (menuData.hasOwnProperty(fileName)) {
+                    allItems = allItems.concat(menuData[fileName].items);
                 }
             }
             
-            // Get selected salads if exists
-            if (currentModalItem.salad) {
-                const saladCheckboxes = document.querySelectorAll('input[name="salad"]:checked');
-                selectedSalads = Array.from(saladCheckboxes).map(cb => cb.value);
-            }
-            
-            currentMealConfiguration = {
-                item: currentModalItem,
-                selectedOption,
-                selectedDip,
-                selectedSalads,
-                basePrice
-            };
-            
-            // Reset drink selection
-            selectedDrink = null;
-            document.querySelectorAll('input[name="drink"]').forEach(radio => {
-                radio.checked = false;
+            let filteredItems = allItems.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
+                                    item.description.toLowerCase().includes(searchTerm);
+                
+                const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
+                
+                return matchesSearch && matchesTag;
             });
             
-            // Show drink modal
-            drinkModal.style.display = 'block';
-        }
-
-        // Close drink modal
-        function closeDrinkModal() {
-            drinkModal.style.display = 'none';
+            renderMenuItems(filteredItems);
         }
 
         // Add item to cart from modal
-        function addToCartFromModal(isMeal = false, drink = null) {
+        function addToCartFromModal(isMeal) {
             if (!currentModalItem) return;
             
             const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
             let selectedOption = null;
-            let selectedDip = null;
-            let selectedSalads = [];
+            let selectedSauce = null;
             let basePrice = currentModalItem.price;
             
             // Get selected option if exists
@@ -1330,28 +919,20 @@
                 basePrice = currentModalItem.options[optionIndex].price;
             }
             
-            // Get selected dip if exists
-            if (currentModalItem.dips) {
-                const dipSelect = document.getElementById('modal-dip-select');
-                if (dipSelect) {
-                    selectedDip = dipSelect.value;
+            // Get selected sauce if exists
+            if (currentModalItem.sauces) {
+                const sauceSelect = document.getElementById('modal-sauce-select');
+                if (sauceSelect) {
+                    selectedSauce = sauceSelect.value;
                 }
-            }
-            
-            // Get selected salads if exists
-            if (currentModalItem.salad) {
-                const saladCheckboxes = document.querySelectorAll('input[name="salad"]:checked');
-                selectedSalads = Array.from(saladCheckboxes).map(cb => cb.value);
             }
             
             const price = isMeal ? basePrice + currentModalItem.mealPriceModifier : basePrice;
             
             let displayName = currentModalItem.name;
             if (selectedOption) displayName += ` (${selectedOption})`;
-            if (selectedDip) displayName += ` with ${selectedDip} dip`;
-            if (selectedSalads.length > 0) displayName += `, ${selectedSalads.join(', ')}`;
-            if (isMeal && drink) displayName += ` + ${drink} drink`;
-            if (isMeal) displayName += ' + chips';
+            if (selectedSauce) displayName += ` with ${selectedSauce}`;
+            if (isMeal) displayName += ' - Meal';
             
             // Check if item already exists in cart
             const existingItem = cart.find(item => item.name === displayName);
@@ -1365,9 +946,7 @@
                     quantity: 1,
                     isMeal,
                     selectedOption,
-                    selectedDip,
-                    selectedSalads,
-                    drink
+                    selectedSauce
                 });
             }
             
@@ -1595,29 +1174,12 @@
             // Modal events
             closeModal.addEventListener('click', closeItemModal);
             modalAddBase.addEventListener('click', () => addToCartFromModal(false));
-            modalAddChipsDrinks.addEventListener('click', openDrinkModal);
+            modalAddMeal.addEventListener('click', () => addToCartFromModal(true));
             
-            // Drink modal events
-            closeDrinkModal.addEventListener('click', closeDrinkModal);
-            cancelDrink.addEventListener('click', closeDrinkModal);
-            confirmDrink.addEventListener('click', () => {
-                const selectedDrinkRadio = document.querySelector('input[name="drink"]:checked');
-                if (selectedDrinkRadio) {
-                    selectedDrink = selectedDrinkRadio.value;
-                    addToCartFromModal(true, selectedDrink);
-                    closeDrinkModal();
-                } else {
-                    alert("Please select a drink");
-                }
-            });
-            
-            // Close modals when clicking outside
+            // Close modal when clicking outside
             window.addEventListener('click', (e) => {
                 if (e.target === itemModal) {
                     closeItemModal();
-                }
-                if (e.target === drinkModal) {
-                    closeDrinkModal();
                 }
             });
             
