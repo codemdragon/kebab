@@ -79,7 +79,7 @@
             min-width: 40px;
             text-align: center;
         }
-        /* Updated home section styling */
+        /* Updated home section styling - ALIGNED LEFT */
         #home {
             position: relative;
             width: 100%;
@@ -91,7 +91,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('Backdrop.jpg');
+            background-image: url('https://images.unsplash.com/photo-1615873968403-89e068629265?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80');
             background-size: cover;
             background-position: center;
             filter: blur(8px);
@@ -111,12 +111,12 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Changed from center to flex-start */
             z-index: 1;
             max-width: 7xl;
             margin: 0 auto;
             padding: 0 1rem;
-            text-align: center;
+            text-align: left; /* Changed from center to left */
         }
         @media (min-width: 640px) {
             #home-content {
@@ -284,6 +284,14 @@
             color: white;
             cursor: pointer;
         }
+        /* Home section buttons aligned left */
+        .home-buttons {
+            justify-content: flex-start; /* Changed from center to flex-start */
+        }
+        /* Home section info items aligned left */
+        .home-info {
+            justify-content: flex-start; /* Changed from center to flex-start */
+        }
     </style>
 </head>
 <body class="bg-[#121212] text-white">
@@ -399,11 +407,11 @@
         </header>
 
         <main>
-            <!-- Home Section - Updated Structure with correct ID -->
+            <!-- Home Section - Updated Structure with correct ID and left-aligned content -->
             <section id="home">
                 <div id="home-backdrop"></div>
                 <div id="home-content" class="py-12 md:py-24">
-                    <div class="max-w-4xl mx-auto">
+                    <div class="max-w-4xl">
                         <h2 class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
                             Where Flavor
                             <br>
@@ -412,7 +420,7 @@
                         <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
                             Experience authentic kebabs, burgers, and shawarma crafted with passion. Fresh ingredients, bold flavors, and unbeatable taste - available 12PM till 2AM daily.
                         </p>
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center mb-10">
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-10 home-buttons">
                             <button id="order-now-btn" class="bg-[#ff6a00] text-lg sm:text-xl font-semibold rounded-lg px-8 py-3 hover:bg-[#e05a00]">
                                 Order Now
                             </button>
@@ -420,7 +428,7 @@
                                 View Menu
                             </button>
                         </div>
-                        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 text-lg sm:text-xl text-gray-400 font-semibold">
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8 text-lg sm:text-xl text-gray-400 font-semibold home-info">
                             <div class="flex items-center space-x-2">
                                 <i class="fas fa-star text-[#ff6a00] text-xl"></i>
                                 <span>4.8 Rating</span>
@@ -1358,5 +1366,3 @@
     </script>
 </body>
 </html>
-
-
