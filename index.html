@@ -11,6 +11,7 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+            --image-position-y: 0%; /* CSS variable to control image position */
         }
         .cart-drawer {
             transform: translateX(100%);
@@ -46,6 +47,35 @@
         }
         #delivery-address-field {
             display: none;
+        }
+        /* Image positioning control panel */
+        .image-control-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid #333;
+        }
+        .image-control-panel h4 {
+            margin: 0 0 10px 0;
+            color: #ff6a00;
+            font-size: 14px;
+            text-align: center;
+        }
+        .image-control-slider {
+            width: 200px;
+            margin: 0 10px;
+        }
+        .image-control-value {
+            color: white;
+            font-size: 12px;
+            min-width: 40px;
+            text-align: center;
         }
         /* Updated home section styling */
         #home {
@@ -111,19 +141,15 @@
         }
         /* Updated image styling */
         .menu-item-image {
-            height: 260px; /* Set a fixed height */
+            height: 260px;
             width: 100%;
-            object-fit: cover; /* Cover the entire area */
-            object-position: top; /* Crop from the top */
+            object-fit: cover;
+            object-position: top var(--image-position-y); /* Use CSS variable */
         }
-        
         .menu-item-card {
             height: 100%;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Ensure overflow is hidden */
-        }
-
         }
         .menu-item-card .card-content {
             flex-grow: 1;
@@ -146,6 +172,16 @@
     </style>
 </head>
 <body class="bg-[#121212] text-white">
+    <!-- Image Positioning Control Panel -->
+    <div class="image-control-panel">
+        <h4>Image Vertical Position</h4>
+        <div class="flex items-center">
+            <span class="image-control-value" id="position-value">0%</span>
+            <input type="range" min="-30" max="30" value="0" class="image-control-slider" id="image-position-slider">
+            <button id="reset-position" class="bg-[#ff6a00] text-white text-xs px-2 py-1 rounded">Reset</button>
+        </div>
+    </div>
+
     <!-- Overlay -->
     <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
     
@@ -727,6 +763,11 @@
         const deliveryAddress = document.getElementById('delivery-address');
         const orderConfirmation = document.getElementById('order-confirmation');
         const confirmOkButton = document.getElementById('confirm-ok');
+        
+        // Image positioning controls
+        const imagePositionSlider = document.getElementById('image-position-slider');
+        const positionValue = document.getElementById('position-value');
+        const resetPositionButton = document.getElementById('reset-position');
 
         // Load menu items from JSON data
         function loadMenuItems() {
@@ -1090,7 +1131,13 @@
                 }
             });
         });
-
+        
+        // Handle image position adjustment
+        function updateImagePosition(value) {
+            document.documentElement.style.setProperty('--image-position-y', value + '%');
+            positionValue.textContent = value + '%';
+        }
+        
         // Initialize the page
         function init() {
             // Load menu items
@@ -1145,6 +1192,16 @@
             
             // Set initial active filter
             document.querySelector('[data-tag="all"]').classList.add('active');
+            
+            // Image position control events
+            imagePositionSlider.addEventListener('input', (e) => {
+                updateImagePosition(e.target.value);
+            });
+            
+            resetPositionButton.addEventListener('click', () => {
+                imagePositionSlider.value = 0;
+                updateImagePosition(0);
+            });
         }
 
         // Run initialization when DOM is loaded
@@ -1152,6 +1209,3 @@
     </script>
 </body>
 </html>
-
-
-
