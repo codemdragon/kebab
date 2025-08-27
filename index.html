@@ -475,33 +475,509 @@
 
         <main>
             <!-- Home Section - Updated Structure with correct ID and left-aligned content -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebab O'Clock</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Import Sigmar and XUONG fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Xuong&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Maiden+Orange&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            --image-position-y: 0%; /* CSS variable to control image position */
+        }
+        /* Apply XUONG font to the logo */
+        .header-logo-text {
+            font-family: 'Xuong', sans-serif;
+        }
+        /* Apply Sigmar font to the main heading */
+        .sigmar-font {
+            font-family: 'Sigmar', cursive;
+        }
+        
+        /* Apply Maiden Orange to "WHERE FLAVOUR" */
+        .maiden-orange-font {
+            font-family: 'Maiden Orange', cursive;
+            font-size: 7rem;
+        }
+
+        .cart-drawer {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .cart-drawer.open {
+            transform: translateX(0);
+        }
+        .overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .active-section {
+            color: #ff6a00 !important;
+        }
+        .tag-filter.active {
+            background-color: #ff6a00;
+            color: black;
+        }
+        .menu-item-card {
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+        .menu-item-card:hover {
+            transform: translateY(-5px);
+        }
+        .checkout-page {
+            display: none;
+        }
+        #delivery-address-field {
+            display: none;
+        }
+        /* Image positioning control panel */
+        .image-control-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid #333;
+            display: none; /* Hidden by default */
+        }
+        .image-control-panel h4 {
+            margin: 0 0 10px 0;
+            color: #ff6a00;
+            font-size: 14px;
+            text-align: center;
+        }
+        .image-control-slider {
+            width: 200px;
+            margin: 0 10px;
+        }
+        .image-control-value {
+            color: white;
+            font-size: 12px;
+            min-width: 40px;
+            text-align: center;
+        }
+        /* Updated home section styling - ALIGNED LEFT */
+        #home {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        #home-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Backdrop.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        #home-backdrop::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        #home-content {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Changed from center to flex-start */
+            z-index: 1;
+            max-width: 7xl;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: left; /* Changed from center to left */
+        }
+        @media (min-width: 640px) {
+            #home-content {
+                padding: 0 1.5rem;
+            }
+        }
+        @media (min-width: 768px) {
+            #home-content {
+                padding: 0 2.5rem;
+            }
+        }
+        /* Tag filter organization */
+        .tag-filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tag-filter {
+            flex: 0 0 auto;
+            white-space: nowrap;
+        }
+        /* Updated image styling */
+        .menu-item-image {
+            height: 260px;
+            width: 100%;
+            object-fit: cover;
+            object-position: top var(--image-position-y); /* Use CSS variable */
+        }
+        .menu-item-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .menu-item-card .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Dropdown styling */
+        .option-selector {
+            width: 100%;
+            background-color: #222;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        /* Modal styling */
+        .item-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background-color: #1a1a1a;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal-option {
+            margin-bottom: 1rem;
+        }
+        .modal-option label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: white;
+            font-weight: 600;
+        }
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .modal-buttons button {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .add-base {
+            background-color: #ff6a00;
+            color: white;
+            border: none;
+        }
+        .add-chips-drink {
+            background-color: transparent;
+            color: #ff6a00;
+            border: 2px solid #ff6a00;
+        }
+        .drink-selection {
+            display: none;
+            background-color: #222;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+        .drink-selection label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: white;
+            font-weight: 600;
+        }
+        .add-chips-drink-final {
+            background-color: #ff6a00;
+            color: white;
+            border: none;
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        /* Vegetable selection styling */
+        .vegetable-selection {
+            background-color: #222;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .vegetable-selection h4 {
+            color: white;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .vegetable-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .vegetable-checkbox input {
+            margin-right: 0.5rem;
+        }
+        .vegetable-checkbox label {
+            color: white;
+            cursor: pointer;
+        }
+        /* Home section buttons aligned left */
+        .home-buttons {
+            justify-content: flex-start; /* Changed from center to flex-start */
+        }
+        /* Home section info items aligned left */
+        .home-info {
+            justify-content: flex-start; /* Changed from center to flex-start */
+        }
+        /* Updated header styling - NAVIGATION MOVED NEXT TO CART */
+        .header-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background-color: #ff6a00;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #121212;
+        }
+        .nav-link {
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+            transition: all 0.2s ease;
+        }
+        .nav-link:hover {
+            transform: translateY(-2px);
+        }
+        /* Header container for nav and cart */
+        .header-nav-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        @media (max-width: 767px) {
+            .header-logo-text {
+                display: none;
+            }
+            /* Hide nav on mobile */
+            .header-nav-container nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#121212] text-white">
+    <!-- Image Positioning Control Panel (Hidden by default) -->
+    <div class="image-control-panel">
+        <h4>Image Vertical Position</h4>
+        <div class="flex items-center">
+            <span class="image-control-value" id="position-value">0%</span>
+            <input type="range" min="-30" max="30" value="0" class="image-control-slider" id="image-position-slider">
+            <button id="reset-position" class="bg-[#ff6a00] text-white text-xs px-2 py-1 rounded">Reset</button>
+        </div>
+    </div>
+
+    <!-- Item Modal -->
+    <div id="item-modal" class="item-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img id="modal-image" class="modal-image" src="" alt="">
+            <h2 id="modal-title" class="text-white text-2xl font-bold mb-2"></h2>
+            <p id="modal-description" class="text-gray-400 mb-4"></p>
+            
+            <div id="modal-options">
+                <!-- Options will be inserted here -->
+            </div>
+            
+            <!-- Vegetable Selection Section -->
+            <div id="vegetable-selection" class="vegetable-selection" style="display: none;">
+                <h4>Select Vegetables:</h4>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-lettuce" name="vegetables" value="Lettuce">
+                    <label for="vegetable-lettuce">Lettuce</label>
+                </div>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-onions" name="vegetables" value="Onions">
+                    <label for="vegetable-onions">Onions</label>
+                </div>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-pickles" name="vegetables" value="Pickles">
+                    <label for="vegetable-pickles">Pickles</label>
+                </div>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-tomatoes" name="vegetables" value="Tomatoes">
+                    <label for="vegetable-tomatoes">Tomatoes</label>
+                </div>
+                <div class="vegetable-checkbox">
+                    <input type="checkbox" id="vegetable-cucumber" name="vegetables" value="Cucumber">
+                    <label for="vegetable-cucumber">Cucumber</label>
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button id="modal-add-base" class="add-base">Add to Cart - £<span id="modal-base-price">0.00</span></button>
+                <button id="modal-add-chips-drink" class="add-chips-drink">Add Chips and Drink - £<span id="modal-chips-drink-price">0.00</span></button>
+                <div id="drink-selection" class="drink-selection">
+                    <label for="drink-select">Select a drink:</label>
+                    <select id="drink-select" class="option-selector">
+                        <option value="Sprite">Sprite</option>
+                        <option value="Pepsi">Pepsi</option>
+                        <option value="Tango Orange">Tango Orange</option>
+                        <option value="Tango Mango">Tango Mango</option>
+                        <option value="Vimto">Vimto</option>
+                        <option value="KA sparkling fruit punch">KA sparkling fruit punch</option>
+                    </select>
+                    <button id="modal-add-chips-drink-final" class="add-chips-drink-final">Add Chips and Drink - £<span id="modal-final-price">0.00</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+    
+    <!-- Cart Drawer -->
+    <div class="cart-drawer fixed top-0 right-0 h-full w-80 bg-[#1a1a1a] shadow-lg z-50">
+        <div class="p-4 border-b border-[#222222] flex justify-between items-center">
+            <h2 class="text-white font-semibold text-lg">Your Cart</h2>
+            <button id="close-cart" class="text-white">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="p-4 overflow-y-auto h-full pb-32">
+            <ul id="cart-items" class="space-y-3">
+                <!-- Cart items will be added here dynamically -->
+            </ul>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-[#1a1a1a] border-t border-[#222222]">
+            <div class="flex justify-between text-white mb-2 text-base">
+                <span class="font-semibold">Subtotal:</span>
+                <span id="cart-subtotal">£0.00</span>
+            </div>
+            <button id="checkout-button" class="w-full bg-[#ff6a00] text-white text-base font-semibold rounded py-3 hover:bg-[#e05a00]">
+                Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Updated Header with Logo Placeholder and Enhanced Navigation -->
+        <header class="flex items-center justify-between px-4 sm:px-6 md:px-10 py-4 bg-[#121212] border-b border-[#222222] sticky top-0 z-30">
+            <div class="header-logo-container">
+                <div class="logo-placeholder">LOGO</div>
+                <div class="text-xl font-bold text-[#ff6a00] header-logo-text">
+                    Kebab O'Clock
+                </div>
+            </div>
+            <!-- Navigation and Cart Container -->
+            <div class="header-nav-container">
+                <nav class="hidden md:flex space-x-4 text-white items-center">
+                    <a class="hover:text-[#ff6a00] nav-link active-section" href="#home">Home</a>
+                    <a class="hover:text-[#ff6a00] nav-link" href="#menu">Menu</a>
+                    <a class="hover:text-[#ff6a00] nav-link" href="#about">About</a>
+                    <a class="hover:text-[#ff6a00] nav-link" href="#contact">Contact</a>
+                </nav>
+                <button id="cart-button" class="flex items-center space-x-2 bg-[#ff6a00] text-base font-semibold rounded px-4 py-2 hover:bg-[#e05a00]">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">Cart (0)</span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <!-- Home Section - Updated Structure with correct ID and left-aligned content -->
             <section id="home">
                 <div id="home-backdrop"></div>
                 <div id="home-content" class="py-12 md:py-24">
-                    <div class="max-w-7xl">
-                        <h2 class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-                            <span class="maiden-orange-font">WHERE FLAVOUR</span>
-                            <br>
-                            <span class="text-[#ff6a00] maiden-orange-font">MEETS TIME</span>
+                    <div class="max-w-6xl">
+                        <h2 class="text-white text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-8">
+                            <span class="maiden-orange-font block mb-2">WHERE FLAVOUR</span>
+                            <span class="text-[#ff6a00] maiden-orange-font block">MEETS TIME</span>
                         </h2>
-                        <p class="text-lg sm:text-xl md:text-4xl text-gray-300 mb-8 leading-relaxed">
+                        <p class="text-xl sm:text-2xl md:text-3xl text-gray-300 mb-12 leading-relaxed w-full max-w-full mx-auto px-4 md:px-0">
                             Experience authentic kebabs, burgers, and shawarma crafted with passion. Fresh ingredients, bold flavors, and unbeatable taste - available 12PM till 2AM daily.
                         </p>
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-10 home-buttons">
-                            <button id="order-now-btn" class="bg-[#ff6a00] text-lg sm:text-2xl font-semibold rounded-lg px-11 py-3 hover:bg-[#e05a00]">
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-14 home-buttons">
+                            <button id="order-now-btn" class="bg-[#ff6a00] text-xl sm:text-2xl font-semibold rounded-xl px-10 py-5 hover:bg-[#e05a00] transition-colors">
                                 Order Now
                             </button>
-                            <button id="view-menu-btn" class="bg-[#1a1a1a] border-2 border-[#ff6a00] text-lg sm:text-2xl font-semibold rounded-lg px-11 py-4 hover:bg-[#ff6a00] hover:text-black">
+                            <button id="view-menu-btn" class="bg-transparent border-2 border-[#ff6a00] text-xl sm:text-2xl font-semibold rounded-xl px-12 py-5 hover:bg-[#ff6a00] hover:text-black transition-colors">
                                 View Menu
                             </button>
                         </div>
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8 text-lg sm:text-2xl text-gray-400 font-semibold home-info">
-                            <div class="flex items-center space-x-2">
-                                <i class="fas fa-star text-[#ff6a00] text-xl"></i>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-12 text-xl sm:text-2xl text-gray-300 font-semibold home-info">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-star text-[#ff6a00] text-2xl"></i>
                                 <span>4.8 Rating</span>
                             </div>
-                            <div class="flex items-center space-x-2">
-                                <i class="fas fa-clock text-[#ff6a00] text-xl"></i>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-clock text-[#ff6a00] text-2xl"></i>
                                 <span>12PM - 2AM Daily</span>
                             </div>
                         </div>
@@ -1434,5 +1910,934 @@
     </script>
 </body>
 </html>
+
+
+
+            <!-- Menu Section -->
+            <section id="menu" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-12 md:py-20">
+                <h3 class="text-center font-semibold text-white text-3xl sm:text-4xl mb-4">Our Menu</h3>
+                <p class="text-center text-gray-400 text-lg sm:text-xl mb-12">Discover our delicious selection of kebabs, burgers, and more</p>
+                
+                <!-- Search and Filters -->
+                <div class="mb-12">
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        <div class="relative w-full sm:w-80">
+                            <input type="text" id="search-input" placeholder="Search menu items..." class="w-full bg-[#1a1a1a] text-white text-lg rounded-xl py-3 px-5 pl-12 focus:outline-none focus:ring-2 focus:ring-[#ff6a00]">
+                            <i class="fas fa-search absolute left-4 top-3.5 text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="text-center text-white text-xl mb-4">Filter by Category</h4>
+                        <div class="tag-filters-container">
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black active" data-tag="all">All</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Beefy-Tastic">Beefy-Tastic</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Chicken menu">Chicken menu</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Don-Shawarma">Don-Shawarma</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Grilled-Tastic">Grilled-Tastic</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Veggie-Tastic">Veggie-Tastic</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Wrap-Tastic">Wrap-Tastic</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Wings/tenders">Wings/tenders</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="menu-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <!-- Menu items will be loaded dynamically from JSON -->
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="max-w-4xl mx-auto px-4 sm:px-6 md:px-10 py-12 md:py-20 text-center text-lg sm:text-xl text-gray-400 leading-relaxed">
+                <h3 class="font-semibold text-white text-3xl sm:text-4xl mb-8">Our Story</h3>
+                <p class="mb-8">
+                    Kebab O’Clock was built on one simple belief: good food makes every moment better. Starting in the heart of Houndslow, we wanted to craft a dining experience where bold flavors, fresh ingredients, and unbeatable taste come together under one roof.
+                </p>
+                <p class="mb-8">
+                    Our chefs pour passion into every bite—grilling, stacking, and wrapping your favorites to perfection. Whether you’re craving a loaded doner, a smoky shawarma, or a burger that’s stacked high and dripping with flavor, you’ll find it here.
+                </p>
+                <p>
+                    We’re not just serving fast food—we’re serving quality, comfort, and flavor that keeps you coming back for more. At Kebab O’Clock, there’s no wrong time to treat yourself.
+                </p>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="max-w-4xl mx-auto px-4 sm:px-6 md:px-10 py-12 md:py-20 text-center text-lg sm:text-xl text-gray-400 leading-relaxed">
+                <h3 class="font-semibold text-white text-3xl sm:text-4xl mb-8">Visit Us</h3>
+                <p class="mb-12 text-2xl">Come and experience the taste of authentic kebabs</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-8">
+                    <div class="bg-[#1a1a1a] rounded-xl p-8 w-full sm:w-64 text-lg">
+                        <i class="fas fa-map-marker-alt text-[#ff6a00] text-3xl mb-4"></i>
+                        <p>
+                            472 Great West Road
+                            <br>
+                            Hounslow, England
+                            <br>
+                            TW5 0JA
+                        </p>
+                    </div>
+                    <div class="bg-[#1a1a1a] rounded-xl p-8 w-full sm:w-64 text-lg">
+                        <i class="fas fa-phone-alt text-[#ff6a00] text-3xl mb-4"></i>
+                        <p>+44 20 7998 6050</p>
+                    </div>
+                    <div class="bg-[#1a1a1a] rounded-xl p-8 w-full sm:w-64 text-lg">
+                        <i class="fas fa-clock text-[#ff6a00] text-3xl mb-4"></i>
+                        <p>
+                            MON - SUN
+                            <br>
+                            12PM TIL 2AM
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-[#0a0a0a] border-t border-[#222222] py-6 px-4 sm:px-6 md:px-10 text-lg text-[#ff6a00] font-semibold flex flex-col sm:flex-row justify-between items-center max-w-7xl mx-auto">
+            <div class="mb-4 sm:mb-0">Kebab O'Clock</div>
+            <div class="text-gray-500 text-base">© 2023 Kebab O'Clock. All rights reserved.</div>
+        </footer>
+    </div>
+
+    <!-- Checkout Page -->
+    <div id="checkout-page" class="checkout-page max-w-4xl mx-auto px-4 sm:px-6 md:px-10 py-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-8 text-center">Checkout</h2>
+        
+        <!-- Order Summary -->
+        <div class="bg-[#1a1a1a] rounded-xl p-8 mb-8">
+            <h3 class="text-2xl font-semibold text-white mb-6">Order Summary</h3>
+            <div id="checkout-items" class="space-y-4 mb-6">
+                <!-- Items will be populated here -->
+            </div>
+            <div class="border-t border-[#333] pt-6">
+                <div class="flex justify-between text-xl text-white">
+                    <span class="font-semibold">Total:</span>
+                    <span id="checkout-total" class="font-bold">£0.00</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Checkout Form -->
+        <form id="checkout-form" class="bg-[#1a1a1a] rounded-xl p-8">
+            <h3 class="text-2xl font-semibold text-white mb-8">Customer Information</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label for="full-name" class="block text-white mb-3 text-lg">Full Name</label>
+                    <input type="text" id="full-name" required class="w-full bg-[#222] text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#ff6a00] text-lg">
+                </div>
+                <div>
+                    <label for="phone" class="block text-white mb-3 text-lg">Phone Number</label>
+                    <input type="tel" id="phone" required class="w-full bg-[#222] text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#ff6a00] text-lg">
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <label for="email" class="block text-white mb-3 text-lg">Email Address</label>
+                <input type="email" id="email" required class="w-full bg-[#222] text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#ff6a00] text-lg">
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label for="order-type" class="block text-white mb-3 text-lg">Order Type</label>
+                    <select id="order-type" required class="w-full bg-[#222] text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#ff6a00] text-lg">
+                        <option value="">Select option</option>
+                        <option value="delivery">Delivery</option>
+                        <option value="collection">Collection</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="payment-method" class="block text-white mb-3 text-lg">Payment Method</label>
+                    <select id="payment-method" required class="w-full bg-[#222] text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#ff6a00] text-lg">
+                        <option value="">Select option</option>
+                        <option value="cash">Cash on Delivery</option>
+                        <option value="card">Card Payment</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="delivery-address-field" class="mb-6">
+                <label for="delivery-address" class="block text-white mb-3 text-lg">Delivery Address</label>
+                <textarea id="delivery-address" class="w-full bg-[#222] text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#ff6a00] h-24 text-lg"></textarea>
+            </div>
+            
+            <div class="mb-8">
+                <label for="special-instructions" class="block text-white mb-3 text-lg">Special Instructions (Optional)</label>
+                <textarea id="special-instructions" class="w-full bg-[#222] text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#ff6a00] h-24 text-lg"></textarea>
+            </div>
+            
+            <button type="submit" id="place-order-btn" class="w-full bg-[#ff6a00] text-white text-xl font-bold rounded-lg py-4 hover:bg-[#e05a00]">
+                Place Order – £0.00
+            </button>
+        </form>
+        
+        <div class="text-center mt-8">
+            <button id="back-to-menu" class="text-[#ff6a00] hover:underline text-lg">
+                ← Back to Menu
+            </button>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="order-confirmation" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-[#1a1a1a] rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="text-center">
+                <i class="fas fa-check-circle text-[#ff6a00] text-5xl mb-4"></i>
+                <h3 class="text-2xl font-bold text-white mb-2">Order Confirmed!</h3>
+                <p class="text-gray-300 mb-6">Thank you for your order. We'll start preparing it right away.</p>
+                <button id="confirm-ok" class="bg-[#ff6a00] text-white font-semibold rounded-lg px-6 py-3 hover:bg-[#e05a00]">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // MODIFIED: Add Veggie-Tastic to sauce options with appropriate sauces
+        const sauceOptions = {
+            "Beefy-Tastic": ["Garlic Mayo", "Burger Blast", "Hot Chilli", "Mild Chilli", "BBQ", "Ketchup", "Mayonnaise", "Peri Peri", "Sweet Chilli"],
+            "Chicken menu": ["Garlic Mayo", "Burger Blast", "Hot Chilli", "Mild Chilli", "BBQ", "Ketchup", "Mayonnaise", "Peri Peri", "Sweet Chilli"],
+            "Grilled-Tastic": ["Mango & Lime", "Medium Peri Peri", "Hot Peri Peri"],
+            "Wrap-Tastic": ["Garlic Herb Mayo", "Sticky BBQ", "Buffalo Kick"],
+            "Wings/tenders": ["Mango & Lime", "Korean BBQ", "Peri Peri", "Mango Habanero", "Hot Honey Siracha", "Buffalo Kick"],
+            "Veggie-Tastic": ["Garlic Mayo", "Sweet Chilli", "BBQ", "Ketchup", "Mayonnaise"] // Added Veggie-Tastic
+        };
+        // Drink options
+        const drinkOptions = [
+            "Sprite", "Pepsi", "Tango Orange", "Tango Mango", "Vimto", "KA sparkling fruit punch"
+        ];
+
+        // Vegetable options for Veggie-Tastic and Wrap-Tastic
+        const vegetableOptions = [
+            "Lettuce", "Onions", "Pickles", "Tomatoes", "Cucumber"
+        ];
+
+        // Updated JSON data with showSlider and sauces options
+        const menuData = {
+            "Beefy-Tastic.json": {
+                "items": [
+                    {
+                        "name": "Double Up Beef Burger",
+                        "description": "Double beef patties with double nachos cheese, glazed onions, burger blast sauce and 1 dip",
+                        "image": "Double Up Beef Burger.jpg",
+                        "price": 8.50,
+                        "tags": ["Beefy-Tastic", "burger", "beef"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "sauces": true,
+                        "vegetables": false
+                    },
+                    {
+                        "name": "Single Up Beef Burger",
+                        "description": "single beef patty with nachos cheese, glazed onions, burger blast sauce and 1 dip",
+                        "image": "Single Up Beef Burger.jpg",
+                        "price": 6.50,
+                        "tags": ["Beefy-Tastic", "burger", "beef"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "sauces": true,
+                        "vegetables": false
+                    }
+                ]
+            },
+            "Chicken menu.json": {
+                "items": [
+                    {
+                        "name": "Nash hot bird Burger",
+                        "description": "Spicy Nashville-style chicken burger with nachos cheese, pickles, burger blast sauce and 1 dip",
+                        "image": "Nash Hot Bird Burger.jpg",
+                        "price": 6.00,
+                        "tags": ["Chicken menu", "burger", "chicken", "spicy"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "sauces": true,
+                        "vegetables": false
+                    }
+                ]
+            },
+            "Wrap-Tastic.json": {
+                "items": [
+                    {
+                        "name": "Crispy Chicken Wrap",
+                        "description": "crispy chicken with your choice of salad, your choice of sauce and 1 dip",
+                        "image": "Crispy Chicken Wrap.jpg",
+                        "price": 7.00,
+                        "tags": ["Wrap-Tastic", "wrap", "chicken"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "sauces": true,
+                        "vegetables": true
+                    }
+                ]
+            },
+            "Don-Shawarma.json": {
+                "items": [
+                    {
+                        "name": "Lamb Doner and Chips",
+                        "description": "Succulent lamb doner with crispy fries, onion, cucumber,pickles, tomato, garlic mayo and garlic chilli sauce",
+                        "image": "Lamb Doner & Chips.jpg",
+                        "price": 8.00,
+                        "tags": ["Don-Shawarma", "doner", "lamb"],
+                        "mealPriceModifier": 1.50,
+                        "showSlider": false,
+                        "sauces": false,
+                        "vegetables": false
+                    }
+                ]
+            },
+            "Grilled-Tastic.json": {
+                "items": [
+                   {
+                        "name": "Single Grilled Chicken Burger",
+                        "description": " Single grilled chicken patty with nachos cheese, lettuce and our signiture KOC sauce",
+                        "image": "Single Grilled Chicken Burger.jpg",
+                        "price": 5.50,
+                        "tags": ["Grilled-Tastic", "burger", "chicken"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "sauces": true,
+                        "vegetables": false
+                    }
+                ]
+            },
+            "Wings/tenders.json": {
+                "items": [
+                    {
+                        "name": "Chicken Tenders or Wings",
+                        "description": "Chicken wings or tenders with any 1 sauce",
+                        "image": "Tenders & Wings.jpg",
+                        "tags": ["Wings/tenders", "chicken"],
+                        "mealPriceModifier": 2.50,
+                        "options": [
+                            {"name": "5 piece", "price": 5.00},
+                            {"name": "10 piece", "price": 9.00},
+                            {"name": "15 piece", "price": 14.00},
+                            {"name": "20 piece", "price": 18.00}
+                        ],
+                        "showSlider": false,
+                        "sauces": true,
+                        "vegetables": false
+                    }
+                ]
+            },
+            "Veggie-Tastic.json": {
+                "items": [
+                    {
+                        "name": "Veg Paneer Wrap",
+                        "description": "Delicious paneer cubes with your choice of salad, your choice of sauce and 1 dip",
+                        "image": "Veg Paneer Wrap.jpg",
+                        "price": 7.00,
+                        "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
+                        "mealPriceModifier": 2.50,
+                        "showSlider": false,
+                        "sauces": true,
+                        "vegetables": true
+                    }
+                ]
+            },
+            "drinks.json": {
+                "items": [
+                    {
+                        "name": "Pepsi",
+                        "description": "Refreshing cold Pepsi drink",
+                        "image": "Pepsi.jpg",
+                        "price": 1.99,
+                        "tags": ["drinks"],
+                        "mealPriceModifier": 0.00,
+                        "showSlider": false,
+                        "sauces": false,
+                        "vegetables": false
+                    }
+                ]
+            }
+        };
+
+        // Cart functionality
+        let cart = [];
+        const cartButton = document.getElementById('cart-button');
+        const closeCart = document.getElementById('close-cart');
+        const cartDrawer = document.querySelector('.cart-drawer');
+        const overlay = document.querySelector('.overlay');
+        const cartItems = document.getElementById('cart-items');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const cartCount = document.getElementById('cart-count');
+        const menuContainer = document.getElementById('menu-container');
+        const searchInput = document.getElementById('search-input');
+        const tagFilters = document.querySelectorAll('.tag-filter');
+        const checkoutButton = document.getElementById('checkout-button');
+        const orderNowButton = document.getElementById('order-now-btn');
+        const viewMenuButton = document.getElementById('view-menu-btn');
+        const mainContent = document.getElementById('main-content');
+        const checkoutPage = document.getElementById('checkout-page');
+        const backToMenuButton = document.getElementById('back-to-menu');
+        const checkoutItems = document.getElementById('checkout-items');
+        const checkoutTotal = document.getElementById('checkout-total');
+        const placeOrderButton = document.getElementById('place-order-btn');
+        const checkoutForm = document.getElementById('checkout-form');
+        const orderTypeSelect = document.getElementById('order-type');
+        const deliveryAddressField = document.getElementById('delivery-address-field');
+        const deliveryAddress = document.getElementById('delivery-address');
+        const orderConfirmation = document.getElementById('order-confirmation');
+        const confirmOkButton = document.getElementById('confirm-ok');
+        
+        // Modal elements
+        const itemModal = document.getElementById('item-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalOptions = document.getElementById('modal-options');
+        const modalBasePrice = document.getElementById('modal-base-price');
+        const modalChipsDrinkPrice = document.getElementById('modal-chips-drink-price');
+        const modalFinalPrice = document.getElementById('modal-final-price');
+        const modalAddBase = document.getElementById('modal-add-base');
+        const modalAddChipsDrink = document.getElementById('modal-add-chips-drink');
+        const drinkSelection = document.getElementById('drink-selection');
+        const drinkSelect = document.getElementById('drink-select');
+        const modalAddChipsDrinkFinal = document.getElementById('modal-add-chips-drink-final');
+        const closeModal = document.querySelector('.close-modal');
+        const vegetableSelection = document.getElementById('vegetable-selection');
+        
+        // Image positioning controls
+        const imagePositionSlider = document.getElementById('image-position-slider');
+        const positionValue = document.getElementById('position-value');
+        const resetPositionButton = document.getElementById('reset-position');
+        const imageControlPanel = document.querySelector('.image-control-panel');
+
+        // Current item being viewed in modal
+        let currentModalItem = null;
+
+        // Load menu items from JSON data
+        function loadMenuItems() {
+            let allItems = [];
+            let showSliderPanel = false;
+            
+            // Simulate loading from multiple JSON files
+            for (const fileName in menuData) {
+                if (menuData.hasOwnProperty(fileName)) {
+                    allItems = allItems.concat(menuData[fileName].items);
+                    
+                    // Check if any item has showSlider set to true
+                    if (menuData[fileName].items.some(item => item.showSlider)) {
+                        showSliderPanel = true;
+                    }
+                }
+            }
+            
+            // Show slider panel if any item has showSlider: true
+            if (showSliderPanel) {
+                imageControlPanel.style.display = 'block';
+            }
+            
+            renderMenuItems(allItems);
+        }
+
+        // Render menu items to the page
+        function renderMenuItems(items) {
+            menuContainer.innerHTML = '';
+            
+            if (items.length === 0) {
+                menuContainer.innerHTML = '<p class="text-center text-gray-400 col-span-full py-8 text-lg">No menu items found matching your criteria.</p>';
+                return;
+            }
+            
+            items.forEach(item => {
+                const article = document.createElement('article');
+                article.className = 'bg-[#1a1a1a] rounded-xl overflow-hidden shadow-md text-base menu-item-card';
+                
+                // Check if item has options
+                const hasOptions = item.options && item.options.length > 0;
+                const basePrice = hasOptions ? item.options[0].price : item.price;
+                
+                article.innerHTML = `
+                    <div class="relative">
+                        <img alt="${item.name}" class="menu-item-image" src="${item.image}">
+                        <span class="absolute top-3 left-3 bg-[#ff6a00] text-xs font-semibold uppercase rounded px-2 py-1">
+                            ${item.tags[0]}
+                        </span>
+                    </div>
+                    <div class="p-4 card-content">
+                        <h4 class="font-semibold text-white mb-2 text-lg">${item.name}</h4>
+                        <p class="text-gray-400 mb-3 text-sm">${item.description}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[#ff6a00] font-semibold text-lg">
+                                ${hasOptions ? `From £${Math.min(...item.options.map(o => o.price)).toFixed(2)}` : `£${item.price.toFixed(2)}`}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                
+                // Add click event to open modal
+                article.addEventListener('click', () => {
+                    openItemModal(item);
+                });
+                
+                menuContainer.appendChild(article);
+            });
+        }
+
+        // Open modal for a menu item
+        function openItemModal(item) {
+            currentModalItem = item;
+            
+            // Reset drink selection UI
+            drinkSelection.style.display = 'none';
+            modalAddChipsDrink.style.display = 'block';
+            
+            // Reset vegetable selection
+            document.querySelectorAll('input[name="vegetables"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Show or hide vegetable selection based on item
+            if (item.vegetables) {
+                vegetableSelection.style.display = 'block';
+            } else {
+                vegetableSelection.style.display = 'none';
+            }
+            
+            // Set modal content
+            modalImage.src = item.image;
+            modalTitle.textContent = item.name;
+            modalDescription.textContent = item.description;
+            
+            // Clear previous options
+            modalOptions.innerHTML = '';
+            
+            // Add options if item has them
+            const hasOptions = item.options && item.options.length > 0;
+            let selectedOptionIndex = 0;
+            let basePrice = hasOptions ? item.options[0].price : item.price;
+            
+            if (hasOptions) {
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'modal-option';
+                optionsDiv.innerHTML = `
+                    <label for="modal-option-select">Size:</label>
+                    <select id="modal-option-select" class="option-selector">
+                        ${item.options.map((option, index) => `
+                            <option value="${index}" data-price="${option.price}">
+                                ${option.name} - £${option.price.toFixed(2)}
+                            </option>
+                        `).join('')}
+                    </select>
+                `;
+                modalOptions.appendChild(optionsDiv);
+                
+                // Add event listener to update prices when option changes
+                const optionSelect = document.getElementById('modal-option-select');
+                optionSelect.addEventListener('change', (e) => {
+                    selectedOptionIndex = parseInt(e.target.value);
+                    basePrice = item.options[selectedOptionIndex].price;
+                    updateModalPrices(item, basePrice);
+                });
+            }
+            
+            // Add sauce options if item has sauces
+            if (item.sauces) {
+                // Find the category for sauce options
+                let sauceCategory = item.tags.find(tag => sauceOptions.hasOwnProperty(tag));
+                
+                if (sauceCategory && sauceOptions[sauceCategory]) {
+                    const sauceDiv = document.createElement('div');
+                    sauceDiv.className = 'modal-option';
+                    
+                    // MODIFIED: Determine the label text based on category
+                    let labelText = "Sauce";
+                    if (["Beefy-Tastic", "Chicken menu", "Veggie-Tastic"].includes(sauceCategory)) {
+                        labelText = "Dip";
+                    } else if (["Grilled-Tastic", "Wrap-Tastic", "Wings/tenders"].includes(sauceCategory)) {
+                        labelText = "Flavour";
+                    }
+                    
+                    sauceDiv.innerHTML = `
+                        <label for="modal-sauce-select">${labelText}:</label>
+                        <select id="modal-sauce-select" class="option-selector">
+                            ${sauceOptions[sauceCategory].map(sauce => `
+                                <option value="${sauce}">${sauce}</option>
+                            `).join('')}
+                        </select>
+                    `;
+                    modalOptions.appendChild(sauceDiv);
+                }
+            }
+            
+            // Update prices
+            updateModalPrices(item, basePrice);
+            
+            // Show modal
+            itemModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Update prices in modal
+        function updateModalPrices(item, basePrice) {
+            modalBasePrice.textContent = basePrice.toFixed(2);
+            modalChipsDrinkPrice.textContent = (basePrice + item.mealPriceModifier).toFixed(2);
+            modalFinalPrice.textContent = (basePrice + item.mealPriceModifier).toFixed(2);
+        }
+
+        // Close modal
+        function closeItemModal() {
+            itemModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentModalItem = null;
+        }
+
+        // Find menu item by name
+        function findMenuItemByName(name) {
+            for (const fileName in menuData) {
+                if (menuData.hasOwnProperty(fileName)) {
+                    const item = menuData[fileName].items.find(item => item.name === name);
+                    if (item) return item;
+                }
+            }
+            return null;
+        }
+
+        // Filter menu items based on search and tags
+        function filterMenuItems() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeTag = document.querySelector('.tag-filter.active')?.getAttribute('data-tag') || 'all';
+            
+            let allItems = [];
+            for (const fileName in menuData) {
+                if (menuData.hasOwnProperty(fileName)) {
+                    allItems = allItems.concat(menuData[fileName].items);
+                }
+            }
+            
+            let filteredItems = allItems.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
+                                    item.description.toLowerCase().includes(searchTerm);
+                
+                const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
+                
+                return matchesSearch && matchesTag;
+            });
+            
+            renderMenuItems(filteredItems);
+        }
+
+        // Add item to cart from modal
+        function addToCartFromModal(isChipsDrink, selectedDrink) {
+            if (!currentModalItem) return;
+            
+            const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
+            let selectedOption = null;
+            let selectedSauce = null;
+            let selectedVegetables = [];
+            let basePrice = currentModalItem.price;
+            
+            // Get selected option if exists
+            if (hasOptions) {
+                const optionSelect = document.getElementById('modal-option-select');
+                const optionIndex = parseInt(optionSelect.value);
+                selectedOption = currentModalItem.options[optionIndex].name;
+                basePrice = currentModalItem.options[optionIndex].price;
+            }
+            
+            // Get selected sauce if exists
+            if (currentModalItem.sauces) {
+                const sauceSelect = document.getElementById('modal-sauce-select');
+                if (sauceSelect) {
+                    selectedSauce = sauceSelect.value;
+                }
+            }
+            
+            // Get selected vegetables if applicable
+            if (currentModalItem.vegetables) {
+                const vegetableCheckboxes = document.querySelectorAll('input[name="vegetables"]:checked');
+                selectedVegetables = Array.from(vegetableCheckboxes).map(cb => cb.value);
+            }
+            
+            const price = isChipsDrink ? basePrice + currentModalItem.mealPriceModifier : basePrice;
+            
+            let displayName = currentModalItem.name;
+            if (selectedOption) displayName += ` (${selectedOption})`;
+            if (selectedSauce) displayName += ` with ${selectedSauce}`;
+            if (selectedVegetables.length > 0) displayName += ` with ${selectedVegetables.join(', ')}`;
+            if (isChipsDrink) displayName += ` with Chips and ${selectedDrink}`;
+            
+            // Check if item already exists in cart
+            const existingItem = cart.find(item => item.name === displayName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: displayName,
+                    price,
+                    quantity: 1,
+                    isChipsDrink,
+                    selectedOption,
+                    selectedSauce,
+                    selectedVegetables,
+                    selectedDrink: isChipsDrink ? selectedDrink : null
+                });
+            }
+            
+            updateCart();
+            closeItemModal();
+            openCartDrawer();
+        }
+
+        // Open cart drawer
+        function openCartDrawer() {
+            cartDrawer.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close cart drawer
+        function closeCartDrawer() {
+            cartDrawer.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Update cart display
+        function updateCart() {
+            // Clear current items
+            cartItems.innerHTML = '';
+            
+            let total = 0;
+            let count = 0;
+            
+            // Add items to cart display
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                count += item.quantity;
+                
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center text-white text-sm border-b border-[#222222] pb-3';
+                li.innerHTML = `
+                    <div>
+                        <div class="font-semibold">${item.name}</div>
+                        <div class="text-[#ff6a00]">£${item.price.toFixed(2)} x ${item.quantity}</div>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="font-semibold mr-3">£${itemTotal.toFixed(2)}</span>
+                        <button class="remove-item text-red-500 hover:text-red-700" data-name="${item.name}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                cartItems.appendChild(li);
+            });
+            
+            // Update subtotal and count
+            cartSubtotal.textContent = `£${total.toFixed(2)}`;
+            cartCount.textContent = `Cart (${count})`;
+            
+            // Update checkout button text
+            placeOrderButton.textContent = `Place Order – £${total.toFixed(2)}`;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const name = e.currentTarget.getAttribute('data-name');
+                    removeFromCart(name);
+                });
+            });
+        }
+
+        // Remove item from cart
+        function removeFromCart(name) {
+            const itemIndex = cart.findIndex(item => item.name === name);
+            
+            if (itemIndex !== -1) {
+                if (cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity -= 1;
+                } else {
+                    cart.splice(itemIndex, 1);
+                }
+                
+                updateCart();
+            }
+        }
+
+        // Show checkout page
+        function showCheckoutPage() {
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add some items before checkout.");
+                return;
+            }
+
+            mainContent.style.display = 'none';
+            checkoutPage.style.display = 'block';
+
+            // Populate checkout items
+            checkoutItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const div = document.createElement('div');
+                div.className = 'flex justify-between items-center';
+                div.innerHTML = `
+                    <div class="flex-1">
+                        <div class="font-semibold">${item.name}</div>
+                        <div class="text-sm text-gray-400">£${item.price.toFixed(2)} x ${item.quantity}</div>
+                    </div>
+                    <div class="font-semibold">£${itemTotal.toFixed(2)}</div>
+                `;
+
+                checkoutItems.appendChild(div);
+            });
+
+            checkoutTotal.textContent = `£${total.toFixed(2)}`;
+            placeOrderButton.textContent = `Place Order – £${total.toFixed(2)}`;
+        }
+
+
+        // Show main content
+        function showMainContent() {
+            checkoutPage.style.display = 'none';
+            mainContent.style.display = 'block';
+        }
+
+        // Handle order type change
+        function handleOrderTypeChange() {
+            if (orderTypeSelect.value === 'delivery') {
+                deliveryAddressField.style.display = 'block';
+                deliveryAddress.setAttribute('required', 'required');
+            } else {
+                deliveryAddressField.style.display = 'none';
+                deliveryAddress.removeAttribute('required');
+            }
+        }
+
+        // Handle form submission
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            // In a real application, you would send the order to a server here
+            // For this example, we'll just show a confirmation message
+            
+            orderConfirmation.classList.remove('hidden');
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Update active navigation link
+                    document.querySelectorAll('.nav-link').forEach(navLink => {
+                        navLink.classList.remove('active-section');
+                    });
+                    link.classList.add('active-section');
+                }
+            });
+        });
+        
+        // Handle image position adjustment
+        function updateImagePosition(value) {
+            document.documentElement.style.setProperty('--image-position-y', value + '%');
+            positionValue.textContent = value + '%';
+        }
+        
+        // Initialize the page
+        function init() {
+            // Load menu items
+            loadMenuItems();
+            
+            // Event listeners
+            cartButton.addEventListener('click', openCartDrawer);
+            closeCart.addEventListener('click', closeCartDrawer);
+            overlay.addEventListener('click', closeCartDrawer);
+            
+            // Search and filter events
+            searchInput.addEventListener('input', filterMenuItems);
+            
+            tagFilters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    tagFilters.forEach(f => f.classList.remove('active'));
+                    filter.classList.add('active');
+                    filterMenuItems();
+                });
+            });
+            
+            // Checkout events
+            checkoutButton.addEventListener('click', showCheckoutPage);
+            orderNowButton.addEventListener('click', showCheckoutPage);
+            backToMenuButton.addEventListener('click', showMainContent);
+            
+            // View Menu button event
+            viewMenuButton.addEventListener('click', () => {
+                document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+                
+                // Update active navigation link
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active-section');
+                });
+                document.querySelector('[href="#menu"]').classList.add('active-section');
+            });
+            
+            // Order type event
+            orderTypeSelect.addEventListener('change', handleOrderTypeChange);
+            
+            // Form submission
+            checkoutForm.addEventListener('submit', handleFormSubmit);
+            
+            // Confirmation button
+            confirmOkButton.addEventListener('click', () => {
+                orderConfirmation.classList.add('hidden');
+                showMainContent();
+                cart = [];
+                updateCart();
+                checkoutForm.reset();
+            });
+            
+            // Modal events
+            closeModal.addEventListener('click', closeItemModal);
+            modalAddBase.addEventListener('click', () => addToCartFromModal(false));
+            
+            // Chips and drink button events
+            modalAddChipsDrink.addEventListener('click', () => {
+                drinkSelection.style.display = 'block';
+                modalAddChipsDrink.style.display = 'none';
+            });
+            
+            modalAddChipsDrinkFinal.addEventListener('click', () => {
+                const selectedDrink = drinkSelect.value;
+                addToCartFromModal(true, selectedDrink);
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === itemModal) {
+                    closeItemModal();
+                }
+            });
+            
+            // Set initial active filter
+            document.querySelector('[data-tag="all"]').classList.add('active');
+            
+            // Image position control events
+            imagePositionSlider.addEventListener('input', (e) => {
+                updateImagePosition(e.target.value);
+            });
+            
+            resetPositionButton.addEventListener('click', () => {
+                imagePositionSlider.value = 0;
+                updateImagePosition(0);
+            });
+        }
+
+        // Run initialization when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
+
 
 
