@@ -17,17 +17,17 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
-            --image-position-y: 0%; /* CSS variable to control image position */
+            --image-position-y: 0%;
         }
-        /* Apply XUONG font to the logo */
+        
         .header-logo-text {
             font-family: 'Xuong', sans-serif;
         }
-        /* Apply Righteous font to the main heading */
+        
         .righteous-font {
             font-family: 'Righteous', cursive;
         }
-        /* Apply Lato font to the description */
+        
         .lato-font {
             font-family: 'Lato', sans-serif;
         }
@@ -36,36 +36,44 @@
             transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
         }
+        
         .cart-drawer.open {
             transform: translateX(0);
         }
+        
         .overlay {
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease-in-out;
         }
+        
         .overlay.active {
             opacity: 1;
             visibility: visible;
         }
+        
         .active-section {
             color: #ff6a00 !important;
         }
+        
         .tag-filter.active {
             background-color: #ff6a00;
             color: black;
         }
+        
         .menu-item-card {
             transition: transform 0.2s ease;
             cursor: pointer;
         }
+        
         .menu-item-card:hover {
             transform: translateY(-5px);
         }
+        
         .checkout-page {
             display: none;
         }
-        /* Image positioning control panel */
+        
         .image-control-panel {
             position: fixed;
             bottom: 20px;
@@ -77,30 +85,35 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
             border: 1px solid #333;
-            display: none; /* Hidden by default */
+            display: none;
         }
+        
         .image-control-panel h4 {
             margin: 0 0 10px 0;
             color: #ff6a00;
             font-size: 14px;
             text-align: center;
         }
+        
         .image-control-slider {
             width: 200px;
             margin: 0 10px;
         }
+        
         .image-control-value {
             color: white;
             font-size: 12px;
             min-width: 40px;
             text-align: center;
         }
-        /* Updated home section styling - ALIGNED LEFT */
+        
+        /* Updated home section for 150% scaling */
         #home {
             position: relative;
             width: 100%;
             overflow: hidden;
         }
+        
         #home-backdrop {
             position: absolute;
             top: 0;
@@ -113,6 +126,7 @@
             filter: blur(8px);
             z-index: -1;
         }
+        
         #home-backdrop::after {
             content: '';
             position: absolute;
@@ -122,29 +136,74 @@
             bottom: 0;
             background: rgba(0, 0, 0, 0.3);
         }
+        
         #home-content {
             position: relative;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* Changed from center to flex-start */
+            justify-content: flex-start;
             z-index: 1;
             max-width: 7xl;
             margin: 0 auto;
             padding: 0 1rem;
-            text-align: left; /* Changed from center to left */
+            text-align: left;
+            transform: scale(0.85);
+            transform-origin: top left;
+            width: 117.65%;
         }
+        
         @media (min-width: 640px) {
             #home-content {
                 padding: 0 1.5rem;
             }
         }
+        
         @media (min-width: 768px) {
             #home-content {
                 padding: 0 2.5rem;
             }
         }
-        /* Tag filter organization */
+        
+        /* Adjusted font sizes for home section */
+        /* CHANGED: Increased font sizes for the heading */
+        #home-content h2 {
+            font-size: 4.5rem !important; /* Increased from 3.5rem */
+            margin-bottom: 1.5rem !important;
+        }
+        
+        /* CHANGED: Removed horizontal padding and max-width constraints */
+        #home-content p {
+            font-size: 1.5rem !important;
+            margin-bottom: 2rem !important;
+            max-width: 100% !important; /* Changed from 90% */
+            padding: 0 !important; /* Added to remove horizontal spacing */
+        }
+        
+        /* Adjust button sizes */
+        .home-buttons button {
+            font-size: 1.25rem !important;
+            padding: 0.75rem 1.5rem !important;
+            margin-right: 0.5rem !important;
+        }
+        
+        /* Adjust info item sizes */
+        .home-info {
+            font-size: 1.25rem !important;
+        }
+        
+        .home-info i {
+            font-size: 1.5rem !important;
+        }
+        
+        /* Ensure backdrop covers the scaled content */
+        #home-backdrop {
+            transform: scale(1.15);
+            transform-origin: center;
+            width: 117.65%;
+            left: -8.8%;
+        }
+        
         .tag-filters-container {
             display: flex;
             flex-wrap: wrap;
@@ -153,28 +212,31 @@
             max-width: 800px;
             margin: 0 auto;
         }
+        
         .tag-filter {
             flex: 0 0 auto;
             white-space: nowrap;
         }
-        /* Updated image styling */
+        
         .menu-item-image {
             height: 260px;
             width: 100%;
             object-fit: cover;
-            object-position: top var(--image-position-y); /* Use CSS variable */
+            object-position: top var(--image-position-y);
         }
+        
         .menu-item-card {
             height: 100%;
             display: flex;
             flex-direction: column;
         }
+        
         .menu-item-card .card-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        /* Dropdown styling */
+        
         .option-selector {
             width: 100%;
             background-color: #222;
@@ -184,7 +246,7 @@
             padding: 0.5rem;
             margin-bottom: 0.75rem;
         }
-        /* Modal styling */
+        
         .item-modal {
             display: none;
             position: fixed;
@@ -196,6 +258,7 @@
             z-index: 1000;
             overflow-y: auto;
         }
+        
         .modal-content {
             background-color: #1a1a1a;
             margin: 2rem auto;
@@ -205,6 +268,7 @@
             width: 90%;
             position: relative;
         }
+        
         .close-modal {
             position: absolute;
             top: 1rem;
@@ -213,6 +277,7 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
+        
         .modal-image {
             width: 100%;
             height: 300px;
@@ -220,37 +285,44 @@
             border-radius: 0.5rem;
             margin-bottom: 1.5rem;
         }
+        
         .modal-option {
             margin-bottom: 1rem;
         }
+        
         .modal-option label {
             display: block;
             margin-bottom: 0.5rem;
             color: white;
             font-weight: 600;
         }
+        
         .modal-buttons {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             margin-top: 1.5rem;
         }
+        
         .modal-buttons button {
             padding: 0.75rem;
             border-radius: 0.5rem;
             font-weight: 600;
             cursor: pointer;
         }
+        
         .add-base {
             background-color: #ff6a00;
             color: white;
             border: none;
         }
+        
         .add-chips-drink {
             background-color: transparent;
             color: #ff6a00;
             border: 2px solid #ff6a00;
         }
+        
         .drink-selection {
             display: none;
             background-color: #222;
@@ -258,12 +330,14 @@
             padding: 1rem;
             margin-top: 0.5rem;
         }
+        
         .drink-selection label {
             display: block;
             margin-bottom: 0.5rem;
             color: white;
             font-weight: 600;
         }
+        
         .add-chips-drink-final {
             background-color: #ff6a00;
             color: white;
@@ -275,45 +349,50 @@
             font-weight: 600;
             cursor: pointer;
         }
-        /* Vegetable selection styling */
+        
         .vegetable-selection {
             background-color: #222;
             border-radius: 0.5rem;
             padding: 1rem;
             margin-bottom: 1rem;
         }
+        
         .vegetable-selection h4 {
             color: white;
             margin-bottom: 0.75rem;
             font-size: 1rem;
             font-weight: 600;
         }
+        
         .vegetable-checkbox {
             display: flex;
             align-items: center;
             margin-bottom: 0.5rem;
         }
+        
         .vegetable-checkbox input {
             margin-right: 0.5rem;
         }
+        
         .vegetable-checkbox label {
             color: white;
             cursor: pointer;
         }
-        /* Home section buttons aligned left */
+        
         .home-buttons {
-            justify-content: flex-start; /* Changed from center to flex-start */
+            justify-content: flex-start;
         }
-        /* Home section info items aligned left */
+        
         .home-info {
-            justify-content: flex-start; /* Changed from center to flex-start */
+            justify-content: flex-start;
         }
-        /* Updated header styling - NAVIGATION MOVED NEXT TO CART */
+        
         .header-logo-container {
             display: flex;
             align-items: center;
             gap: 12px;
         }
+        
         .logo-placeholder {
             width: 50px;
             height: 50px;
@@ -325,36 +404,49 @@
             font-weight: bold;
             color: #121212;
         }
+        
         .nav-link {
             font-size: 1.1rem;
             font-weight: 600;
             padding: 0.5rem 0.75rem;
             transition: all 0.2s ease;
         }
+        
         .nav-link:hover {
             transform: translateY(-2px);
         }
-        /* Header container for nav and cart */
+        
         .header-nav-container {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
+        
         @media (max-width: 767px) {
             .header-logo-text {
                 display: none;
             }
-            /* Hide nav on mobile */
+            
             .header-nav-container nav {
                 display: none;
             }
+            
+            /* CHANGED: Adjusted for mobile responsiveness */
+            #home-content h2 {
+                font-size: 3rem !important;
+            }
+            
+            #home-content p {
+                font-size: 1.2rem !important;
+            }
         }
-        /* Card input styling */
+        
         .card-input-group {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1rem;
         }
+        
         @media (min-width: 768px) {
             .card-input-group {
                 grid-template-columns: 2fr 1fr 1fr;
@@ -487,22 +579,24 @@
                 <div id="home-backdrop"></div>
                 <div id="home-content" class="py-12 md:py-24">
                     <div class="max-w-6xl">
-                        <h2 class="text-white text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-8">
+                        <!-- CHANGED: Increased font sizes for the heading -->
+                        <h2 class="text-white text-6xl sm:text-7xl md:text-8xl font-extrabold leading-tight mb-8">
                             <span class="righteous-font block mb-2">WHERE FLAVOUR</span>
                             <span class="text-[#ff6a00] righteous-font block">MEETS TIME</span>
                         </h2>
-                        <p class="lato-font text-xl sm:text-2xl md:text-3xl text-gray-300 mb-12 leading-relaxed w-full max-w-full mx-auto px-4 md:px-0">
+                        <!-- CHANGED: Removed horizontal padding classes -->
+                        <p class="lato-font text-xl sm:text-2xl md:text-3xl text-gray-300 mb-12 leading-relaxed w-full">
                             Experience authentic kebabs, burgers, and shawarma crafted with passion. Fresh ingredients, bold flavors, and unbeatable taste - available 12PM till 2AM daily.
                         </p>
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-14 home-buttons">
-                            <button id="order-now-btn" class="bg-[#ff6a00] text-xl sm:text-2xl font-semibold rounded-xl px-10 py-5 hover:bg-[#e05a00] transition-colors">
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-6 home-buttons">
+                            <button id="order-now-btn" class="bg-[#ff6a00] text-black text-xl sm:text-2xl font-semibold rounded-xl px-10 py-5 hover:bg-[#e05a00] transition-colors">
                                 Order Now
                             </button>
-                            <button id="view-menu-btn" class="bg-transparent border-2 border-[#ff6a00] text-xl sm:text-2xl font-semibold rounded-xl px-12 py-5 hover:bg-[#ff6a00] hover:text-black transition-colors">
+                            <button id="view-menu-btn" class="bg-transparent border-2 border-[#ff6a00] text-xl sm:text-2xl font-semibold rounded-xl px-13 py-5 hover:bg-[#ff6a00] hover:text-black transition-colors">
                                 View Menu
                             </button>
                         </div>
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-12 text-xl sm:text-2xl text-gray-300 font-semibold home-info">
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-12 text-xl sm:text-2xl text-gray-300 font-semibold home-info">
                             <div class="flex items-center space-x-3">
                                 <i class="fas fa-star text-[#ff6a00] text-2xl"></i>
                                 <span>4.8 Rating</span>
