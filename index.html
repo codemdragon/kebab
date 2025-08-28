@@ -1491,9 +1491,7 @@
             
             // Checkout events
             checkoutButton.addEventListener('click', showCheckoutPage);
-            orderNowButton.addEventListener('click', () => {
-                document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
-            });
+            orderNowButton.addEventListener('click', showCheckoutPage);
             backToMenuButton.addEventListener('click', showMainContent);
             
             // View Menu button event
