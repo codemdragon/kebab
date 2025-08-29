@@ -635,6 +635,12 @@
                             <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Veggie-Tastic">Veggie-Tastic</button>
                             <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Wrap-Tastic">Wrap-Tastic</button>
                             <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Wings/tenders">Wings/tenders</button>
+                            <!-- New category filters -->
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Drinks">Drinks</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Sauces">Sauces</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Addons">Addons</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="MilkShakes">MilkShakes</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Loaded Fries">Loaded Fries</button>
                         </div>
                     </div>
                 </div>
@@ -724,7 +730,7 @@
                     <option value="">Select order type...</option>
                     <option value="collection">Collection</option>
                 </select>
-                <p class="text-amber-500 text-sm mt-2 font-semibold"> </p>  <!-- Note replaced Collection only -->
+                <p class="text-amber-500 text-sm mt-2 font-semibold"> </p>  <!-- Note replaced Collection only Keep for later -->
             </div>
 
             <!-- NEW: Container for fields that will be shown on selection -->
@@ -785,7 +791,7 @@
             <div class="text-center">
                 <i class="fas fa-check-circle text-[#ff6a00] text-5xl mb-4"></i>
                 <h3 class="text-2xl font-bold text-white mb-2">Order Confirmed!</h3>
-                <p class="text-gray-300 mb-6">Thank you for your order. We'll start preparing it right away.</p>
+                <p class="text-gray-300 mb-6" id="confirmation-message">Thank you for your order. We'll start preparing it right away.</p>
                 <button id="confirm-ok" class="bg-[#ff6a00] text-white font-semibold rounded-lg px-6 py-3 hover:bg-[#e05a00]">
                     OK
                 </button>
@@ -813,7 +819,7 @@
             "Lettuce", "Onions", "Pickles", "Tomatoes", "Cucumber"
         ];
 
-        // Updated JSON data with showSlider and sauces options
+        // Updated JSON data with new categories
         const menuData = {
             "Beefy-Tastic.json": {
             "items": [
@@ -936,14 +942,140 @@
                 }
             ]
             },
-            "drinks.json": {
+            "Drinks.json": {
             "items": [
                 {
                 "name": "Pepsi",
                 "description": "Refreshing cold Pepsi drink",
                 "image": "Pepsi.jpg",
                 "price": 1.99,
-                "tags": ["drinks"],
+                "tags": ["Drinks"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                },
+                {
+                "name": "Sprite",
+                "description": "Crisp and refreshing lemon-lime soda",
+                "image": "Sprite.jpg",
+                "price": 1.99,
+                "tags": ["Drinks"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                },
+                {
+                "name": "Tango Orange",
+                "description": "Zesty orange flavored carbonated drink",
+                "image": "Tango Orange.jpg",
+                "price": 1.99,
+                "tags": ["Drinks"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                },
+                {
+                "name": "Tango Mango",
+                "description": "Sweet mango flavored carbonated drink",
+                "image": "Tango Mango.jpg",
+                "price": 1.99,
+                "tags": ["Drinks"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                },
+                {
+                "name": "Vimto",
+                "description": "Fruity and refreshing berry flavored drink",
+                "image": "Vimto.jpg",
+                "price": 1.99,
+                "tags": ["Drinks"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                },
+                {
+                "name": "KA Sparkling Fruit Punch",
+                "description": "Bubbly fruit punch flavored soda",
+                "image": "KA Fruit Punch.jpg",
+                "price": 1.99,
+                "tags": ["Drinks"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                }
+            ]
+            },
+            "Sauces.json": {
+            "items": [
+                {
+                "name": "Buffalo Kick Sauce",
+                "description": "Spicy buffalo sauce with a tangy kick",
+                "image": "Buffalo Sauce.jpg",
+                "price": 0.50,
+                "tags": ["Sauces"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                },
+                {
+                "name": "Burger Blast Sauce",
+                "description": "Our signature burger sauce with special spices",
+                "image": "Burger Sauce.jpg",
+                "price": 0.50,
+                "tags": ["Sauces"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                }
+            ]
+            },
+            "Addons.json": {
+            "items": [
+                {
+                "name": "Apple Pie",
+                "description": "Warm, flaky pastry filled with sweet apple cinnamon filling",
+                "image": "Apple Pie.jpg",
+                "price": 2.50,
+                "tags": ["Addons", "dessert"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                }
+            ]
+            },
+            "MilkShakes.json": {
+            "items": [
+                {
+                "name": "Banana Milkshake",
+                "description": "Creamy milkshake made with real bananas and vanilla ice cream",
+                "image": "Banana Milkshake.jpg",
+                "price": 3.50,
+                "tags": ["MilkShakes", "dessert"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                }
+            ]
+            },
+            "Loaded Fries.json": {
+            "items": [
+                {
+                "name": "Nacho Beef Loaded Fries",
+                "description": "Crispy fries topped with seasoned beef, nacho cheese, jalapeños, and sour cream",
+                "image": "Nacho Beef Fries.jpg",
+                "price": 6.50,
+                "tags": ["Loaded Fries"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -1440,6 +1572,16 @@
                 return;
             }
             
+            // NEW: Set confirmation message based on delivery type
+            const deliveryType = document.getElementById('delivery-type').value;
+            const confirmationMessage = document.getElementById('confirmation-message');
+            
+            if (deliveryType === 'collection') {
+                confirmationMessage.textContent = 'Thank you for your order. Please come collect your food in 25-30 minutes.';
+            } else {
+                confirmationMessage.textContent = 'Thank you for your order. We\'ll start preparing it right away.';
+            }
+            
             orderConfirmation.classList.remove('hidden');
         }
 
@@ -1577,4 +1719,3 @@
     </script>
 </body>
 </html>
-
