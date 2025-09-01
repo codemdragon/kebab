@@ -224,13 +224,11 @@
             height: 260px;
             width: 100%;
             object-fit: cover;
-            object-position: top var(--image-position-y);
+            object-position: 50% calc(var(--image-position-y) + var(--d-offset, 0px));
         }
         
         /* NEW: Specific positioning for images with D tag */
-        .menu-item-image.d-tag-image {
-            object-position: 50% calc(var(--image-position-y) + 211px) !important;
-        }
+        .menu-item-image.d-tag-image { --d-offset: 211px; }
         
         .menu-item-card {
             height: 100%;
