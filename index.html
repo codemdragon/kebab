@@ -227,11 +227,6 @@
             object-position: top var(--image-position-y);
         }
         
-        /* NEW: Specific positioning for images with D tag */
-        .menu-item-image.d-tag-image {
-            object-position: top calc(var(--image-position-y) + 211px) !important;
-        }
-        
         .menu-item-card {
             height: 100%;
             display: flex;
@@ -591,7 +586,7 @@
                         </h2>
                         <!-- CHANGED: Removed horizontal padding classes -->
                         <p class="lato-font text-xl sm:text-2xl md:text-3xl text-gray-300 mb-12 leading-relaxed w-full">
-                            Experience authentic kebabs, burgers and shawarma crafted with passion. Fresh ingredients, bold flavors, and unbeatable taste - available 12PM till 2AM daily.
+                            Experience authentic kebabs, burgers, and shawarma crafted with passion. Fresh ingredients, bold flavors, and unbeatable taste - available 12PM till 2AM daily.
                         </p>
                             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-6 home-buttons">
                                 <button id="order-now-btn" class="bg-[#ff6a00] text-black text-lg sm:text-xl font-semibold rounded-xl px-8 py-4 hover:bg-[#e05a00] transition-colors">
@@ -952,7 +947,7 @@
                 "description": "Refreshing cold Pepsi drink",
                 "image": "Pepsi.jpg",
                 "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
+                "tags": ["Drinks & Milkshakes",D],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -963,7 +958,7 @@
                 "description": "Crisp and refreshing lemon-lime soda",
                 "image": "Sprite.jpg",
                 "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
+                "tags": ["Drinks & Milkshakes",D],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -974,7 +969,7 @@
                 "description": "Zesty orange flavored carbonated drink",
                 "image": "Tango Orange.jpg",
                 "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
+                "tags": ["Drinks & Milkshakes",D],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -985,7 +980,7 @@
                 "description": "Sweet mango flavored carbonated drink",
                 "image": "Tango Mango.jpg",
                 "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
+                "tags": ["Drinks & Milkshakes",D],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -996,7 +991,7 @@
                 "description": "Fruity and refreshing berry flavored drink",
                 "image": "Vimto.jpg",
                 "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
+                "tags": ["Drinks & Milkshakes",D],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -1177,12 +1172,9 @@
                 // Check if item has options
                 const hasOptions = item.options && item.options.length > 0;
                 
-                // Check if item has D tag
-                const hasDTag = item.tags.includes("D");
-                
                 article.innerHTML = `
                     <div class="relative">
-                        <img alt="${item.name}" class="menu-item-image ${hasDTag ? 'd-tag-image' : ''}" src="${item.image}">
+                        <img alt="${item.name}" class="menu-item-image" src="${item.image}">
                         <span class="absolute top-3 left-3 bg-[#ff6a00] text-xs font-semibold uppercase rounded px-2 py-1">
                             ${item.tags[0]}
                         </span>
@@ -1733,3 +1725,4 @@
     </script>
 </body>
 </html>
+
