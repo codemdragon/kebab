@@ -817,7 +817,7 @@
             "Lettuce", "Onions", "Pickles", "Tomatoes", "Cucumber"
         ];
 
-        // Updated JSON data with combined categories
+        // Updated JSON data with separate files for combined categories
         const menuData = {
             "Beefy-Tastic.json": {
             "items": [
@@ -1318,7 +1318,7 @@
             return null;
         }
 
-        // Filter menu items based on search and tags
+        // Filter menu items based on search and tags - FIXED VERSION
         function filterMenuItems() {
             const searchTerm = searchInput.value.toLowerCase();
             const activeTag = document.querySelector('.tag-filter.active')?.getAttribute('data-tag') || 'all';
@@ -1341,8 +1341,15 @@
                     matchesTag = item.tags.includes("Drinks & Milkshakes");
                 } else if (activeTag === "Addons & Sauces") {
                     matchesTag = item.tags.includes("Addons & Sauces");
-                } else {
+                } else if (activeTag === "Loaded Fries") {
+                    matchesTag = item.tags.includes("Loaded Fries");
+                } else if (activeTag !== 'all') {
                     matchesTag = item.tags.includes(activeTag);
+                }
+                
+                // If "All" is selected, show all items regardless of search term
+                if (activeTag === 'all') {
+                    return matchesSearch;
                 }
                 
                 return matchesSearch && matchesTag;
