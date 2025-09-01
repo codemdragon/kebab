@@ -635,11 +635,9 @@
                             <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Veggie-Tastic">Veggie-Tastic</button>
                             <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Wrap-Tastic">Wrap-Tastic</button>
                             <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Wings/tenders">Wings/tenders</button>
-                            <!-- New category filters -->
-                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Drinks">Drinks</button>
-                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Sauces">Sauces</button>
-                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Addons">Addons</button>
-                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="MilkShakes">MilkShakes</button>
+                            <!-- Combined category filters -->
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Drinks & Milkshakes">Drinks & Milkshakes</button>
+                            <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Addons & Sauces">Addons & Sauces</button>
                             <button class="tag-filter text-sm bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg hover:bg-[#ff6a00] hover:text-black" data-tag="Loaded Fries">Loaded Fries</button>
                         </div>
                     </div>
@@ -688,7 +686,7 @@
                         <p>
                             MON - SUN
                             <br>
-                            12PM TIL 2AM
+                            <span class="font-bold">12PM TIL 2AM</span>
                         </p>
                     </div>
                 </div>
@@ -819,7 +817,7 @@
             "Lettuce", "Onions", "Pickles", "Tomatoes", "Cucumber"
         ];
 
-        // Updated JSON data with new categories
+        // Updated JSON data with combined categories
         const menuData = {
             "Beefy-Tastic.json": {
             "items": [
@@ -942,14 +940,14 @@
                 }
             ]
             },
-            "Drinks.json": {
+            "Drinks & Milkshakes.json": {
             "items": [
                 {
                 "name": "Pepsi",
                 "description": "Refreshing cold Pepsi drink",
                 "image": "Pepsi.jpg",
                 "price": 1.99,
-                "tags": ["Drinks"],
+                "tags": ["Drinks & Milkshakes"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -960,7 +958,7 @@
                 "description": "Crisp and refreshing lemon-lime soda",
                 "image": "Sprite.jpg",
                 "price": 1.99,
-                "tags": ["Drinks"],
+                "tags": ["Drinks & Milkshakes"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -971,7 +969,7 @@
                 "description": "Zesty orange flavored carbonated drink",
                 "image": "Tango Orange.jpg",
                 "price": 1.99,
-                "tags": ["Drinks"],
+                "tags": ["Drinks & Milkshakes"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -982,7 +980,7 @@
                 "description": "Sweet mango flavored carbonated drink",
                 "image": "Tango Mango.jpg",
                 "price": 1.99,
-                "tags": ["Drinks"],
+                "tags": ["Drinks & Milkshakes"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -993,7 +991,7 @@
                 "description": "Fruity and refreshing berry flavored drink",
                 "image": "Vimto.jpg",
                 "price": 1.99,
-                "tags": ["Drinks"],
+                "tags": ["Drinks & Milkshakes"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -1004,7 +1002,18 @@
                 "description": "Bubbly fruit punch flavored soda",
                 "image": "KA Fruit Punch.jpg",
                 "price": 1.99,
-                "tags": ["Drinks"],
+                "tags": ["Drinks & Milkshakes"],
+                "mealPriceModifier": 0.00,
+                "showSlider": false,
+                "sauces": false,
+                "vegetables": false
+                },
+                {
+                "name": "Banana Milkshake",
+                "description": "Creamy milkshake made with real bananas and vanilla ice cream",
+                "image": "Banana Milkshake.jpg",
+                "price": 3.50,
+                "tags": ["Drinks & Milkshakes", "dessert"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -1012,14 +1021,14 @@
                 }
             ]
             },
-            "Sauces.json": {
+            "Addons & Sauces.json": {
             "items": [
                 {
                 "name": "Buffalo Kick Sauce",
                 "description": "Spicy buffalo sauce with a tangy kick",
                 "image": "Buffalo Sauce.jpg",
                 "price": 0.50,
-                "tags": ["Sauces"],
+                "tags": ["Addons & Sauces"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -1030,37 +1039,18 @@
                 "description": "Our signature burger sauce with special spices",
                 "image": "Burger Sauce.jpg",
                 "price": 0.50,
-                "tags": ["Sauces"],
+                "tags": ["Addons & Sauces"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
                 "vegetables": false
-                }
-            ]
-            },
-            "Addons.json": {
-            "items": [
+                },
                 {
                 "name": "Apple Pie",
                 "description": "Warm, flaky pastry filled with sweet apple cinnamon filling",
                 "image": "Apple Pie.jpg",
                 "price": 2.50,
-                "tags": ["Addons", "dessert"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                }
-            ]
-            },
-            "MilkShakes.json": {
-            "items": [
-                {
-                "name": "Banana Milkshake",
-                "description": "Creamy milkshake made with real bananas and vanilla ice cream",
-                "image": "Banana Milkshake.jpg",
-                "price": 3.50,
-                "tags": ["MilkShakes", "dessert"],
+                "tags": ["Addons & Sauces", "dessert"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -1344,7 +1334,16 @@
                 const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
                                     item.description.toLowerCase().includes(searchTerm);
                 
-                const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
+                let matchesTag = activeTag === 'all';
+                
+                // Handle combined categories
+                if (activeTag === "Drinks & Milkshakes") {
+                    matchesTag = item.tags.includes("Drinks & Milkshakes");
+                } else if (activeTag === "Addons & Sauces") {
+                    matchesTag = item.tags.includes("Addons & Sauces");
+                } else {
+                    matchesTag = item.tags.includes(activeTag);
+                }
                 
                 return matchesSearch && matchesTag;
             });
