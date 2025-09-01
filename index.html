@@ -457,7 +457,14 @@
                 grid-template-columns: 2fr 1fr 1fr;
             }
         }
-    </style>
+    
+        /* M tag images – show full image, no zoom/crop */
+        .menu-item-image.m-tag-image {
+            object-fit: contain !important;
+            object-position: center center !important;
+            background-color: #fff;
+        }
+</style>
 </head>
 <body class="bg-[#121212] text-white">
     <!-- Image Positioning Control Panel (Hidden by default) -->
@@ -1016,7 +1023,7 @@
                 "description": "Creamy milkshake made with real bananas and vanilla ice cream",
                 "image": "Banana Milkshake.jpg",
                 "price": 3.50,
-                "tags": ["Drinks & Milkshakes", "dessert"],
+                "tags": ["Drinks & Milkshakes", "dessert","M"],
                 "mealPriceModifier": 0.00,
                 "showSlider": false,
                 "sauces": false,
@@ -1180,7 +1187,7 @@
                 
                 article.innerHTML = `
                     <div class="relative">
-                        <img alt="${item.name}" class="menu-item-image ${hasDTag ? 'd-tag-image' : ''}" src="${item.image}">
+                        <img alt="${item.name}" class="menu-item-image ${item.tags.includes('D') ? 'd-tag-image' : ''} ${item.tags.includes('M') ? 'm-tag-image' : ''}" src="${item.image}">
                         <span class="absolute top-3 left-3 bg-[#ff6a00] text-xs font-semibold uppercase rounded px-2 py-1">
                             ${item.tags[0]}
                         </span>
