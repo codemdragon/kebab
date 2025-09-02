@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "name": "Single Grilled Chicken Burger",
+      "description": " Single grilled chicken patty with nachos cheese, lettuce and our signiture KOC sauce",
+      "image": "Single Grilled Chicken Burger.jpg",
+      "price": 5.50,
+      "tags": ["Grilled-Tastic", "burger", "chicken"],
+      "mealPriceModifier": 2.50,
+      "showSlider": false,
+      "sauces": true,
+      "vegetables": false
+    }
+  ]
+}
