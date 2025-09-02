@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "name": "Buffalo Kick Sauce",
+      "description": "Spicy buffalo sauce with a tangy kick",
+      "image": "Buffalo Sauce.jpg",
+      "price": 0.50,
+      "tags": ["Addons & Sauces"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Burger Blast Sauce",
+      "description": "Our signature burger sauce with special spices",
+      "image": "Burger Sauce.jpg",
+      "price": 0.50,
+      "tags": ["Addons & Sauces"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Apple Pie",
+      "description": "Warm, flaky pastry filled with sweet apple cinnamon filling",
+      "image": "Apple Pie.jpg",
+      "price": 2.50,
+      "tags": ["Addons & Sauces", "dessert"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    }
+  ]
+}
