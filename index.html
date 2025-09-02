@@ -812,282 +812,55 @@
     </div>
 
     <script>
-        // MODIFIED: Add Veggie-Tastic to sauce options with appropriate sauces
+        // Sauce options (unchanged)
         const sauceOptions = {
             "Beefy-Tastic": ["Garlic Mayo", "Burger Blast", "Hot Chilli", "Mild Chilli", "BBQ", "Ketchup", "Mayonnaise", "Peri Peri", "Sweet Chilli"],
             "Chicken menu": ["Garlic Mayo", "Burger Blast", "Hot Chilli", "Mild Chilli", "BBQ", "Ketchup", "Mayonnaise", "Peri Peri", "Sweet Chilli"],
             "Grilled-Tastic": ["Mango & Lime", "Medium Peri Peri", "Hot Peri Peri"],
             "Wrap-Tastic": ["Garlic Herb Mayo", "Sticky BBQ", "Buffalo Kick"],
             "Wings/tenders": ["Mango & Lime", "Korean BBQ", "Peri Peri", "Mango Habanero", "Hot Honey Siracha", "Buffalo Kick"],
-            "Veggie-Tastic": ["Garlic Mayo", "Sweet Chilli", "BBQ", "Ketchup", "Mayonnaise"] // Added Veggie-Tastic
+            "Veggie-Tastic": ["Garlic Mayo", "Sweet Chilli", "BBQ", "Ketchup", "Mayonnaise"]
         };
-        // Drink options
+
+        // Drinks options (unchanged)
         const drinkOptions = [
             "Sprite", "Pepsi", "Tango Orange", "Tango Mango", "Vimto", "KA sparkling fruit punch"
         ];
 
-        // Vegetable options for Veggie-Tastic and Wrap-Tastic
+        // Vegetables options (unchanged)
         const vegetableOptions = [
             "Lettuce", "Onions", "Pickles", "Tomatoes", "Cucumber"
         ];
 
-        // Updated JSON data with separate files for combined categories
-        const menuData = {
-            "Beefy-Tastic.json": {
-            "items": [
-                {
-                "name": "Double Up Beef Burger",
-                "description": "Double beef patties with double nachos cheese, glazed onions, burger blast sauce and 1 dip",
-                "image": "Double Up Beef Burger.jpg",
-                "price": 8.50,
-                "tags": ["Beefy-Tastic", "burger", "beef"],
-                "mealPriceModifier": 2.50,
-                "showSlider": false,
-                "sauces": true,
-                "vegetables": false
-                },
-                {
-                "name": "Single Up Beef Burger",
-                "description": "single beef patty with nachos cheese, glazed onions, burger blast sauce and 1 dip",
-                "image": "Single Up Beef Burger.jpg",
-                "price": 6.50,
-                "tags": ["Beefy-Tastic", "burger", "beef"],
-                "mealPriceModifier": 2.50,
-                "showSlider": false,
-                "sauces": true,
-                "vegetables": false
+        // JSON files to load (must be placed in the same folder as index_fixed_dm.html)
+        const jsonFiles = [
+            "Beefy-Tastic.json",
+            "Chicken menu.json",
+            "Wrap-Tastic.json",
+            "Don-Shawarma.json",
+            "Grilled-Tastic.json",
+            "Wings/tenders.json",
+            "Veggie-Tastic.json",
+            "Drinks & Milkshakes.json",
+            "Addons & Sauces.json",
+            "Loaded Fries.json"
+        ];
+
+        let menuData = {};
+
+        // Load all external JSON files
+        async function loadAllJSON() {
+            for (const file of jsonFiles) {
+                try {
+                    const response = await fetch(file);
+                    if (!response.ok) throw new Error(`Failed to load ${file}`);
+                    const data = await response.json();
+                    menuData[file] = data;
+                } catch (err) {
+                    console.error(`Error loading ${file}:`, err);
                 }
-            ]
-            },
-            "Chicken menu.json": {
-            "items": [
-                {
-                "name": "Nash hot bird Burger",
-                "description": "Spicy Nashville-style chicken burger with nachos cheese, pickles, burger blast sauce and 1 dip",
-                "image": "Nash hot bird Burger.jpg",
-                "price": 6.00,
-                "tags": ["Chicken menu", "burger", "chicken", "spicy"],
-                "mealPriceModifier": 2.50,
-                "showSlider": false,
-                "sauces": true,
-                "vegetables": false
-                }
-            ]
-            },
-            "Wrap-Tastic.json": {
-            "items": [
-                {
-                "name": "Crispy Chicken Wrap",
-                "description": "crispy chicken with your choice of salad, your choice of sauce and 1 dip",
-                "image": "Crispy Chicken Wrap.jpg",
-                "price": 7.00,
-                "tags": ["Wrap-Tastic", "wrap", "chicken"],
-                "mealPriceModifier": 2.50,
-                "showSlider": false,
-                "sauces": true,
-                "vegetables": true
-                }
-            ]
-            },
-            "Don-Shawarma.json": {
-            "items": [
-                {
-                "name": "Lamb Doner and Chips",
-                "description": "Succulent lamb doner with crispy fries, onion, cucumber,pickles, tomato, garlic mayo and garlic chilli sauce",
-                "image": "Lamb Doner and Chips.jpg",
-                "price": 8.00,
-                "tags": ["Don-Shawarma", "doner", "lamb"],
-                "mealPriceModifier": 1.50,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                }
-            ]
-            },
-            "Grilled-Tastic.json": {
-            "items": [
-               {
-                "name": "Single Grilled Chicken Burger",
-                "description": " Single grilled chicken patty with nachos cheese, lettuce and our signiture KOC sauce",
-                "image": "Single Grilled Chicken Burger.jpg",
-                "price": 5.50,
-                "tags": ["Grilled-Tastic", "burger", "chicken"],
-                "mealPriceModifier": 2.50,
-                "showSlider": false,
-                "sauces": true,
-                "vegetables": false
-                }
-            ]
-            },
-            "Wings/tenders.json": {
-            "items": [
-                {
-                "name": "Chicken Tenders or Wings",
-                "description": "Chicken wings or tenders with any 1 sauce",
-                "image": "Chicken Tenders or Wings.jpg",
-                "tags": ["Wings/tenders", "chicken"],
-                "mealPriceModifier": 2.50,
-                "options": [
-                    {"name": "5 piece", "price": 5.00},
-                    {"name": "10 piece", "price": 9.00},
-                    {"name": "15 piece", "price": 14.00},
-                    {"name": "20 piece", "price": 18.00}
-                ],
-                "showSlider": false,
-                "sauces": true,
-                "vegetables": false
-                }
-            ]
-            },
-            "Veggie-Tastic.json": {
-            "items": [
-                {
-                "name": "Veg Paneer Wrap",
-                "description": "Delicious paneer cubes with your choice of salad, your choice of sauce and 1 dip",
-                "image": "Veg Paneer Wrap.jpg",
-                "price": 7.00,
-                "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
-                "mealPriceModifier": 2.50,
-                "showSlider": false,
-                "sauces": true,
-                "vegetables": true
-                }
-            ]
-            },
-            "Drinks & Milkshakes.json": {
-            "items": [
-                {
-                "name": "Pepsi",
-                "description": "Refreshing cold Pepsi drink",
-                "image": "Pepsi.jpg",
-                "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                },
-                {
-                "name": "Sprite",
-                "description": "Crisp and refreshing lemon-lime soda",
-                "image": "Sprite.jpg",
-                "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                },
-                {
-                "name": "Tango Orange",
-                "description": "Zesty orange flavored carbonated drink",
-                "image": "Tango Orange.jpg",
-                "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                },
-                {
-                "name": "Tango Mango",
-                "description": "Sweet mango flavored carbonated drink",
-                "image": "Tango Mango.jpg",
-                "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                },
-                {
-                "name": "Vimto",
-                "description": "Fruity and refreshing berry flavored drink",
-                "image": "Vimto.jpg",
-                "price": 1.99,
-                "tags": ["Drinks & Milkshakes", "D"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                },
-                {
-                "name": "KA Sparkling Fruit Punch",
-                "description": "Bubbly fruit punch flavored soda",
-                "image": "KA Fruit Punch.jpg",
-                "price": 1.99,
-                "tags": ["Drinks & Milkshakes"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                },
-                {
-                "name": "Banana Milkshake",
-                "description": "Creamy milkshake made with real bananas and vanilla ice cream",
-                "image": "Banana Milkshake.jpg",
-                "price": 3.50,
-                "tags": ["Drinks & Milkshakes", "dessert","M"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                }
-            ]
-            },
-            "Addons & Sauces.json": {
-            "items": [
-                {
-                "name": "Buffalo Kick Sauce",
-                "description": "Spicy buffalo sauce with a tangy kick",
-                "image": "Buffalo Sauce.jpg",
-                "price": 0.50,
-                "tags": ["Addons & Sauces"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                },
-                {
-                "name": "Burger Blast Sauce",
-                "description": "Our signature burger sauce with special spices",
-                "image": "Burger Sauce.jpg",
-                "price": 0.50,
-                "tags": ["Addons & Sauces"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                },
-                {
-                "name": "Apple Pie",
-                "description": "Warm, flaky pastry filled with sweet apple cinnamon filling",
-                "image": "Apple Pie.jpg",
-                "price": 2.50,
-                "tags": ["Addons & Sauces", "dessert"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                }
-            ]
-            },
-            "Loaded Fries.json": {
-            "items": [
-                {
-                "name": "Nacho Beef Loaded Fries",
-                "description": "Crispy fries topped with seasoned beef, nacho cheese, jalapeños, and sour cream",
-                "image": "Nacho Beef Fries.jpg",
-                "price": 6.50,
-                "tags": ["Loaded Fries"],
-                "mealPriceModifier": 0.00,
-                "showSlider": false,
-                "sauces": false,
-                "vegetables": false
-                }
-            ]
             }
-        };
+        }
 
         // Cart functionality
         let cart = [];
@@ -1742,7 +1515,10 @@
         }
 
         // Run initialization when DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadAllJSON();  // make sure all JSON files are fetched
+            init();
+        });
     </script>
 </body>
 </html>
