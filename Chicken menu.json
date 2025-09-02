@@ -1,0 +1,14 @@
+            "items": [
+                {
+                "name": "Nash hot bird Burger",
+                "description": "Spicy Nashville-style chicken burger with nachos cheese, pickles, burger blast sauce and 1 dip",
+                "image": "Nash hot bird Burger.jpg",
+                "price": 6.00,
+                "tags": ["Chicken menu", "burger", "chicken", "spicy"],
+                "mealPriceModifier": 2.50,
+                "showSlider": false,
+                "sauces": true,
+                "vegetables": false
+                }
+            ]
+            }
