@@ -56,5 +56,5 @@ Options: This is OPTIONAL and is there when there is a drop down for Sizes costi
 
 showslider: THIS MUST ALWAYS BE FALSE
 
-sauces: (True/False) Indicates if the item allows sauce selection(Drop down)
+sauces: (True/False) Indicates if the item allows sauce selection(Drop down). The  Sauces include Dips and Flavours
 vegetables: (True/Fasle) Indicates if the item includes or allows vegetable options(Multiple choice) 
