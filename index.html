@@ -224,11 +224,22 @@
             height: 260px;
             width: 100%;
             object-fit: cover;
-            object-position: 50% calc(var(--image-position-y) - var(--d-offset, 0%));
+            /* Default: cut 20% off the top */
+            object-position: 50% calc(var(--image-position-y, 0%) + 55%);
         }
-        
-        /* NEW: Specific positioning for images with D tag */
-        .menu-item-image.d-tag-image { --d-offset: 20%; }
+
+        /* D-tag: keep custom positioning, no crop */
+        .menu-item-image.d-tag-image {
+            object-position: 50% var(--image-position-y, 0%);
+        }
+
+        /* M-tag: always show the full image */
+        .menu-item-image.m-tag-image {
+            object-fit: contain;   /* ensures full image fits inside */
+            object-position: center;
+            background-color: #000000; /* optional: avoid blank edges showing black */
+        }
+
         
         .menu-item-card {
             height: 100%;
@@ -457,14 +468,7 @@
                 grid-template-columns: 2fr 1fr 1fr;
             }
         }
-    
-        /* M tag images – show full image, no zoom/crop */
-        .menu-item-image.m-tag-image {
-            object-fit: contain !important;
-            object-position: center center !important;
-            background-color: #fff;
-        }
-</style>
+    </style>
 </head>
 <body class="bg-[#121212] text-white">
     <!-- Image Positioning Control Panel (Hidden by default) -->
@@ -1181,13 +1185,17 @@
                 
                 // Check if item has options
                 const hasOptions = item.options && item.options.length > 0;
-                
-                // Check if item has D tag
+
+                // Check tags separately
                 const hasDTag = item.tags.includes("D");
-                
+                const hasMTag = item.tags.includes("M");
+
                 article.innerHTML = `
                     <div class="relative">
-                        <img alt="${item.name}" class="menu-item-image ${item.tags.includes('D') ? 'd-tag-image' : ''} ${item.tags.includes('M') ? 'm-tag-image' : ''}" src="${item.image}">
+                        <img 
+                            alt="${item.name}" 
+                            class="menu-item-image ${hasDTag ? 'd-tag-image' : ''} ${hasMTag ? 'm-tag-image' : ''}" 
+                            src="${item.image}">
                         <span class="absolute top-3 left-3 bg-[#ff6a00] text-xs font-semibold uppercase rounded px-2 py-1">
                             ${item.tags[0]}
                         </span>
