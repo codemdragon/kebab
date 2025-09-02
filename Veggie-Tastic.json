@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "name": "Veg Paneer Wrap",
+      "description": "Delicious paneer cubes with your choice of salad, your choice of sauce and 1 dip",
+      "image": "Veg Paneer Wrap.jpg",
+      "price": 7.00,
+      "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
+      "mealPriceModifier": 2.50,
+      "showSlider": false,
+      "sauces": true,
+      "vegetables": true
+    }
+  ]
+}
