@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "name": "Nacho Beef Loaded Fries",
+      "description": "Crispy fries topped with seasoned beef, nacho cheese, jalapeños, and sour cream",
+      "image": "Nacho Beef Fries.jpg",
+      "price": 6.50,
+      "tags": ["Loaded Fries"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    }
+  ]
+}
