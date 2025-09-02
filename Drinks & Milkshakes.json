@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "name": "Pepsi",
+      "description": "Refreshing cold Pepsi drink",
+      "image": "Pepsi.jpg",
+      "price": 1.99,
+      "tags": ["Drinks & Milkshakes", "D"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Sprite",
+      "description": "Crisp and refreshing lemon-lime soda",
+      "image": "Sprite.jpg",
+      "price": 1.99,
+      "tags": ["Drinks & Milkshakes", "D"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Tango Orange",
+      "description": "Zesty orange flavored carbonated drink",
+      "image": "Tango Orange.jpg",
+      "price": 1.99,
+      "tags": ["Drinks & Milkshakes", "D"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Tango Mango",
+      "description": "Sweet mango flavored carbonated drink",
+      "image": "Tango Mango.jpg",
+      "price": 1.99,
+      "tags": ["Drinks & Milkshakes", "D"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Vimto",
+      "description": "Fruity and refreshing berry flavored drink",
+      "image": "Vimto.jpg",
+      "price": 1.99,
+      "tags": ["Drinks & Milkshakes", "D"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "KA Sparkling Fruit Punch",
+      "description": "Bubbly fruit punch flavored soda",
+      "image": "KA Fruit Punch.jpg",
+      "price": 1.99,
+      "tags": ["Drinks & Milkshakes"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Banana Milkshake",
+      "description": "Creamy milkshake made with real bananas and vanilla ice cream",
+      "image": "Banana Milkshake.jpg",
+      "price": 3.50,
+      "tags": ["Drinks & Milkshakes", "dessert", "M"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    }
+  ]
+}
