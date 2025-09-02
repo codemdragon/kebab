@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "name": "Lamb Doner and Chips",
+      "description": "Succulent lamb doner with crispy fries, onion, cucumber,pickles, tomato, garlic mayo and garlic chilli sauce",
+      "image": "Lamb Doner and Chips.jpg",
+      "price": 8.00,
+      "tags": ["Don-Shawarma", "doner", "lamb"],
+      "mealPriceModifier": 1.50,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    }
+  ]
+}
