@@ -10,6 +10,28 @@
       "showSlider": false,
       "sauces": true,
       "vegetables": true
+    },
+    {
+      "name": "Grilled Chicken Wrap",
+      "description": "Grilled chicken with your choice of salad, your choice of sauce and 1 dip",
+      "image": "Grilled Chicken Wrap.jpg",
+      "price": 7.00,
+      "tags": ["Wrap-Tastic", "wrap", "chicken"],
+      "mealPriceModifier": 2.50,
+      "showSlider": false,
+      "sauces": true,
+      "vegetables": true
+    },
+    {
+      "name": "Pulled Beef Wrap",
+      "description": "Tender pulled beef with your choice of salad, your choice of sauce and 1 dip",
+      "image": "Pulled Beef Wrap.jpg",
+      "price": 7.50,
+      "tags": ["Wrap-Tastic", "wrap", "beef"],
+      "mealPriceModifier": 2.50,
+      "showSlider": false,
+      "sauces": true,
+      "vegetables": true
     }
   ]
 }
