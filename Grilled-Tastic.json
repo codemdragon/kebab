@@ -10,6 +10,17 @@
       "showSlider": false,
       "sauces": true,
       "vegetables": false
+    },
+    {
+      "name": "Double Grilled Chicken Burger",
+      "description": "Double grilled chicken patties with nachos cheese, lettuce and our signiture KOC sauce",
+      "image": "Double Grilled Chicken Burger.jpg",
+      "price": 7.50,
+      "tags": ["Grilled-Tastic", "burger", "chicken"],
+      "mealPriceModifier": 2.50,
+      "showSlider": false,
+      "sauces": true,
+      "vegetables": false
     }
   ]
 }
