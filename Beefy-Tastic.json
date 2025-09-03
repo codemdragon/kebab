@@ -21,6 +21,28 @@
       "showSlider": false,
       "sauces": true,
       "vegetables": false
+    },
+    {
+      "name": "Double Smash Beef Burger",
+      "description": "Double smashed beef patties with cheese and special sauce",
+      "image": "Double Smash Beef Burger.jpg",
+      "price": 9.00,
+      "tags": ["Beefy-Tastic", "burger", "beef"],
+      "mealPriceModifier": 2.50,
+      "showSlider": false,
+      "sauces": true,
+      "vegetables": false
+    },
+    {
+      "name": "Single Smash Beef Burger",
+      "description": "Single smashed beef patty with cheese and special sauce",
+      "image": "Single Smash Beef Burger.jpg",
+      "price": 7.00,
+      "tags": ["Beefy-Tastic", "burger", "beef"],
+      "mealPriceModifier": 2.50,
+      "showSlider": false,
+      "sauces": true,
+      "vegetables": false
     }
   ]
 }
