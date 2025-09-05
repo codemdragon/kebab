@@ -1,16 +1,19 @@
 This is a guide to using this website
 You can edit of the JSONS to add or remove items to the menu
 
-Beefy-Tastic.json
-Chicken menu.json
-Wrap-Tastic.json
-Don-Shawarma.json
-Grilled-Tastic.json
-Wings&tenders.json
-Veggie-Tastic.json
-Drinks & Milkshakes.json
-Addons & Sauces.json
-Loaded Fries.json
+const jsonFiles = [
+    "beefy-tastic.json",
+    "chicken-menu.json",
+    "wrap-tastic.json",
+    "don-shawarma.json",
+    "grilled-tastic.json",
+    "wings-tenders.json",
+    "veggie-tastic.json",
+    "drinks-milkshakes.json",
+    "addons-sauces.json",
+    "loaded-fries.json"
+];
+
 
 Now ill cover how the JSONS work Your JSON will look something like this
 
