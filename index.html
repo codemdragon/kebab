@@ -995,102 +995,120 @@
         }
 
         // Open modal for a menu item
+        // Open modal for a menu item
         function openItemModal(item) {
             currentModalItem = item;
-            
+
             // Reset drink selection UI
             drinkSelection.style.display = 'none';
             modalAddChipsDrink.style.display = 'block';
-            
+
             // Reset vegetable selection
             document.querySelectorAll('input[name="vegetables"]').forEach(checkbox => {
                 checkbox.checked = false;
             });
-            
+
             // Show or hide vegetable selection based on item
             if (item.vegetables) {
                 vegetableSelection.style.display = 'block';
             } else {
                 vegetableSelection.style.display = 'none';
             }
-            
+
             // Set modal content
             modalImage.src = item.image;
             modalTitle.textContent = item.name;
             modalDescription.textContent = item.description;
-            
+
             // Clear previous options
             modalOptions.innerHTML = '';
-            
-            // Add options if item has them
+
+            // ----- OPTIONS LOGIC -----
             const hasOptions = item.options && item.options.length > 0;
             let selectedOptionIndex = 0;
             let basePrice = hasOptions ? item.options[0].price : item.price;
-            
+
             if (hasOptions) {
                 const optionsDiv = document.createElement('div');
                 optionsDiv.className = 'modal-option';
+
+                // ✅ check if all options same price
+                const allSamePrice = item.options.every(
+                    opt => opt.price === item.options[0].price
+                );
+
                 optionsDiv.innerHTML = `
-                    <label for="modal-option-select">Size:</label>
-                    // Check if all option prices are identical
-                    const allSamePrice = item.options.every(opt => opt.price === item.options[0].price);
-
+                    <label for="modal-option-select">Choose:</label>
                     <select id="modal-option-select" class="option-selector">
-                    ${item.options.map((option, index) => `
-                        <option value="${index}" data-price="${option.price}">
-                        ${allSamePrice ? option.name : `${option.name} - £${option.price.toFixed(2)}`}
-                        </option>
-                    `).join('')}
+                        ${item.options
+                            .map(
+                                (option, index) => `
+                            <option value="${index}" data-price="${option.price}">
+                                ${
+                                    allSamePrice
+                                        ? option.name
+                                        : `${option.name} - £${option.price.toFixed(2)}`
+                                }
+                            </option>
+                        `
+                            )
+                            .join('')}
                     </select>
-
                 `;
                 modalOptions.appendChild(optionsDiv);
-                
-                // Add event listener to update prices when option changes
-                const optionSelect = document.getElementById('modal-option-select');
-                optionSelect.addEventListener('change', (e) => {
-                    selectedOptionIndex = parseInt(e.target.value);
+
+                // ✅ bind AFTER element exists
+                const optionSelect = optionsDiv.querySelector('#modal-option-select');
+                optionSelect.addEventListener('change', e => {
+                    selectedOptionIndex = parseInt(e.target.value, 10);
                     basePrice = item.options[selectedOptionIndex].price;
                     updateModalPrices(item, basePrice);
                 });
+            } else {
+                basePrice = item.price;
             }
-            
-            // Add sauce options if item has sauces
+
+            // ----- SAUCES -----
             if (item.sauces) {
                 // Find the category for sauce options
-                let sauceCategory = item.tags.find(tag => sauceOptions.hasOwnProperty(tag));
-                
+                let sauceCategory = item.tags.find(tag =>
+                    sauceOptions.hasOwnProperty(tag)
+                );
+
                 if (sauceCategory && sauceOptions[sauceCategory]) {
                     const sauceDiv = document.createElement('div');
                     sauceDiv.className = 'modal-option';
-                    
-                    // MODIFIED: Determine the label text based on category
-                    let labelText = "Sauce";
-                    if (["Beefy-Tastic", "Chicken menu", "Veggie-Tastic"].includes(sauceCategory)) {
-                        labelText = "Dip";
-                    } else if (["Grilled-Tastic", "Wrap-Tastic", "Wings/tenders"].includes(sauceCategory)) {
-                        labelText = "Flavour";
+
+                    // Determine the label text based on category
+                    let labelText = 'Sauce';
+                    if (['Beefy-Tastic', 'Chicken menu', 'Veggie-Tastic'].includes(sauceCategory)) {
+                        labelText = 'Dip';
+                    } else if (['Grilled-Tastic', 'Wrap-Tastic', 'Wings/tenders'].includes(sauceCategory)) {
+                        labelText = 'Flavour';
                     }
-                    
+
                     sauceDiv.innerHTML = `
                         <label for="modal-sauce-select">${labelText}:</label>
                         <select id="modal-sauce-select" class="option-selector">
-                            ${sauceOptions[sauceCategory].map(sauce => `
-                                <option value="${sauce}">${sauce}</option>
-                            `).join('')}
+                            ${sauceOptions[sauceCategory]
+                                .map(
+                                    sauce => `<option value="${sauce}">${sauce}</option>`
+                                )
+                                .join('')}
                         </select>
                     `;
                     modalOptions.appendChild(sauceDiv);
                 }
             }
-            
-            // Update prices
+
+            // Update prices initially
             updateModalPrices(item, basePrice);
-            
+
             // Show modal
             itemModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
+
 
         // Update prices in modal
         function updateModalPrices(item, basePrice) {
