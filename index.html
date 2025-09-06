@@ -1032,13 +1032,17 @@
                 optionsDiv.className = 'modal-option';
                 optionsDiv.innerHTML = `
                     <label for="modal-option-select">Size:</label>
+                    // Check if all option prices are identical
+                    const allSamePrice = item.options.every(opt => opt.price === item.options[0].price);
+
                     <select id="modal-option-select" class="option-selector">
-                        ${item.options.map((option, index) => `
-                            <option value="${index}" data-price="${option.price}">
-                                ${option.name} - £${option.price.toFixed(2)}
-                            </option>
-                        `).join('')}
+                    ${item.options.map((option, index) => `
+                        <option value="${index}" data-price="${option.price}">
+                        ${allSamePrice ? option.name : `${option.name} - £${option.price.toFixed(2)}`}
+                        </option>
+                    `).join('')}
                     </select>
+
                 `;
                 modalOptions.appendChild(optionsDiv);
                 
