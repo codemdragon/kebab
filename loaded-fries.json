@@ -21,6 +21,28 @@
       "showSlider": false,
       "sauces": false,
       "vegetables": false
+    },
+    {
+      "name": "Nacho Jalepeno Cheese",
+      "description": "Crispy fries topped with seasoned chicken, nacho cheese, jalapeños, and sour cream",
+      "image": "Nacho Chicken.jpg",
+      "price": 6.50,
+      "tags": ["Loaded Fries"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Chicken Nuggets",
+      "description": "Crispy chicken nuggets",
+      "image": "Chicken Nuggets.jpg",
+      "price": 4.00,
+      "tags": ["Loaded Fries", "chicken"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
     }
   ]
 }
