@@ -180,17 +180,6 @@
       "vegetables": false
     },
     {
-      "name": "Jalapeno Balls",
-      "description": "Spicy jalapeno and cheese balls",
-      "image": "Jalapeno Balls.jpg",
-      "price": 4.50,
-      "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
       "name": "Onion Rings",
       "description": "Crispy golden onion rings",
       "image": "Onion Rings.jpg",
