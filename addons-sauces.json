@@ -133,17 +133,6 @@
       "vegetables": false
     },
     {
-      "name": "Jalapeno Balls",
-      "description": "Crispy jalapeno cheese balls",
-      "image": "Jalapeno Balls.jpg",
-      "price": 2.50,
-      "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
       "name": "Cheese Sticks",
       "description": "Crispy cheese sticks",
       "image": "Cheese Sticks.jpg",
