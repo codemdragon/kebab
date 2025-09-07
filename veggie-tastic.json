@@ -1,28 +1,6 @@
 {
   "items": [
     {
-      "name": "Veg Paneer Wrap",
-      "description": "Delicious paneer cubes with your choice of salad, your choice of sauce and 1 dip",
-      "image": "Veg Paneer Wrap.jpg",
-      "price": 7.00,
-      "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
-      "mealPriceModifier": 2.50,
-      "showSlider": false,
-      "sauces": true,
-      "vegetables": true
-    },
-    {
-      "name": "Fresh Falafel Wrap",
-      "description": "Crispy falafel with fresh salad and sauce in a wrap",
-      "image": "Fresh Falafel Wrap.jpg",
-      "price": 6.50,
-      "tags": ["Veggie-Tastic", "wrap", "vegetarian"],
-      "mealPriceModifier": 2.50,
-      "showSlider": false,
-      "sauces": true,
-      "vegetables": true
-    },
-    {
       "name": "Nacho Bean Burger",
       "description": "Spicy bean burger with nachos cheese",
       "image": "Nacho Bean Burger.jpg",
@@ -42,61 +20,6 @@
       "mealPriceModifier": 2.50,
       "showSlider": false,
       "sauces": true,
-      "vegetables": false
-    },
-    {
-      "name": "Karachi Bun Kebab",
-      "description": "Traditional Karachi style bun kebab",
-      "image": "Karachi Bun Kebab.jpg",
-      "price": 5.00,
-      "tags": ["Veggie-Tastic", "vegetarian"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Cheese Sticks",
-      "description": "Golden fried mozzarella cheese sticks",
-      "image": "Cheese Sticks.jpg",
-      "price": 4.50,
-      "tags": ["Veggie-Tastic", "sides", "vegetarian"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Jalapeno Balls",
-      "description": "Spicy jalapeno and cheese balls",
-      "image": "Jalapeno Balls.jpg",
-      "price": 4.50,
-      "tags": ["Veggie-Tastic", "sides", "vegetarian"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Onion Rings",
-      "description": "Crispy golden onion rings",
-      "image": "Onion Rings.jpg",
-      "price": 3.50,
-      "tags": ["Veggie-Tastic", "sides", "vegetarian"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Samosas",
-      "description": "Crispy pastry filled with spiced vegetables",
-      "image": "Samosas.jpg",
-      "price": 3.00,
-      "tags": ["Veggie-Tastic", "sides", "vegetarian"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
       "vegetables": false
     }
   ]
