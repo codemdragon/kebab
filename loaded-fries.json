@@ -34,6 +34,17 @@
       "vegetables": false
     },
     {
+      "name": "Jalapeno Cheese",
+      "description": "Creamy jalapeno cheese dip",
+      "image": "Jalapeno Cheese.jpg",
+      "price": 1.00,
+      "tags": ["Addons & Sauces"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
       "name": "Chicken Nuggets",
       "description": "Crispy chicken nuggets",
       "image": "Chicken Nuggets.jpg",
