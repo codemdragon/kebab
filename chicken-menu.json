@@ -45,39 +45,6 @@
       "vegetables": false
     },
     {
-      "name": "Butter Chicken Box",
-      "description": "Creamy butter chicken served with rice",
-      "image": "Butter Chicken Box.jpg",
-      "price": 9.00,
-      "tags": ["Chicken menu", "box", "chicken"],
-      "mealPriceModifier": 2.50,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Chicken Fajita Box",
-      "description": "Sizzling chicken fajitas served with rice",
-      "image": "Chicken Fajita Box.jpg",
-      "price": 9.00,
-      "tags": ["Chicken menu", "box", "chicken"],
-      "mealPriceModifier": 2.50,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Chicken Tikka Masala Box",
-      "description": "Classic chicken tikka masala served with rice",
-      "image": "Chicken Tikka Masala Box.jpg",
-      "price": 9.00,
-      "tags": ["Chicken menu", "box", "chicken"],
-      "mealPriceModifier": 2.50,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
       "name": "Buffalo Chicken Burger",
       "description": "Double smashed beef patties with cheese and special sauce",
       "image": "Buffalo Kick Burger.jpg",
