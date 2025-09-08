@@ -1,6 +1,86 @@
 {
   "items": [
     {
+      "name": "Apple Pie",
+      "description": "Warm, flaky pastry filled with sweet apple cinnamon filling",
+      "image": "Apple Pie.jpg",
+      "price": 2.50,
+      "tags": ["Addons & Sauces", "dessert"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Jalapeno Cheese",
+      "description": "Creamy jalapeno cheese dip",
+      "image": "Jalapeno Cheese.jpg",
+      "price": 1.00,
+      "tags": ["Addons & Sauces"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Jalapeno Balls",
+      "description": "Crispy jalapeno cheese balls",
+      "image": "Jalapeno Balls.jpg",
+      "price": 2.50,
+      "tags": ["Addons & Sauces"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Cheese Sticks",
+      "description": "Crispy cheese sticks",
+      "image": "Cheese Sticks.jpg",
+      "price": 2.50,
+      "tags": ["Addons & Sauces"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Somosas (3 Peices)",
+      "description": "Crispy somosas",
+      "image": "Somosas.jpg",
+      "tags": ["Addons & Sauces"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false,
+      "options": [
+        { "name": "Chicken", "price": 2.50 },
+        { "name": "Lamb", "price": 2.50 }
+      ]
+    },
+    {
+      "name": "Karachi Bun Kebab",
+      "description": "Traditional Karachi style bun kebab",
+      "image": "Karachi Bun Kebab.jpg",
+      "price": 5.00,
+      "tags": ["Addons & Sauces"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Onion Rings",
+      "description": "Crispy golden onion rings",
+      "image": "Onion Rings.jpg",
+      "price": 3.50,
+      "tags": ["Addons & Sauces"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
       "name": "Buffalo Kick Sauce",
       "description": "Spicy buffalo sauce with a tangy kick",
       "image": "Buffalo Kick Sauce.jpg",
@@ -17,17 +97,6 @@
       "image": "Burger Blast Sauce.jpg",
       "price": 0.50,
       "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Apple Pie",
-      "description": "Warm, flaky pastry filled with sweet apple cinnamon filling",
-      "image": "Apple Pie.jpg",
-      "price": 2.50,
-      "tags": ["Addons & Sauces", "dessert"],
       "mealPriceModifier": 0.00,
       "showSlider": false,
       "sauces": false,
@@ -104,75 +173,6 @@
       "description": "Rich and smokey BBQ sauce",
       "image": "Smokey BBQ Sauce.jpg",
       "price": 0.50,
-      "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Jalapeno Cheese",
-      "description": "Creamy jalapeno cheese dip",
-      "image": "Jalapeno Cheese.jpg",
-      "price": 1.00,
-      "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Jalapeno Balls",
-      "description": "Crispy jalapeno cheese balls",
-      "image": "Jalapeno Balls.jpg",
-      "price": 2.50,
-      "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Cheese Sticks",
-      "description": "Crispy cheese sticks",
-      "image": "Cheese Sticks.jpg",
-      "price": 2.50,
-      "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Somosas (3 Peices)",
-      "description": "Crispy somosas",
-      "image": "Somosas.jpg",
-      "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false,
-      "options": [
-        { "name": "Chicken", "price": 2.50 },
-        { "name": "Lamb", "price": 2.50 }
-      ]
-    },
-    {
-      "name": "Karachi Bun Kebab",
-      "description": "Traditional Karachi style bun kebab",
-      "image": "Karachi Bun Kebab.jpg",
-      "price": 5.00,
-      "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Onion Rings",
-      "description": "Crispy golden onion rings",
-      "image": "Onion Rings.jpg",
-      "price": 3.50,
       "tags": ["Addons & Sauces"],
       "mealPriceModifier": 0.00,
       "showSlider": false,
