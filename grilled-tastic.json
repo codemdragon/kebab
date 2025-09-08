@@ -27,7 +27,7 @@
       "description": "Grilled chicken tenders served with rice",
       "image": "Grilled Chicken Tenders & Rice.jpg",
       "price": 8.00,
-      "tags": ["Chicken menu", "chicken"],
+      "tags": ["Grilled-Tastic", "chicken"],
       "mealPriceModifier": 2.50,
       "showSlider": false,
       "sauces": false,
@@ -38,16 +38,16 @@
       "description": "Succulent grilled chicken tenders",
       "image": "Grilled Chicken Tenders.jpg",
       "price": 6.00,
-      "tags": ["Chicken menu", "chicken"],
+      "tags": ["Grilled-Tastic", "chicken"],
       "mealPriceModifier": 2.50,
       "showSlider": false,
       "sauces": false,
       "vegetables": false,
       "options": [
-        { "name": "5 piece", "price": 5.00 },
-        { "name": "10 piece", "price": 9.00 },
-        { "name": "15 piece", "price": 14.00 },
-        { "name": "20 piece", "price": 18.00 }
+      { "name": "5 piece", "price": 5.00 },
+      { "name": "10 piece", "price": 9.00 },
+      { "name": "15 piece", "price": 14.00 },
+      { "name": "20 piece", "price": 18.00 }
       ]
     },
     {
