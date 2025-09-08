@@ -1,6 +1,61 @@
 {
   "items": [
     {
+      "name": "Banana Milkshake",
+      "description": "Creamy milkshake made with real bananas and vanilla ice cream",
+      "image": "Banana Milkshake.jpg",
+      "price": 3.50,
+      "tags": ["Drinks & Milkshakes", "dessert", "M"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Chocolate Milkshake",
+      "description": "Rich and creamy chocolate milkshake",
+      "image": "Chocolate Milkshake.jpg",
+      "price": 3.50,
+      "tags": ["Drinks & Milkshakes", "dessert", "M"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Pistachio Milkshake",
+      "description": "Creamy pistachio milkshake",
+      "image": "Pistachio Milkshake.jpg",
+      "price": 3.50,
+      "tags": ["Drinks & Milkshakes", "dessert", "M"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Strawberry Milkshake",
+      "description": "Creamy strawberry milkshake",
+      "image": "Strawberry Milkshake.jpg",
+      "price": 3.50,
+      "tags": ["Drinks & Milkshakes", "dessert", "M"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
+      "name": "Vanilla Milkshake",
+      "description": "Classic creamy vanilla milkshake",
+      "image": "Vanilla Milkshake.jpg",
+      "price": 3.50,
+      "tags": ["Drinks & Milkshakes", "dessert", "M"],
+      "mealPriceModifier": 0.00,
+      "showSlider": false,
+      "sauces": false,
+      "vegetables": false
+    },
+    {
       "name": "Pepsi",
       "description": "Refreshing cold Pepsi drink",
       "image": "Pepsi.jpg",
@@ -67,17 +122,6 @@
       "vegetables": false
     },
     {
-      "name": "Banana Milkshake",
-      "description": "Creamy milkshake made with real bananas and vanilla ice cream",
-      "image": "Banana Milkshake.jpg",
-      "price": 3.50,
-      "tags": ["Drinks & Milkshakes", "dessert", "M"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
       "name": "7up zero sugar",
       "description": "Refreshing 7up zero sugar drink",
       "image": "7up zero sugar.jpg",
@@ -94,17 +138,6 @@
       "image": "7up.jpg",
       "price": 1.99,
       "tags": ["Drinks & Milkshakes", "D"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Chocolate Milkshake",
-      "description": "Rich and creamy chocolate milkshake",
-      "image": "Chocolate Milkshake.jpg",
-      "price": 3.50,
-      "tags": ["Drinks & Milkshakes", "dessert", "M"],
       "mealPriceModifier": 0.00,
       "showSlider": false,
       "sauces": false,
@@ -221,17 +254,6 @@
       "vegetables": false
     },
     {
-      "name": "Pistachio Milkshake",
-      "description": "Creamy pistachio milkshake",
-      "image": "Pistachio Milkshake.jpg",
-      "price": 3.50,
-      "tags": ["Drinks & Milkshakes", "dessert", "M"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
       "name": "Rubicon Mango Juice Soft Drink",
       "description": "Refreshing mango juice soft drink",
       "image": "Rubicon Mango Juice Soft Drink.jpg",
@@ -259,17 +281,6 @@
       "image": "Sprite sugar free.jpg",
       "price": 1.99,
       "tags": ["Drinks & Milkshakes", "D"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Strawberry Milkshake",
-      "description": "Creamy strawberry milkshake",
-      "image": "Strawberry Milkshake.jpg",
-      "price": 3.50,
-      "tags": ["Drinks & Milkshakes", "dessert", "M"],
       "mealPriceModifier": 0.00,
       "showSlider": false,
       "sauces": false,
@@ -314,17 +325,6 @@
       "image": "Thums Up.jpg",
       "price": 1.99,
       "tags": ["Drinks & Milkshakes", "D"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
-      "name": "Vanilla Milkshake",
-      "description": "Classic creamy vanilla milkshake",
-      "image": "Vanilla Milkshake.jpg",
-      "price": 3.50,
-      "tags": ["Drinks & Milkshakes", "dessert", "M"],
       "mealPriceModifier": 0.00,
       "showSlider": false,
       "sauces": false,
