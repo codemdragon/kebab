@@ -12,17 +12,6 @@
       "vegetables": false
     },
     {
-      "name": "Jalapeno Cheese",
-      "description": "Creamy jalapeno cheese dip",
-      "image": "Jalapeno Cheese.jpg",
-      "price": 1.00,
-      "tags": ["Addons & Sauces"],
-      "mealPriceModifier": 0.00,
-      "showSlider": false,
-      "sauces": false,
-      "vegetables": false
-    },
-    {
       "name": "Jalapeno Balls",
       "description": "Crispy jalapeno cheese balls",
       "image": "Jalapeno Balls.jpg",
@@ -45,9 +34,9 @@
       "vegetables": false
     },
     {
-      "name": "Somosas (3 Peices)",
-      "description": "Crispy somosas",
-      "image": "Somosas.jpg",
+      "name": "Samosas (3 Pieces)",
+      "description": "Crispy samosas",
+      "image": "Samosas.jpg",
       "tags": ["Addons & Sauces"],
       "mealPriceModifier": 0.00,
       "showSlider": false,
