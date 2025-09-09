@@ -469,7 +469,7 @@
             }
         }
 
-        /* NEW: Quantity selector styles - MOVED to be below buttons */
+        /* NEW: Quantity selector styles - MOVED to be above buttons */
         .quantity-selector {
             display: flex;
             align-items: center;
@@ -610,6 +610,16 @@
                 </div>
             </div>
             
+            <!-- NEW: Quantity Selector MOVED to be above the buttons -->
+            <div class="quantity-selector">
+                <span>Quantity:</span>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease-quantity" disabled>-</button>
+                    <input type="number" id="modal-quantity" class="quantity-input" value="1" min="1" max="10">
+                    <button class="quantity-btn increase-quantity">+</button>
+                </div>
+            </div>
+            
             <div class="modal-buttons">
                 <button id="modal-add-base" class="add-base">Add to Cart - £<span id="modal-base-price">0.00</span></button>
                 <button id="modal-add-chips-drink" class="add-chips-drink">Add Chips and Drink - £<span id="modal-chips-drink-price">0.00</span></button>
@@ -624,16 +634,6 @@
                         <option value="KA sparkling fruit punch">KA sparkling fruit punch</option>
                     </select>
                     <button id="modal-add-chips-drink-final" class="add-chips-drink-final">Add Chips and Drink - £<span id="modal-final-price">0.00</span></button>
-                </div>
-            </div>
-            
-            <!-- NEW: Quantity Selector - MOVED to be below buttons -->
-            <div class="quantity-selector">
-                <span>Quantity:</span>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease-quantity" disabled>-</button>
-                    <input type="number" id="modal-quantity" class="quantity-input" value="1" min="1" max="10">
-                    <button class="quantity-btn increase-quantity">+</button>
                 </div>
             </div>
         </div>
@@ -954,7 +954,7 @@
             "wrap-tastic.json",
             "don-shawarma.json",
             "wings-tenders.json",
-            "loaded-fries.json",
+            "loaded-friends.json",
             "drinks-milkshakes.json",
             "addons-sauces.json"
         ];
