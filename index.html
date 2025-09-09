@@ -468,6 +468,98 @@
                 grid-template-columns: 2fr 1fr 1fr;
             }
         }
+
+        /* NEW: Quantity selector styles */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+        }
+        
+        .quantity-selector span {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            background-color: #222;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .quantity-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.2s;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #444;
+        }
+        
+        .quantity-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .quantity-input {
+            width: 3rem;
+            height: 2.5rem;
+            text-align: center;
+            background-color: #222;
+            color: white;
+            border: none;
+            border-left: 1px solid #444;
+            border-right: 1px solid #444;
+            font-size: 1.1rem;
+            -moz-appearance: textfield;
+        }
+        
+        .quantity-input::-webkit-outer-spin-button,
+        .quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* NEW: Clear cart button styles */
+        .cart-header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        #clear-cart {
+            color: #ff6a00;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        #clear-cart:hover {
+            background-color: rgba(255, 106, 0, 0.1);
+        }
+        
+        #clear-cart:disabled {
+            color: #666;
+            cursor: not-allowed;
+        }
+        
+        #clear-cart:disabled:hover {
+            background-color: transparent;
+        }
     </style>
 </head>
 <body class="bg-[#121212] text-white">
@@ -488,6 +580,16 @@
             <img id="modal-image" class="modal-image" src="" alt="">
             <h2 id="modal-title" class="text-white text-2xl font-bold mb-2"></h2>
             <p id="modal-description" class="text-gray-400 mb-4"></p>
+            
+            <!-- NEW: Quantity Selector -->
+            <div class="quantity-selector">
+                <span>Quantity:</span>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease-quantity" disabled>-</button>
+                    <input type="number" id="modal-quantity" class="quantity-input" value="1" min="1" max="10">
+                    <button class="quantity-btn increase-quantity">+</button>
+                </div>
+            </div>
             
             <div id="modal-options">
                 <!-- Options will be inserted here -->
@@ -544,9 +646,14 @@
     <div class="cart-drawer fixed top-0 right-0 h-full w-80 bg-[#1a1a1a] shadow-lg z-50">
         <div class="p-4 border-b border-[#222222] flex justify-between items-center">
             <h2 class="text-white font-semibold text-lg">Your Cart</h2>
-            <button id="close-cart" class="text-white">
-                <i class="fas fa-times"></i>
-            </button>
+            <div class="cart-header-actions">
+                <button id="clear-cart" class="text-[#ff6a00] hover:text-[#e05a00] disabled:text-gray-500 disabled:cursor-not-allowed" disabled>
+                    Clear All
+                </button>
+                <button id="close-cart" class="text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
         <div class="p-4 overflow-y-auto h-full pb-32">
             <ul id="cart-items" class="space-y-3">
@@ -627,7 +734,7 @@
             <!-- Menu Section -->
             <section id="menu" class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-12 md:py-20">
                 <h3 class="text-center font-semibold text- text-3xl lg:text-6xl mb-4 righteous-font">OUR MENU</h3>
-                <p class="text-center text-gray-400 text-lg sm:text-xl mb-12">Discover our delicious selection of kebabs, burgers, and more</p>
+                <p class="text-center text-gray-400 text-lg sm:text-xl mb-12">Discover our delicious selection of kebabs, burgers and more</p>
                 
                 <!-- Search and Filters -->
                 <div class="mb-12">
@@ -666,13 +773,13 @@
             <section id="about" class="max-w-4xl mx-auto px-4 sm:px-6 md:px-10 py-12 md:py-20 text-center text-lg sm:text-xl text-gray-400 leading-relaxed">
                 <h3 class="font-semibold text-white text-3xl sm:text-4xl mb-8">Our Story</h3>
                 <p class="mb-8">
-                    Kebab O’Clock was built on one simple belief: good food makes every moment better. Starting in the heart of Houndslow, we wanted to craft a dining experience where bold flavors, fresh ingredients, and unbeatable taste come together under one roof.
+                    Kebab O'Clock was built on one simple belief: good food makes every moment better. Starting in the heart of Houndslow, we wanted to craft a dining experience where bold flavors, fresh ingredients, and unbeatable taste come together under one roof.
                 </p>
                 <p class="mb-8">
-                    Our chefs pour passion into every bite—grilling, stacking, and wrapping your favorites to perfection. Whether you’re craving a loaded doner, a smoky shawarma, or a burger that’s stacked high and dripping with flavor, you’ll find it here.
+                    Our chefs pour passion into every bite—grilling, stacking, and wrapping your favorites to perfection. Whether you're craving a loaded doner, a smoky shawarma, or a burger that's stacked high and dripping with flavor, you'll find it here.
                 </p>
                 <p>
-                    We’re not just serving fast food—we’re serving quality, comfort, and flavor that keeps you coming back for more. At Kebab O’Clock, there’s no wrong time to treat yourself.
+                    We're not just serving fast food—we're serving quality, comfort, and flavor that keeps you coming back for more. At Kebab O'Clock, there's no wrong time to treat yourself.
                 </p>
             </section>
 
@@ -815,6 +922,9 @@
     </div>
 
     <script>
+        // NEW: Maximum quantity per item (easily changeable)
+        const MAX_QUANTITY_PER_ITEM = 10;
+
         // Sauce options (unchanged)
         const sauceOptions = {
             "Beefy-Tastic": ["Burger Blast", "Butter Ranch", "Garlic Gurb", "Habanero Mayo", "Siracha Heat", "Smookey BBQ", "Tomato Splash", "Buffalo Kick", "Mango Habenero"],
@@ -848,8 +958,6 @@
             "drinks-milkshakes.json",
             "addons-sauces.json"
         ];
-
-
 
         let menuData = {};
 
@@ -914,11 +1022,19 @@
         const closeModal = document.querySelector('.close-modal');
         const vegetableSelection = document.getElementById('vegetable-selection');
         
+        // NEW: Quantity selector elements
+        const quantityInput = document.getElementById('modal-quantity');
+        const decreaseQuantityBtn = document.querySelector('.decrease-quantity');
+        const increaseQuantityBtn = document.querySelector('.increase-quantity');
+        
         // Image positioning controls
         const imagePositionSlider = document.getElementById('image-position-slider');
         const positionValue = document.getElementById('position-value');
         const resetPositionButton = document.getElementById('reset-position');
         const imageControlPanel = document.querySelector('.image-control-panel');
+
+        // NEW: Clear cart button
+        const clearCartButton = document.getElementById('clear-cart');
 
         // Current item being viewed in modal
         let currentModalItem = null;
@@ -999,9 +1115,12 @@
         }
 
         // Open modal for a menu item
-        // Open modal for a menu item
         function openItemModal(item) {
             currentModalItem = item;
+
+            // Reset quantity to 1
+            quantityInput.value = 1;
+            updateQuantityButtons();
 
             // Reset drink selection UI
             drinkSelection.style.display = 'none';
@@ -1113,12 +1232,19 @@
             document.body.style.overflow = 'hidden';
         }
 
+        // NEW: Update quantity buttons state
+        function updateQuantityButtons() {
+            const quantity = parseInt(quantityInput.value);
+            decreaseQuantityBtn.disabled = quantity <= 1;
+            increaseQuantityBtn.disabled = quantity >= MAX_QUANTITY_PER_ITEM;
+        }
 
         // Update prices in modal
         function updateModalPrices(item, basePrice) {
-            modalBasePrice.textContent = basePrice.toFixed(2);
-            modalChipsDrinkPrice.textContent = (basePrice + item.mealPriceModifier).toFixed(2);
-            modalFinalPrice.textContent = (basePrice + item.mealPriceModifier).toFixed(2);
+            const quantity = parseInt(quantityInput.value);
+            modalBasePrice.textContent = (basePrice * quantity).toFixed(2);
+            modalChipsDrinkPrice.textContent = ((basePrice + item.mealPriceModifier) * quantity).toFixed(2);
+            modalFinalPrice.textContent = ((basePrice + item.mealPriceModifier) * quantity).toFixed(2);
         }
 
         // Close modal
@@ -1183,6 +1309,7 @@
         function addToCartFromModal(isChipsDrink, selectedDrink) {
             if (!currentModalItem) return;
             
+            const quantity = parseInt(quantityInput.value);
             const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
             let selectedOption = null;
             let selectedSauce = null;
@@ -1223,12 +1350,12 @@
             const existingItem = cart.find(item => item.name === displayName);
             
             if (existingItem) {
-                existingItem.quantity += 1;
+                existingItem.quantity += quantity;
             } else {
                 cart.push({
                     name: displayName,
                     price,
-                    quantity: 1,
+                    quantity,
                     isChipsDrink,
                     selectedOption,
                     selectedSauce,
@@ -1274,8 +1401,8 @@
                 li.className = 'flex justify-between items-center text-white text-sm border-b border-[#222222] pb-3';
                 li.innerHTML = `
                     <div>
-                        <div class="font-semibold">${item.name}</div>
-                        <div class="text-[#ff6a00]">£${item.price.toFixed(2)} x ${item.quantity}</div>
+                        <div class="font-semibold">${item.quantity} x ${item.name}</div>
+                        <div class="text-[#ff6a00]">£${item.price.toFixed(2)} each</div>
                     </div>
                     <div class="flex items-center">
                         <span class="font-semibold mr-3">£${itemTotal.toFixed(2)}</span>
@@ -1291,6 +1418,9 @@
             // Update subtotal and count
             cartSubtotal.textContent = `£${total.toFixed(2)}`;
             cartCount.textContent = `Cart (${count})`;
+            
+            // Enable/disable clear cart button based on whether cart has items
+            clearCartButton.disabled = cart.length === 0;
             
             // Update checkout button text
             placeOrderButton.textContent = `Place Order – £${total.toFixed(2)}`;
@@ -1309,14 +1439,15 @@
             const itemIndex = cart.findIndex(item => item.name === name);
             
             if (itemIndex !== -1) {
-                if (cart[itemIndex].quantity > 1) {
-                    cart[itemIndex].quantity -= 1;
-                } else {
-                    cart.splice(itemIndex, 1);
-                }
-                
+                cart.splice(itemIndex, 1);
                 updateCart();
             }
+        }
+
+        // NEW: Clear entire cart
+        function clearCart() {
+            cart = [];
+            updateCart();
         }
 
         // Show checkout page
@@ -1353,8 +1484,8 @@
                 div.className = 'flex justify-between items-center';
                 div.innerHTML = `
                     <div class="flex-1">
-                        <div class="font-semibold">${item.name}</div>
-                        <div class="text-sm text-gray-400">£${item.price.toFixed(2)} x ${item.quantity}</div>
+                        <div class="font-semibold">${item.quantity} x ${item.name}</div>
+                        <div class="text-sm text-gray-400">£${item.price.toFixed(2)} each</div>
                     </div>
                     <div class="font-semibold">£${itemTotal.toFixed(2)}</div>
                 `;
@@ -1370,7 +1501,6 @@
             detailsContainer.style.display = 'none';
             placeOrderButton.disabled = true;
         }
-
 
         // Show main content
         function showMainContent() {
@@ -1446,6 +1576,9 @@
             cartButton.addEventListener('click', openCartDrawer);
             closeCart.addEventListener('click', closeCartDrawer);
             overlay.addEventListener('click', closeCartDrawer);
+            
+            // NEW: Clear cart button event listener
+            clearCartButton.addEventListener('click', clearCart);
             
             // Search and filter events
             searchInput.addEventListener('input', filterMenuItems);
@@ -1538,6 +1671,71 @@
 
             checkoutInputs.forEach(input => {
                 input.addEventListener('input', checkFormValidity);
+            });
+
+            // NEW: Quantity selector events
+            decreaseQuantityBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                    updateQuantityButtons();
+                    if (currentModalItem) {
+                        const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
+                        let basePrice = hasOptions ? 
+                            currentModalItem.options[document.getElementById('modal-option-select').value].price : 
+                            currentModalItem.price;
+                        updateModalPrices(currentModalItem, basePrice);
+                    }
+                }
+            });
+
+            increaseQuantityBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value < MAX_QUANTITY_PER_ITEM) {
+                    quantityInput.value = value + 1;
+                    updateQuantityButtons();
+                    if (currentModalItem) {
+                        const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
+                        let basePrice = hasOptions ? 
+                            currentModalItem.options[document.getElementById('modal-option-select').value].price : 
+                            currentModalItem.price;
+                        updateModalPrices(currentModalItem, basePrice);
+                    }
+                }
+            });
+
+            quantityInput.addEventListener('input', (e) => {
+                let value = parseInt(e.target.value);
+                if (isNaN(value) || value < 1) {
+                    e.target.value = 1;
+                } else if (value > MAX_QUANTITY_PER_ITEM) {
+                    e.target.value = MAX_QUANTITY_PER_ITEM;
+                }
+                updateQuantityButtons();
+                if (currentModalItem) {
+                    const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
+                    let basePrice = hasOptions ? 
+                        currentModalItem.options[document.getElementById('modal-option-select').value].price : 
+                        currentModalItem.price;
+                    updateModalPrices(currentModalItem, basePrice);
+                }
+            });
+
+            quantityInput.addEventListener('change', (e) => {
+                let value = parseInt(e.target.value);
+                if (isNaN(value) || value < 1) {
+                    e.target.value = 1;
+                } else if (value > MAX_QUANTITY_PER_ITEM) {
+                    e.target.value = MAX_QUANTITY_PER_ITEM;
+                }
+                updateQuantityButtons();
+                if (currentModalItem) {
+                    const hasOptions = currentModalItem.options && currentModalItem.options.length > 0;
+                    let basePrice = hasOptions ? 
+                        currentModalItem.options[document.getElementById('modal-option-select').value].price : 
+                        currentModalItem.price;
+                    updateModalPrices(currentModalItem, basePrice);
+                }
             });
         }
 
