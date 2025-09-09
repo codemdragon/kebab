@@ -581,6 +581,16 @@
             <h2 id="modal-title" class="text-white text-2xl font-bold mb-2"></h2>
             <p id="modal-description" class="text-gray-400 mb-4"></p>
             
+            <!-- NEW: Quantity Selector -->
+            <div class="quantity-selector">
+                <span>Quantity:</span>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease-quantity" disabled>-</button>
+                    <input type="number" id="modal-quantity" class="quantity-input" value="1" min="1" max="10">
+                    <button class="quantity-btn increase-quantity">+</button>
+                </div>
+            </div>
+            
             <div id="modal-options">
                 <!-- Options will be inserted here -->
             </div>
@@ -622,22 +632,13 @@
                         <option value="Tango Mango">Tango Mango</option>
                         <option value="Vimto">Vimto</option>
                         <option value="KA sparkling fruit punch">KA sparkling fruit punch</option>
-                </select>
-                <button id="modal-add-chips-drink-final" class="add-chips-drink-final">Add Chips and Drink - £<span id="modal-final-price">0.00</span></button>
-            </div>
-
-
-            <!-- Quantity selector moved here -->
-            <div class="quantity-selector">
-                <span>Quantity:</span>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease-quantity" disabled>-</button>
-                    <input type="number" id="modal-quantity" class="quantity-input" value="1" min="1" max="10">
-                    <button class="quantity-btn increase-quantity">+</button>
+                    </select>
+                    <button id="modal-add-chips-drink-final" class="add-chips-drink-final">Add Chips and Drink - £<span id="modal-final-price">0.00</span></button>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Overlay -->
     <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
     
