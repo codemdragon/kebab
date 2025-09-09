@@ -1,4 +1,4 @@
-# 🥙 Kebab O'Clock – Menu Management Guide
+#  Kebab O'Clock – Menu Management Guide
 
 This guide explains how to manage the menu items for the **Kebab O'Clock website** by editing the associated JSON files.
 
